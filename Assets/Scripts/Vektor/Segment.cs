@@ -20,7 +20,10 @@ namespace Vektor
       get => _end;
       set => _end = value;
     }
+
+    public Vector3 Direction=> (_end - _start).normalized;
     
+
     public Segment()
     {
       _start = Vector3.zero;

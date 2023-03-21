@@ -14,7 +14,10 @@ namespace Vektor.MeshFilters
     }
     protected override void GenerateMesh()
     {
-      var vectorMesh = new VectorClosedMesh(_points, _lineWidth);
+      var vectorMesh = new VectorClosedMesh(_points, _lineWidth)
+      {
+        Join = _joinType
+      };
       _meshFilter.mesh = vectorMesh.CreateMesh();
     }
   }

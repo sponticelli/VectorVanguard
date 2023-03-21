@@ -11,6 +11,12 @@ namespace Vektor.MeshFilters
     protected override void GenerateMesh()
     {
       if (_meshFilters == null || _meshFilters.Length == 0) return;
+
+      foreach (var meshFilter in _meshFilters)
+      {
+        meshFilter.Generate(true);
+      }
+      
       var mesh = new Mesh();
       var combine = new CombineInstance[_meshFilters.Length];
       var mergeSubMeshes = true;

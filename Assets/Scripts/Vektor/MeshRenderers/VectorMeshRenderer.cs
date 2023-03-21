@@ -14,10 +14,10 @@ namespace Vektor.MeshRenderers
     private void Awake()
     {
       SetupComponents();
-      Generate();
+      Generate(false);
     }
     
-    private void SetupComponents()
+    public void SetupComponents()
     {
       if (_meshFilter == null) _meshFilter = GetComponent<AVectorMeshFilter>();
       if (_meshRenderer != null) return;
