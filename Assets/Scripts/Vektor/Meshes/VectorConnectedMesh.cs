@@ -3,19 +3,19 @@ using UnityEngine;
 
 namespace Vektor.Meshes
 {
-  public class VectorConnecteddMesh : VectorMesh
+  public class VectorConnectedMesh : VectorMesh
   {
     public Vector3[] Points { get; set; }
 
     public bool IsClosed { get; set; }
 
-    public VectorConnecteddMesh()
+    public VectorConnectedMesh()
     {
       Points = Array.Empty<Vector3>();
       _mesh = null;
     }
     
-    public VectorConnecteddMesh(Vector3[] points, float lineWidth)
+    public VectorConnectedMesh(Vector3[] points, float lineWidth)
     {
       this.Points = points;
       _lineWidth = lineWidth;

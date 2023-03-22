@@ -7,17 +7,22 @@ using Vektor.MeshFilters;
 namespace Vektor.Editors
 {
   [CustomEditor(typeof(VectorConnectedMeshFilter))]
-  public class VectorClosedMeshFilterEditor : Editor
+  public class VectorConnectedMeshFilterEditor : Editor
   {
     private List<Vector3> _worldPoints;
     private Transform _transform;
     private Vector3 _lastPosition;
     private int _numPoints;
     
+    private GUIStyle _plusIconStyle;
+    
     private void OnEnable()
     {
       CacheData();
+      
     }
+    
+
 
     private void CacheData()
     {
@@ -31,6 +36,8 @@ namespace Vektor.Editors
       _numPoints = ((VectorConnectedMeshFilter)target).Points.Length;
     }
 
+    
+    
     public override void OnInspectorGUI()
     {
       base.OnInspectorGUI();
@@ -50,6 +57,8 @@ namespace Vektor.Editors
         CacheData();
       }
       
+      var meshFilter = (VectorConnectedMeshFilter) target;
+      
       
       // Draw handles for each point
       for (var i = 0; i < _worldPoints.Count; i++)
@@ -61,9 +70,9 @@ namespace Vektor.Editors
         {
           // Convert the world point back to local space and update the _points list
           var localPoint = _transform.InverseTransformPoint(worldPoint);
-          ((VectorConnectedMeshFilter)target).Points[i] = localPoint;
+          meshFilter.Points[i] = localPoint;
           _worldPoints[i] = worldPoint;
-          ((VectorConnectedMeshFilter)target).Generate(true);
+          meshFilter.Generate(true);
         }
         
         // Draw lines between adjacent points
@@ -71,6 +80,31 @@ namespace Vektor.Editors
         Handles.color = Color.blue;
         var j = (i + 1) % _worldPoints.Count;
         Handles.DrawLine(_worldPoints[i], _worldPoints[j], 1);
+        
+        // Add a "+" button in the middle of the line
+        var midpoint = (_worldPoints[i] + _worldPoints[j]) * 0.5f;
+        Handles.color = Color.green;
+        if (Handles.Button(midpoint, Quaternion.identity, HandleUtility.GetHandleSize(midpoint) * 0.1f, 
+              HandleUtility.GetHandleSize(midpoint) * 0.1f, Handles.CircleHandleCap ))
+        {
+          // Insert a new point in the middle
+          var points = meshFilter.Points;
+          meshFilter.Points = new Vector3[points.Length + 1];
+          for (var k = 0; k < i + 1; k++)
+          {
+            meshFilter.Points[k] = points[k];
+          }
+          meshFilter.Points[i + 1] = _transform.InverseTransformPoint(midpoint);
+          for (var k = i + 2; k < meshFilter.Points.Length; k++)
+          {
+            meshFilter.Points[k] = points[k - 1];
+          }
+          
+          CacheData();
+          meshFilter.Generate(true);
+        }
+        
+        
         Handles.color = previousColor;
       }
     }
