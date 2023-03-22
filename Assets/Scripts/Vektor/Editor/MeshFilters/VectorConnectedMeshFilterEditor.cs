@@ -57,7 +57,6 @@ namespace Vektor.Editors
         }
         
         ((VectorConnectedMeshFilter) target).Generate(true);
-        _scaleFactor = 1f;
         CacheData();
       }
     }

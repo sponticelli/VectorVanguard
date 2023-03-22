@@ -272,9 +272,6 @@ namespace Vektor.Meshes
 
     }
 
-
-
-
     private void RemoveDuplicateSegments()
     {
       // Remove duplicate segments by removing the segment that has the same start and end points,or the end point is the same as the start point and the start point is the same as the end point
@@ -315,22 +312,5 @@ namespace Vektor.Meshes
       return pairedSegments;
     }
 
-
-    // Find the list of segments that are in the first place of Tuple<Segment, Segment> when the second place is the given segment
-    private List<Segment> FindPairedSegments(Segment segment, IEnumerable<Tuple<Segment, Segment>> pairedSegments)
-    {
-      return (from tuple in pairedSegments where tuple.Item2 == segment select tuple.Item1).ToList();
-    }
-
-    // Find the list of indexes of segments in _segments, given a list of segments
-    private List<int> FindSegmentIndexes(List<Segment> segments)
-    {
-      return (from segment in segments select Array.IndexOf(_segments, segment)).ToList();
-    }
-
-    private List<int> FindPairedSegmentIndexes(Segment segment, List<Tuple<Segment, Segment>> pairedSegments)
-    {
-      return FindSegmentIndexes(FindPairedSegments(segment, pairedSegments));
-    }
   }
 }
