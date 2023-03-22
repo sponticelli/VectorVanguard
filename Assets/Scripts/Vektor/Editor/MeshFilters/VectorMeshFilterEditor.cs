@@ -4,8 +4,8 @@ using Vektor.MeshFilters;
 
 namespace Vektor.Editors
 {
-  [CustomEditor(typeof(AVectorMeshFilter))]
-  public class AVectorMeshFilterEditor : Editor
+  [CustomEditor(typeof(VectorMeshFilter))]
+  public class VectorMeshFilterEditor : Editor
   {
     public override void OnInspectorGUI()
     {
