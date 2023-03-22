@@ -13,6 +13,14 @@ namespace Vektor.MeshFilters
       get => _points;
       set => _points = value;
     }
+    
+    public bool IsClosed
+    {
+      get => _isClosed;
+      set => _isClosed = value;
+    }
+    
+    
     protected override void GenerateMesh()
     {
       var vectorMesh = new VectorConnectedMesh(_points, _lineWidth)

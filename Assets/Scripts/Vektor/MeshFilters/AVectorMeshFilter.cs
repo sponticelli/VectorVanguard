@@ -12,10 +12,30 @@ namespace Vektor.MeshFilters
     [SerializeField] protected Material[] _materials;
     
     
-    public MeshFilter MeshFilter => _meshFilter;
-    public Material[] Materials => _materials;
+    public MeshFilter MeshFilter
+    {
+      get => _meshFilter;
+      set => _meshFilter = value;
+    }
+
+    public Material[] Materials
+    {
+      get => _materials;
+      set => _materials = value;
+    }
+
     public Material Material => _materials.Length > 0 ? _materials[0] : null;
-    public VectorMesh.JoinType JoinType => _joinType;
+    public VectorMesh.JoinType JoinType
+    {
+      get => _joinType;
+      set => _joinType = value;
+    }
+
+    public float LineWidth
+    {
+      get => _lineWidth;
+      set => _lineWidth = value;
+    }
 
 
     public void Generate(bool forceUpdate)

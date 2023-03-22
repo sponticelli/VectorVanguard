@@ -25,7 +25,7 @@ namespace Vektor.Editors
 
     private static void ShowSetupButton(VectorMeshRenderer vectorMeshRenderer)
     {
-      if (vectorMeshRenderer.MeshFilter != null && vectorMeshRenderer.MeshRenderer != null) return;
+      if (vectorMeshRenderer.VectorMeshFilter != null && vectorMeshRenderer.MeshRenderer != null) return;
       if (GUILayout.Button("Setup Components"))
       {
         vectorMeshRenderer.SetupComponents();

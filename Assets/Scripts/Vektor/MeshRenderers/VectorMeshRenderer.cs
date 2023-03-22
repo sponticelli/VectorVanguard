@@ -8,8 +8,19 @@ namespace Vektor.MeshRenderers
     [SerializeField] private AVectorMeshFilter _meshFilter;
     [SerializeField] private MeshRenderer _meshRenderer;
     
-    public AVectorMeshFilter MeshFilter => _meshFilter;
-    public MeshRenderer MeshRenderer => _meshRenderer;
+    public AVectorMeshFilter VectorMeshFilter
+    {
+      get => _meshFilter;
+      set => _meshFilter = value;
+    }
+
+    public MeshRenderer MeshRenderer
+    {
+      get => _meshRenderer;
+      set => _meshRenderer = value;
+    }
+
+    public Material[] Materials { get; set; }
 
     private void Awake()
     {
