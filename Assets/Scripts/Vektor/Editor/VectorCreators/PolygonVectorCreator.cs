@@ -6,7 +6,7 @@ using Vektor.MeshRenderers;
 
 namespace Vektor.Editors
 {
-  public class InscribedPolygonCreator : EditorWindow
+  public class PolygonVectorCreator : ConnectedVectorCreator
   {
     private float _radius = 1f;
     private int _numSides = 3;
@@ -16,10 +16,10 @@ namespace Vektor.Editors
     private VectorMesh.JoinType _joinType;
     private bool _isClosed = true;
 
-    [MenuItem("LiteNinja/Vektor/Inscribed Polygon Creator")]
+    [MenuItem("LiteNinja/Vektor/Polygon Creator")]
     public static void ShowWindow()
     {
-      GetWindow<InscribedPolygonCreator>("Inscribed Polygon Creator");
+      GetWindow<PolygonVectorCreator>("Polygon Creator");
     }
 
     private void OnGUI()
@@ -33,19 +33,15 @@ namespace Vektor.Editors
       _material = (Material)EditorGUILayout.ObjectField("Material", _material, typeof(Material), false);
       _isClosed = EditorGUILayout.Toggle("Is Closed", _isClosed);
 
-      if (GUILayout.Button("Create Inscribed Polygon"))
+      if (GUILayout.Button("Create Polygon"))
       {
-        CreateInscribedPolygon();
+        var points = GeneratePoints();
+        CreateConnectedVector(points, GetPolygonName());
       }
     }
 
-    private void CreateInscribedPolygon()
+    private Vector3[] GeneratePoints()
     {
-      if (_numSides < 3)
-      {
-        Debug.LogError("Number of sides must be at least 3");
-        return;
-      }
       // Calculate the points of the inscribed polygon
       var points = new Vector3[_numSides];
       var angleIncrement = 2f * Mathf.PI / _numSides;
@@ -56,28 +52,9 @@ namespace Vektor.Editors
         points[i] = new Vector3(_radius * Mathf.Cos(angle), _radius * Mathf.Sin(angle), 0);
       }
 
-      // Create the GameObject and components
-      var polygon = new GameObject(GetPolygonName());
-      var vectorMeshRenderer = polygon.AddComponent<VectorMeshRenderer>();
-      var vectorConnectedMeshFilter = polygon.AddComponent<VectorConnectedMeshFilter>();
-      var meshFilter = polygon.AddComponent<MeshFilter>();
-      var meshRenderer = polygon.AddComponent<MeshRenderer>();
-      
-
-      // Configure the mesh and renderer
-      vectorConnectedMeshFilter.LineWidth = _lineWidth;
-      vectorConnectedMeshFilter.Points = points;
-      vectorConnectedMeshFilter.JoinType = _joinType;
-      vectorConnectedMeshFilter.MeshFilter = meshFilter;
-      vectorConnectedMeshFilter.IsClosed = _isClosed;
-      vectorConnectedMeshFilter.Materials = new[] {_material};
-      vectorMeshRenderer.MeshRenderer = meshRenderer;
-      vectorMeshRenderer.VectorMeshFilter = vectorConnectedMeshFilter;
-      
-      vectorMeshRenderer.SetupComponents();
-      vectorMeshRenderer.Generate(true);
+      return points;
     }
-    
+
     public string GetPolygonName()
     {
       return $"Polygon_{_numSides}";
