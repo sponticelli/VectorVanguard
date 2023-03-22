@@ -3,9 +3,10 @@ using Vektor.Meshes;
 
 namespace Vektor.MeshFilters
 {
-  public class VectorClosedMeshFilter : AVectorMeshFilter
+  public class VectorConnectedMeshFilter : AVectorMeshFilter
   {
     [SerializeField] private Vector3[] _points;
+    [SerializeField] private bool _isClosed;
     
     public Vector3[] Points
     {
@@ -14,9 +15,10 @@ namespace Vektor.MeshFilters
     }
     protected override void GenerateMesh()
     {
-      var vectorMesh = new VectorClosedMesh(_points, _lineWidth)
+      var vectorMesh = new VectorConnecteddMesh(_points, _lineWidth)
       {
-        Join = _joinType
+        Join = _joinType,
+        IsClosed = _isClosed
       };
       _meshFilter.mesh = vectorMesh.CreateMesh();
     }

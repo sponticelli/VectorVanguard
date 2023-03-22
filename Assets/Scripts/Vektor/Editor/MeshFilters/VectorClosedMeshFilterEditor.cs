@@ -6,7 +6,7 @@ using Vektor.MeshFilters;
 
 namespace Vektor.Editors
 {
-  [CustomEditor(typeof(VectorClosedMeshFilter))]
+  [CustomEditor(typeof(VectorConnectedMeshFilter))]
   public class VectorClosedMeshFilterEditor : Editor
   {
     private List<Vector3> _worldPoints;
@@ -21,14 +21,14 @@ namespace Vektor.Editors
 
     private void CacheData()
     {
-      _transform = ((VectorClosedMeshFilter)target).transform;
+      _transform = ((VectorConnectedMeshFilter)target).transform;
       _worldPoints = new List<Vector3>();
-      foreach (var point in ((VectorClosedMeshFilter)target).Points)
+      foreach (var point in ((VectorConnectedMeshFilter)target).Points)
       {
         _worldPoints.Add(_transform.TransformPoint(point));
       }
       _lastPosition = _transform.position;
-      _numPoints = ((VectorClosedMeshFilter)target).Points.Length;
+      _numPoints = ((VectorConnectedMeshFilter)target).Points.Length;
     }
 
     public override void OnInspectorGUI()
@@ -36,14 +36,14 @@ namespace Vektor.Editors
       base.OnInspectorGUI();
       if (GUILayout.Button("Generate"))
       {
-        ((VectorClosedMeshFilter) target).Generate(true);
+        ((VectorConnectedMeshFilter) target).Generate(true);
       }
     }
     
     private void OnSceneGUI()
     {
-      var numPoints = ((VectorClosedMeshFilter)target).Points.Length;
-      var distance = Vector3.Distance(_lastPosition, ((VectorClosedMeshFilter)target).transform.position);
+      var numPoints = ((VectorConnectedMeshFilter)target).Points.Length;
+      var distance = Vector3.Distance(_lastPosition, ((VectorConnectedMeshFilter)target).transform.position);
       const float epsilon = 0.001f;
       if ( distance > epsilon || numPoints != _numPoints)
       {
@@ -61,9 +61,9 @@ namespace Vektor.Editors
         {
           // Convert the world point back to local space and update the _points list
           var localPoint = _transform.InverseTransformPoint(worldPoint);
-          ((VectorClosedMeshFilter)target).Points[i] = localPoint;
+          ((VectorConnectedMeshFilter)target).Points[i] = localPoint;
           _worldPoints[i] = worldPoint;
-          ((VectorClosedMeshFilter)target).Generate(true);
+          ((VectorConnectedMeshFilter)target).Generate(true);
         }
         
         // Draw lines between adjacent points
