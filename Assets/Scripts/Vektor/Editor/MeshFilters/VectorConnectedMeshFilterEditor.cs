@@ -13,6 +13,7 @@ namespace Vektor.Editors
     private Transform _transform;
     private Vector3 _lastPosition;
     private int _numPoints;
+    private float _scaleFactor = 1f;
     
     private GUIStyle _plusIconStyle;
     
@@ -41,9 +42,23 @@ namespace Vektor.Editors
     public override void OnInspectorGUI()
     {
       base.OnInspectorGUI();
+      EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
+      _scaleFactor = EditorGUILayout.FloatField("Scale Factor", _scaleFactor);
       if (GUILayout.Button("Generate"))
       {
+        if (_scaleFactor != 1f && _scaleFactor != 0f)
+        {
+          var points = ((VectorConnectedMeshFilter)target).Points;
+          for (var i = 0; i < points.Length; i++)
+          {
+            points[i] *= _scaleFactor;
+          }
+          ((VectorConnectedMeshFilter)target).Points = points;
+        }
+        
         ((VectorConnectedMeshFilter) target).Generate(true);
+        _scaleFactor = 1f;
+        CacheData();
       }
     }
     

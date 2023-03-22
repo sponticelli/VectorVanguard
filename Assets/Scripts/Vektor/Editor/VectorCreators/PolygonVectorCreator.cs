@@ -10,11 +10,7 @@ namespace Vektor.Editors
   {
     private float _radius = 1f;
     private int _numSides = 3;
-    private float _lineWidth = 0.1f;
     private float _angle = 0f;
-    private Material _material;
-    private VectorMesh.JoinType _joinType;
-    private bool _isClosed = true;
 
     [MenuItem("LiteNinja/Vektor/Polygon Creator")]
     public static void ShowWindow()

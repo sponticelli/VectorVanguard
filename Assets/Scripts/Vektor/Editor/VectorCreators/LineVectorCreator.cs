@@ -10,9 +10,7 @@ namespace Vektor.Editors
   {
     private Vector3 _startPoint = Vector3.zero;
     private Vector3 _endPoint = Vector3.one;
-    private float _lineWidth = 0.1f;
-    private Material _material;
-    private VectorMesh.JoinType _joinType;
+
 
     [MenuItem("LiteNinja/Vektor/Line Creator")]
     public static void ShowWindow()
