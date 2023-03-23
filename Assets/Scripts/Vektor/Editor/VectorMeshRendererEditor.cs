@@ -63,7 +63,7 @@ namespace Vektor.Editors
     private void CreateEdgeCollider2D(VectorMeshRenderer vectorMeshRenderer)
     {
       var edgeCollider2D = vectorMeshRenderer.gameObject.AddComponent<EdgeCollider2D>();
-      var mesh = vectorMeshRenderer.VectorMeshFilter.MeshFilter.mesh;
+      var mesh = vectorMeshRenderer.VectorMeshFilter.MeshFilter.sharedMesh;
       
       var points = new Vector2[mesh.vertices.Length];
       for (var i = 0; i < mesh.vertices.Length; i++)
@@ -76,7 +76,7 @@ namespace Vektor.Editors
     private void CreateCircleCollider2D(VectorMeshRenderer vectorMeshRenderer)
     {
       var circleCollider2D = vectorMeshRenderer.gameObject.AddComponent<CircleCollider2D>();
-      var mesh = vectorMeshRenderer.VectorMeshFilter.MeshFilter.mesh;
+      var mesh = vectorMeshRenderer.VectorMeshFilter.MeshFilter.sharedMesh;
       
       var points = new Vector2[mesh.vertices.Length];
       //find the center of the mesh
@@ -93,14 +93,14 @@ namespace Vektor.Editors
     private void CreateMeshCollider(VectorMeshRenderer vectorMeshRenderer)
     {
       var meshCollider = vectorMeshRenderer.gameObject.AddComponent<MeshCollider>();
-      var mesh = vectorMeshRenderer.VectorMeshFilter.MeshFilter.mesh;
+      var mesh = vectorMeshRenderer.VectorMeshFilter.MeshFilter.sharedMesh;
       meshCollider.sharedMesh = mesh;
     }
 
     private void CreatePolygonCollider2D(VectorMeshRenderer vectorMeshRenderer)
     {
       var collider2D = vectorMeshRenderer.gameObject.AddComponent<PolygonCollider2D>();
-      var mesh = vectorMeshRenderer.VectorMeshFilter.MeshFilter.mesh;
+      var mesh = vectorMeshRenderer.VectorMeshFilter.MeshFilter.sharedMesh;
       
       var points = new Vector2[mesh.vertices.Length];
       for (var i = 0; i < mesh.vertices.Length; i++)

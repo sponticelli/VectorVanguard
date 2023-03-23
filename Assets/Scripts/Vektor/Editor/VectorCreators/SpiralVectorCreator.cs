@@ -56,6 +56,7 @@ namespace Vektor.Editors
         points[i] = new Vector3(radius * Mathf.Cos(angle), radius * Mathf.Sin(angle), 0);
       }
 
+      _isClosed = false;
       CreateConnectedVector(points, GetSpiralName());
     }
 

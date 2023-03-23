@@ -10,6 +10,7 @@ namespace Vektor.Editors
 {
   public class VectorMeshMergerEditor
   {
+    [ContextMenu("LiteNinja/Vektor/Bake VectorMeshes")]
     [MenuItem("LiteNinja/Vektor/Bake VectorMeshes")]
     private static void MergeSelectedVectorMeshes(MenuCommand menuCommand)
     {
