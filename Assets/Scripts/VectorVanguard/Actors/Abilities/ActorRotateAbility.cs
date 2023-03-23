@@ -5,44 +5,42 @@ namespace VectorVanguard.Actors.Abilities
   public class ActorRotateAbility : AActorAbility
   {
     [SerializeField]
-    private float _maxSpeed = 5f;
+    private float _rotationPower = 30;
     [SerializeField]
-    private float _acceleration = 1f;
-    [SerializeField]
-    private float _deceleration = 1f;
+    private float _angularDecayRate = 0.7f;
     
+    [SerializeField]
+    private bool _invertDirection = true;
     
     private float _direction;
-    private float _currentSpeed;
+    private float _angularVelocity;
     private ActorPhysics _physics;
+    private float _directionMultiplier = 1;
 
     protected override void OnInitialization()
     {
       base.OnInitialization();
       _physics = _actor.GetComponent<ActorPhysics>();
+      _directionMultiplier = _invertDirection ? -1 : 1;
     }
     
     public override void EarlyExecute()
     {
       base.EarlyExecute();
-      _direction = _actor.Input.GetMovementDirection().x;
+      _direction = _directionMultiplier * _actor.Input.GetMovementDirection().x;
     }
 
     public override void Execute()
     {
       base.Execute();
+      _angularVelocity = _direction * _rotationPower;
+      
       if (_direction == 0)
       {
-        _currentSpeed = Mathf.Lerp(_currentSpeed, 0, _deceleration * Time.deltaTime);
-        if (_currentSpeed < 0.01f) _currentSpeed = 0;
-      }
-      else
-      {
-        _currentSpeed += _direction * _acceleration * Time.deltaTime;
-        _currentSpeed = Mathf.Clamp(_currentSpeed, -_maxSpeed, _maxSpeed);
+        _angularVelocity *= _angularDecayRate;
       }
       
-      _physics.AddRotation(_currentSpeed);
+      _physics.AddRotation(_angularVelocity);
     }
   }
 }

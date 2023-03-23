@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using Vektor.MeshFilters;
@@ -14,6 +15,7 @@ namespace Vektor.Editors
     private Vector3 _lastPosition;
     private int _numPoints;
     private float _scaleFactor = 1f;
+    private bool _centered = true;
     
     private GUIStyle _plusIconStyle;
     
@@ -46,21 +48,44 @@ namespace Vektor.Editors
     private void GenerateButton()
     {
       _scaleFactor = EditorGUILayout.FloatField("Scale Factor", _scaleFactor);
+      _centered = EditorGUILayout.Toggle("Centered", _centered);
       if (GUILayout.Button("Generate"))
       {
-        if (_scaleFactor != 1f && _scaleFactor != 0f)
-        {
-          var points = ((VectorConnectedMeshFilter)target).Points;
-          for (var i = 0; i < points.Length; i++)
-          {
-            points[i] *= _scaleFactor;
-          }
-
-          ((VectorConnectedMeshFilter)target).Points = points;
-        }
-
+        Scale();
+        Center();
         ((VectorConnectedMeshFilter)target).Generate(true);
         CacheData();
+      }
+    }
+
+    private void Center()
+    {
+      if (_centered)
+      {
+        var points = ((VectorConnectedMeshFilter)target).Points;
+        var center = points.Aggregate(Vector3.zero, (current, t) => current + t);
+
+        center /= points.Length;
+        for (var i = 0; i < points.Length; i++)
+        {
+          points[i] -= center;
+        }
+
+        ((VectorConnectedMeshFilter)target).Points = points;
+      }
+    }
+
+    private void Scale()
+    {
+      if (_scaleFactor != 1f && _scaleFactor != 0f)
+      {
+        var points = ((VectorConnectedMeshFilter)target).Points;
+        for (var i = 0; i < points.Length; i++)
+        {
+          points[i] *= _scaleFactor;
+        }
+
+        ((VectorConnectedMeshFilter)target).Points = points;
       }
     }
 

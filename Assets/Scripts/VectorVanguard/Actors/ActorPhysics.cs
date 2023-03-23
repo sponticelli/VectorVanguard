@@ -20,8 +20,7 @@ namespace VectorVanguard.Actors
 
     private void FixedUpdate()
     {
-      if (_rotationFactor!=0) Debug.Log(_rotationFactor);
-      _actor.transform.Rotate(0, 0, _rotationFactor, Space.World);
+      _actor.transform.Rotate(0, 0, _rotationFactor * Time.fixedTime, Space.World);
       _processed = true;
     }
 
