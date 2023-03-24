@@ -5,7 +5,7 @@ namespace VectorVanguard.Actors.Abilities
   public class ActorRotateAbility : AActorAbility
   {
     [SerializeField]
-    private float _rotationPower = 30;
+    private float _rotationPower = 200;
     [SerializeField]
     private float _angularDecayRate = 0.7f;
     
@@ -37,10 +37,10 @@ namespace VectorVanguard.Actors.Abilities
       
       if (_direction == 0)
       {
-        _angularVelocity *= _angularDecayRate;
+        _angularVelocity *= _angularDecayRate * 0;
       }
       
-      _physics.AddRotation(_angularVelocity);
+      _physics.AddRotationForce(_angularVelocity);
     }
   }
 }

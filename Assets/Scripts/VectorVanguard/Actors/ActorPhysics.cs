@@ -5,22 +5,33 @@ namespace VectorVanguard.Actors
 {
   public class ActorPhysics : MonoBehaviour
   {
+    
+    [SerializeField] private LayerMask _collisionLayerMask;
+    [SerializeField] private PolygonCollider2D _collider;
+    
     private Actor _actor;
     
-    private float _rotationFactor;
+    private float _rotationForce;
+    private Vector3 _linearForce;
     
     private bool _processed = false;
     
+    private Transform _transform;
     
     public void Initialization(Actor actor)
     {
       _actor = actor;
+      _transform = _actor.transform;
+      _linearForce = Vector2.zero;
     }
 
 
     private void FixedUpdate()
     {
-      _actor.transform.Rotate(0, 0, _rotationFactor * Time.fixedTime, Space.World);
+      _linearForce.z = 0;
+      _transform.Rotate(0, 0, _rotationForce * Time.deltaTime);
+      
+      _transform.position += CheckForCollision() * Time.deltaTime;
       _processed = true;
     }
 
@@ -28,14 +39,70 @@ namespace VectorVanguard.Actors
     {
       if (_processed)
       {
-        _rotationFactor = 0;
+        _rotationForce = 0;
+        _linearForce = Vector2.zero;
         _processed = false;
       }
     }
 
-    public void AddRotation(float rotation)
+    public void AddRotationForce(float rotation)
     {
-      _rotationFactor += rotation;
+      _rotationForce += rotation;
+    }
+    
+    public void AddForce(Vector3 force)
+    {
+      _linearForce += force;
+      
+    }
+    
+    public Vector3 CheckForCollision()
+    {
+      // Calculate the distance based on _linearForce and Time.deltaTime
+      var distance = (_linearForce * Time.deltaTime).magnitude;
+      var collided = false;
+
+      // Get the vertices of the polygon collider, assuming the Actor has a PolygonCollider2D component
+      if (_collider == null)
+      {
+        var hit = Physics2D.Raycast(_transform.position, _linearForce.normalized, distance, _collisionLayerMask);
+        if (hit.collider != null)
+        {
+          distance = hit.distance;
+          collided = true;
+        }
+      }
+      else
+      {
+        var vertices = _collider.points;
+
+        // Perform raycasts from each vertex in the direction of movement
+        foreach (var vertex in vertices)
+        {
+          Vector2 worldVertex = _transform.TransformPoint(vertex);
+          RaycastHit2D hit = Physics2D.Raycast(worldVertex, _linearForce.normalized, distance, _collisionLayerMask);
+
+          if (hit.collider != null)
+          {
+            Debug.DrawLine(worldVertex, hit.point, Color.red);
+            distance = Mathf.Min(distance, hit.distance);
+            collided = true;
+          }
+          else
+          {
+            Debug.DrawRay(worldVertex, _linearForce.normalized * distance, Color.yellow);
+          }
+        }
+      }
+
+      if (collided)
+      {
+        // Calculate the new translation vector
+        var newTranslation = (Vector3)(_linearForce.normalized * distance);
+        return newTranslation;
+      }
+
+      return _linearForce;
     }
   }
 }
