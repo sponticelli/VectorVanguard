@@ -61,6 +61,7 @@ namespace VectorVanguard.Actors
       // Calculate the distance based on _linearForce and Time.deltaTime
       var distance = (_linearForce * Time.deltaTime).magnitude;
       var collided = false;
+      float bufferDistance = 0.01f; // Add a small buffer distance
 
       // Get the vertices of the polygon collider, assuming the Actor has a PolygonCollider2D component
       if (_collider == null)
@@ -68,7 +69,7 @@ namespace VectorVanguard.Actors
         var hit = Physics2D.Raycast(_transform.position, _linearForce.normalized, distance, _collisionLayerMask);
         if (hit.collider != null)
         {
-          distance = hit.distance;
+          distance = hit.distance - bufferDistance;
           collided = true;
         }
       }
@@ -80,12 +81,12 @@ namespace VectorVanguard.Actors
         foreach (var vertex in vertices)
         {
           Vector2 worldVertex = _transform.TransformPoint(vertex);
-          RaycastHit2D hit = Physics2D.Raycast(worldVertex, _linearForce.normalized, distance, _collisionLayerMask);
+          var hit = Physics2D.Raycast(worldVertex, _linearForce.normalized, distance, _collisionLayerMask);
 
           if (hit.collider != null)
           {
             Debug.DrawLine(worldVertex, hit.point, Color.red);
-            distance = Mathf.Min(distance, hit.distance);
+            distance = Mathf.Min(distance, hit.distance - bufferDistance);
             collided = true;
           }
           else
@@ -95,14 +96,12 @@ namespace VectorVanguard.Actors
         }
       }
 
-      if (collided)
-      {
-        // Calculate the new translation vector
-        var newTranslation = (Vector3)(_linearForce.normalized * distance);
-        return newTranslation;
-      }
+      if (!collided) return _linearForce;
+      
+      // Calculate the new translation vector
+      var newTranslation = _linearForce.normalized * distance / Time.deltaTime;
+      return newTranslation;
 
-      return _linearForce;
     }
   }
 }
