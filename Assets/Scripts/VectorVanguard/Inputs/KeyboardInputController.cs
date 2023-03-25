@@ -8,18 +8,11 @@ namespace VectorVanguard.Inputs
   {
     [SerializeField]
     private ButtonAction[] _buttonActions;
-    
-    private Dictionary<string, KeyCode> _buttonActionMap;
-    
+
     private Vector2 _lastMovementDirection;
 
     private void Awake()
     {
-      _buttonActionMap = new Dictionary<string, KeyCode>();
-      foreach (var buttonAction in _buttonActions)
-      {
-        _buttonActionMap.Add(buttonAction.ActionID, buttonAction.Key);
-      }
       _lastMovementDirection = Vector2.zero;
     }
     

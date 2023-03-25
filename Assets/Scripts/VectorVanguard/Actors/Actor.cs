@@ -13,11 +13,11 @@ namespace VectorVanguard.Actors
     [SerializeField]
     private ActorPhysics _physics;
 
-    [SerializeField]
-    private AActorAbility[] _abilities;
+    [SerializeField] 
+    private ActorAbilities _actorAbilities;
     
+    public ActorAbilities ActorAbilities => _actorAbilities;
     
-    public AActorAbility[] Abilities => _abilities;
     public AActorInput Input => _input;
 
     private void Awake()
@@ -28,28 +28,12 @@ namespace VectorVanguard.Actors
     private void Initialization()
     {
       _physics.Initialization(this);
-      foreach (var ability in _abilities)
-      {
-        ability.Initialization(this);
-      }
+      _actorAbilities.Initialization(this);
     }
 
     private void Update()
     {
-      foreach (var ability in _abilities)
-      {
-        ability.EarlyExecute();
-      }
-
-      foreach (var ability in _abilities)
-      {
-        ability.Execute();
-      }
-      
-      foreach (var ability in _abilities)
-      {
-        ability.LateExecute();
-      }
+      _actorAbilities.Execute();
     }
     
 

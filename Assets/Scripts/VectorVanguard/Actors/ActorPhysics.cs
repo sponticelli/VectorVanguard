@@ -104,4 +104,6 @@ namespace VectorVanguard.Actors
 
     }
   }
+  
+  // A class that collect the abilites of an actor
 }
