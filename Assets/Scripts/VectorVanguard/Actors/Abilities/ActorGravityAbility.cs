@@ -7,14 +7,14 @@ namespace VectorVanguard.Actors.Abilities
     [SerializeField] private float _gravityPower = 1;
     [SerializeField] private Vector3 _gravityDirection = Vector3.down;
 
-    private ActorPhysics _physics;
+    private AActorPhysics _physics;
     
     
     protected override void OnInitialization()
     {
       base.OnInitialization();
       _gravityDirection = _gravityDirection.normalized;
-      _physics = _actor.GetComponent<ActorPhysics>();
+      _physics = _actor.Physics;
     }
 
     public override void Execute()

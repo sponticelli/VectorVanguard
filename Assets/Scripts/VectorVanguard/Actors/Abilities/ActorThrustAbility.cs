@@ -15,7 +15,7 @@ namespace VectorVanguard.Actors.Abilities
 
     private bool _isThrusting;
     private float _linearVelocity;
-    private ActorPhysics _physics;
+    private AActorPhysics _physics;
 
     private Vector3 _linearForce;
 
@@ -23,7 +23,7 @@ namespace VectorVanguard.Actors.Abilities
     protected override void OnInitialization()
     {
       base.OnInitialization();
-      _physics = _actor.GetComponent<ActorPhysics>();
+      _physics = _actor.Physics;
       _isThrusting = false;
       _linearForce = Vector2.zero;
     }

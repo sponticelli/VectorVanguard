@@ -14,13 +14,13 @@ namespace VectorVanguard.Actors.Abilities
     
     private float _direction;
     private float _angularVelocity;
-    private ActorPhysics _physics;
+    private AActorPhysics _physics;
     private float _directionMultiplier = 1;
 
     protected override void OnInitialization()
     {
       base.OnInitialization();
-      _physics = _actor.GetComponent<ActorPhysics>();
+      _physics = _actor.Physics;
       _directionMultiplier = _invertDirection ? -1 : 1;
     }
     

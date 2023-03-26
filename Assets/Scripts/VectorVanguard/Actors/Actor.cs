@@ -11,12 +11,13 @@ namespace VectorVanguard.Actors
     private AActorInput _input;
     
     [SerializeField]
-    private ActorPhysics _physics;
+    private AActorPhysics _physics;
 
     [SerializeField] 
     private ActorAbilities _actorAbilities;
     
     public ActorAbilities ActorAbilities => _actorAbilities;
+    public AActorPhysics Physics => _physics;
     
     public AActorInput Input => _input;
 
