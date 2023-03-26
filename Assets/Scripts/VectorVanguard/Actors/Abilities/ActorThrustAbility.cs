@@ -31,7 +31,6 @@ namespace VectorVanguard.Actors.Abilities
     public override void EarlyExecute()
     {
       base.EarlyExecute();
-
       _isThrusting = _actor.Input.GetMovementDirection().y != 0 || _actor.Input.IsPressed("THRUST");
     }
 

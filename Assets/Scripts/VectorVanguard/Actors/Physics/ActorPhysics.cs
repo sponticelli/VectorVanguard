@@ -6,7 +6,8 @@ namespace VectorVanguard.Actors
   public class ActorPhysics :  AActorPhysics
   {
     
-    
+    [SerializeField] private float _weight = 8;
+    [SerializeField] private float _drag = 0.9f;
     
     private float _internalRotationForce;
     private Vector3 _internalLinearForce;
@@ -33,9 +34,10 @@ namespace VectorVanguard.Actors
     {
       _internalLinearForce.z = 0;
       _externalLinearForce.z = 0;
-      _transform.Rotate(0, 0, (_internalRotationForce+_externalRotationForce) * Time.deltaTime);
       
-      _transform.position += CheckForCollision() * Time.deltaTime;
+      _transform.Rotate(0, 0, (_internalRotationForce+_externalRotationForce) * Time.deltaTime / _weight);
+      
+      _transform.position += CheckForCollision() * Time.deltaTime / _weight;
       _processed = true;
     }
 
@@ -44,8 +46,8 @@ namespace VectorVanguard.Actors
       if (!_processed) return;
       _internalLinearForce = Vector3.zero;
       _internalRotationForce = 0;
-      _externalLinearForce = Vector3.zero;
-      _externalRotationForce = 0;
+      _externalLinearForce *= _drag;
+      _externalRotationForce *= _drag;
         
       _processed = false;
     }
