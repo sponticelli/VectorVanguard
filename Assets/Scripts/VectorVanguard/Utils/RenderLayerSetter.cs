@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 namespace VectorVanguard.Utils
@@ -11,6 +12,26 @@ namespace VectorVanguard.Utils
     
     
     private Renderer _renderer;
+    
+    public SortingLayer SortingLayer
+    {
+      get => SortingLayer.layers.FirstOrDefault(layer => layer.id == _sortingLayerID);
+      set
+      {
+        _sortingLayerID = value.id;
+        SetSortingInfo();
+      }
+    }
+
+    public int SortingOrder
+    {
+      get => _sortingOrder;
+      set
+      {
+        _sortingOrder = value;
+        SetSortingInfo();
+      }
+    }
 
     private void Awake()
     {
@@ -18,6 +39,11 @@ namespace VectorVanguard.Utils
     }
 
     private void Start()
+    {
+      SetSortingInfo();
+    }
+
+    private void SetSortingInfo()
     {
       _renderer.sortingLayerID = _sortingLayerID;
       _renderer.sortingOrder = _sortingOrder;
