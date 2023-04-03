@@ -15,5 +15,7 @@ namespace Vektor.Editors
         ((AVectorMeshFilter) target).Generate(true);
       }
     }
+
+
   }
 }

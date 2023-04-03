@@ -56,6 +56,7 @@ namespace Vektor.Editors
         ((VectorConnectedMeshFilter)target).Generate(true);
         CacheData();
       }
+      
     }
 
     private void Center()
@@ -160,5 +161,6 @@ namespace Vektor.Editors
       CacheData();
       meshFilter.Generate(true);
     }
+
   }
 }
