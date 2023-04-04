@@ -17,7 +17,7 @@ namespace Vektor.Meshes
     
     public VectorConnectedMesh(Vector3[] points, float lineWidth)
     {
-      this.Points = points;
+      Points = points;
       _lineWidth = lineWidth;
     }
 
