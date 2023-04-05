@@ -23,6 +23,7 @@ namespace VectorVanguard.Actors.Weapons
       SetupBullet(bullet);
       bullet.Speed += additionalForce;
       bullet.Fire();
+      OnFire?.Invoke();
       return true;
     }
 

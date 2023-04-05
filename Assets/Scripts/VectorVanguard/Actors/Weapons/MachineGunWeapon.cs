@@ -40,6 +40,7 @@ namespace VectorVanguard.Actors.Weapons
     public override bool Fire(float additionalForce = 0)
     {
       if (!base.Fire(additionalForce)) return false;
+      
       _bulletsFired++;
       _lastFireTime = Time.time;
       return true;
