@@ -1,4 +1,5 @@
 using System.Collections;
+using LiteNinja.SOA.Events;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -6,6 +7,7 @@ namespace VectorVanguard.Actors.Abilities
 {
   public class ActorDeathAbility : AActorAbility
   {
+    [SerializeField] private Vector3Event _onDeathPosition;
     [SerializeField] private float _delayedDestroyTime = 0.1f;
     protected ActorHealth _actorHealth;
     
@@ -34,6 +36,7 @@ namespace VectorVanguard.Actors.Abilities
     private IEnumerator DelayedDestroy(float f)
     {
       yield return new WaitForSeconds(f);
+      _onDeathPosition?.Raise(_actor.transform.position);
       _actor.gameObject.SetActive(false);
     }
   }

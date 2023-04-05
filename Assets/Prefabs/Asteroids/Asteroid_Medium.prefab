@@ -122,6 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df7f14b2164b47719ec3c0e37294b34e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _onDeathPosition: {fileID: 11400000, guid: 8987581d4a57149e487c7fad82dd3318, type: 2}
   _delayedDestroyTime: 0.25
   OnDeath:
     m_PersistentCalls:

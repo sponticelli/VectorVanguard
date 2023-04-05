@@ -1,5 +1,7 @@
 {
   "dependencies": {
+    "com.liteninja.common": "https://github.com/sponticelli/LiteNinja-Common.git",
+    "com.liteninja.soa": "https://github.com/sponticelli/LiteNinja-SOA.git",
     "com.unity.cinemachine": "2.8.9",
     "com.unity.collab-proxy": "1.17.7",
     "com.unity.feature.2d": "1.0.0",

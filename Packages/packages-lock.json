@@ -1,5 +1,19 @@
 {
   "dependencies": {
+    "com.liteninja.common": {
+      "version": "https://github.com/sponticelli/LiteNinja-Common.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "cd69adc6d8ba796eb17f377bb3caa1e6a559bb5e"
+    },
+    "com.liteninja.soa": {
+      "version": "https://github.com/sponticelli/LiteNinja-SOA.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "95ad904fac8502026598be2e7974fab2aa351211"
+    },
     "com.unity.2d.animation": {
       "version": "7.0.9",
       "depth": 1,
