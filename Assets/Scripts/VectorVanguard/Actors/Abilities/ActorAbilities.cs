@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 using VectorVanguard.Actors.Abilities;
 
@@ -31,6 +32,16 @@ namespace VectorVanguard.Actors.Abilities
       {
         ability.LateExecute();
       }
+    }
+    
+    /// <summary>
+    /// Returns the first ability of type T
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <returns></returns>
+    public T GetAbility<T>() where T : AActorAbility
+    {
+      return _abilities.OfType<T>().FirstOrDefault();
     }
   }
 }

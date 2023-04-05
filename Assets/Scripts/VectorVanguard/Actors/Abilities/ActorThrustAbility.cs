@@ -1,6 +1,7 @@
 using System;
 using System.Numerics;
 using UnityEngine;
+using UnityEngine.Events;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 
@@ -12,26 +13,63 @@ namespace VectorVanguard.Actors.Abilities
     [SerializeField] private float _maxSpeed = 10;
     [SerializeField] private float _linearDecayRate = 0.7f;
 
+    [SerializeField] private bool _useMovementDirection = true;
+    [SerializeField] private string _thrustActionID = "THRUST";
 
+    public UnityEvent OnThrustStart;
+    public UnityEvent OnThrustEnd;
+    public UnityEvent OnThrust;
+    
+    
+    
     private bool _isThrusting;
+    private bool _wasThrusting;
     private float _linearVelocity;
     private AActorPhysics _physics;
 
     private Vector3 _linearForce;
 
+    
 
     protected override void OnInitialization()
     {
       base.OnInitialization();
       _physics = _actor.Physics;
       _isThrusting = false;
+      _wasThrusting = false;
       _linearForce = Vector2.zero;
     }
 
     public override void EarlyExecute()
     {
       base.EarlyExecute();
-      _isThrusting = _actor.Input.GetMovementDirection().y != 0 || _actor.Input.IsPressed("THRUST");
+      _wasThrusting = _isThrusting;
+      if (_useMovementDirection)
+      {
+        _isThrusting = _actor.Input.GetMovementDirection().y != 0;
+      }
+      else
+      {
+        _isThrusting = _actor.Input.IsPressed(_thrustActionID);
+      }
+
+      InvokeEvents();
+    }
+
+    private void InvokeEvents()
+    {
+      switch (_isThrusting)
+      {
+        case true when !_wasThrusting:
+          OnThrustStart?.Invoke();
+          break;
+        case false when _wasThrusting:
+          OnThrustEnd?.Invoke();
+          break;
+        case true when _wasThrusting:
+          OnThrust?.Invoke();
+          break;
+      }
     }
 
     public override void Execute()

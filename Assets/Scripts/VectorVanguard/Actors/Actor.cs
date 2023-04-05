@@ -26,7 +26,7 @@ namespace VectorVanguard.Actors
       Initialization();
     }
     
-    private void Initialization()
+    protected virtual void Initialization()
     {
       _physics.Initialization(this);
       _actorAbilities.Initialization(this);

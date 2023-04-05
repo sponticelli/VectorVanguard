@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using VectorVanguard.Utils;
 
 namespace VectorVanguard.Actors.Weapons
 {
@@ -11,6 +12,7 @@ namespace VectorVanguard.Actors.Weapons
     [SerializeField] protected float _speed = 10;
     [SerializeField] protected bool _destroyIfNotVisible = true;
     [SerializeField] protected bool _disableWhenDestroyed = true;
+    [SerializeField] protected float _damage = 1;
     
     /// <summary>
     /// The speed at which the bullet will travel at
@@ -86,7 +88,7 @@ namespace VectorVanguard.Actors.Weapons
       Lifetime();
     }
 
-    private void OnCollisionEnter2D(Collision2D col)
+    private void OnTriggerEnter2D(Collider2D col)
     {
       //Check if the bullet is colliding with a layer that is in the collision mask
       if (((1 << col.gameObject.layer) & CollisionMask) == 0) return;
@@ -94,20 +96,32 @@ namespace VectorVanguard.Actors.Weapons
       OnAfterCollide(col);
     }
 
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+      //Check if the bullet is colliding with a layer that is in the collision mask
+      if (((1 << col.gameObject.layer) & CollisionMask) == 0) return;
+      OnCollide(col.collider);
+      OnAfterCollide(col.collider);
+    }
+
     /// <summary>
     /// Called when the bullet collides with something
     /// </summary>
     /// <param name="col"></param>
-    protected virtual void OnCollide(Collision2D col)
+    protected virtual void OnCollide(Collider2D col)
     {
-      
+      var damageable = col.GetComponent<IDamageable>();
+      if (damageable != null)
+      {
+        damageable.TakeDamage(_damage);
+      }
     }
-    
+
     /// <summary>
     /// Called after the bullet has collided with something
     /// </summary>
     /// <param name="col"></param>
-    protected virtual void OnAfterCollide(Collision2D col)
+    protected virtual void OnAfterCollide(Collider2D col)
     {
       Destroy(); //disable so it can be reused
     }

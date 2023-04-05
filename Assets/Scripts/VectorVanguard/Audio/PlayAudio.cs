@@ -6,9 +6,28 @@ namespace VectorVanguard.Audio
   {
     [SerializeField] private AudioSource _audioSource;
     
-    public void Play(AudioClip clip)
+    public void PlayOneShot(AudioClip clip)
     {
       _audioSource.PlayOneShot(clip);
+    }
+    
+    public void Play(AudioClip clip)
+    {
+      _audioSource.clip = clip;
+      _audioSource.Play();
+    }
+    
+    public void PlayLoop(AudioClip clip)
+    {
+      _audioSource.clip = clip;
+      _audioSource.loop = true;
+      _audioSource.Play();
+    }
+    
+    public void Stop()
+    {
+      _audioSource.Stop();
+      _audioSource.loop = false;
     }
   }
 }
