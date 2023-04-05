@@ -23,7 +23,7 @@ namespace VectorVanguard.Actors.Abilities
       set => _maxHealth = value;
     }
     
-    public UnityEvent OnDeath;
+    public UnityEvent<float> OnHealthChanged;
     
     public override void Initialization(Actor actor)
     {
@@ -35,10 +35,11 @@ namespace VectorVanguard.Actors.Abilities
     {
       var _previousHealth = _currentHealth;
       _currentHealth -= damage;
-      if (_currentHealth <= 0 && _previousHealth > 0)
+      if (_currentHealth< 0) _currentHealth = 0;
+      
+      if (_currentHealth != _previousHealth)
       {
-        _currentHealth = 0;
-        OnDeath.Invoke();
+        OnHealthChanged.Invoke(_currentHealth);
       }
     }
   }

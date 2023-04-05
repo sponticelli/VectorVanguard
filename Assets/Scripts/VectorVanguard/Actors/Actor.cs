@@ -21,7 +21,7 @@ namespace VectorVanguard.Actors
     
     public AActorInput Input => _input;
 
-    private void Awake()
+    private void OnEnable()
     {
       Initialization();
     }
