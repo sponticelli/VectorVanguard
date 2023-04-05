@@ -14,6 +14,8 @@ namespace VectorVanguard.Actors
     public abstract void AddForce(Vector3 force);
     public abstract void AddExternalRotationForce(float rotation);
     public abstract void AddExternalForce(Vector3 force);
+    
+    public abstract float GetSpeed();
   }
 
 }

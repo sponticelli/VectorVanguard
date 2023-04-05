@@ -60,5 +60,10 @@ namespace VectorVanguard.Actors
         {
             _externalLinearForce += force;
         }
+        
+        public override float GetSpeed()
+        {
+            return _rigidbody2D.velocity.magnitude;
+        }
     }
 }

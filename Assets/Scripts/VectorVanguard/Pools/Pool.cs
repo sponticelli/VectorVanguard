@@ -73,8 +73,10 @@ namespace VectorVanguard.Pools
       {
         var obj = Instantiate(_prefab, transform);
         obj.SetActive(false);
+        obj.name = $"{_tag} {i+_size}";
         _pool.Add(obj);
       }
+      _size += expandSize;
     }
   }
 }

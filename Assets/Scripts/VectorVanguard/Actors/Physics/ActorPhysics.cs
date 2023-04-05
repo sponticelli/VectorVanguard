@@ -19,6 +19,9 @@ namespace VectorVanguard.Actors
     
     private Transform _transform;
     
+    private Vector3 _previousPosition;
+    
+    
     public override void Initialization(Actor actor)
     {
       _actor = actor;
@@ -27,6 +30,7 @@ namespace VectorVanguard.Actors
       _internalRotationForce = 0;
       _externalLinearForce = Vector2.zero;
       _externalRotationForce = 0;
+      _previousPosition = _transform.position;
     }
 
 
@@ -36,7 +40,7 @@ namespace VectorVanguard.Actors
       _externalLinearForce.z = 0;
       
       _transform.Rotate(0, 0, (_internalRotationForce+_externalRotationForce) * Time.deltaTime / _weight);
-      
+      _previousPosition = _transform.position;
       _transform.position += CheckForCollision() * Time.deltaTime / _weight;
       _processed = true;
     }
@@ -70,6 +74,11 @@ namespace VectorVanguard.Actors
     public override void AddExternalForce(Vector3 force)
     {
       _externalLinearForce += force;
+    }
+    
+    public override float GetSpeed()
+    {
+      return (_transform.position - _previousPosition).magnitude / Time.deltaTime;
     }
 
     private Vector3 CheckForCollision()
@@ -121,5 +130,7 @@ namespace VectorVanguard.Actors
       return newTranslation;
 
     }
+    
+    
   }
 }
