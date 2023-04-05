@@ -10,8 +10,8 @@ namespace VectorVanguard.Pools
     private static PoolManager _instance;
     public static PoolManager Instance => _instance;
     
-    private readonly List<Pool> _pools = new();
-    private Dictionary<string, Pool> _poolDictionary = new();
+    private readonly List<APool> _pools = new();
+    private Dictionary<string, APool> _poolDictionary = new();
 
     private void Awake()
     {
@@ -23,7 +23,7 @@ namespace VectorVanguard.Pools
       _instance = this;
       
       //Get all pools in children
-      _pools.AddRange(GetComponentsInChildren<Pool>());
+      _pools.AddRange(GetComponentsInChildren<APool>());
       foreach (var pool in _pools)
       {
         pool.Initialization();

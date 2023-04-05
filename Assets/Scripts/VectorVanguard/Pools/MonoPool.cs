@@ -3,21 +3,21 @@ using UnityEngine;
 
 namespace VectorVanguard.Pools
 {
-  public class Pool : MonoBehaviour
+  public class MonoPool : APool
   {
-    [SerializeField] private string _tag;
+    
     [SerializeField] private GameObject _prefab;
     [SerializeField] private int _size = 10;
     [SerializeField] private bool _expandable = true;
     [SerializeField] private int _maxExpandSize = 100;
     [SerializeField] private int _expandSize = 10;
     
-    public string Tag => _tag;
+    
     
     private readonly List<GameObject> _pool = new();
     private readonly  List<GameObject> _activeObjects = new();
 
-    public void Initialization()
+    public override void Initialization()
     {
       for (var i = 0; i < _size; i++)
       {
@@ -28,7 +28,7 @@ namespace VectorVanguard.Pools
       }
     }
     
-    public GameObject GetObject(Vector3 position, Quaternion rotation)
+    public override GameObject GetObject(Vector3 position, Quaternion rotation)
     {
       Enqueue();
       if (_pool.Count == 0) return null;
