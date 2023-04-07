@@ -111,6 +111,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnImpact:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: b32848d6fc8b44c9b9de2ffd6d21b856, type: 2}
+        m_TargetAssemblyTypeName: LiteNinja.SOA.Events.ASOEvent`1[[VectorVanguard.Utils.ImpactInfo,
+          Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &8955892617644988062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,7 +140,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _onDeathPosition: {fileID: 11400000, guid: 8987581d4a57149e487c7fad82dd3318, type: 2}
-  _delayedDestroyTime: 0.25
   OnDeath:
     m_PersistentCalls:
       m_Calls:

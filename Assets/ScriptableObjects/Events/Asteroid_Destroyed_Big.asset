@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0cb532b63d2384cfc9ba8c80f0b69ae9, type: 3}
-  m_Name: AsteroidSmallDestroyed
+  m_Name: Asteroid_Destroyed_Big
   m_EditorClassIdentifier: 
   _description: 
   _debugLogEnabled: 0

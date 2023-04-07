@@ -1,10 +1,11 @@
 using UnityEngine;
 using UnityEngine.Events;
 using VectorVanguard.Utils;
+using VectorVanguard.Utils.SOEvents;
 
 namespace VectorVanguard.Actors.Abilities
 {
-  public class ActorHealth : AActorAbility, IDamageable
+  public class ActorHealth : AActorAbility, IDamageable, IImpactable
   {
     [SerializeField] private float _maxHealth;
     
@@ -24,6 +25,7 @@ namespace VectorVanguard.Actors.Abilities
     }
     
     public UnityEvent<float> OnHealthChanged;
+    public UnityEventImpact OnImpact;
     
     public override void Initialization(Actor actor)
     {
@@ -31,7 +33,7 @@ namespace VectorVanguard.Actors.Abilities
       _currentHealth = _maxHealth;
     }
     
-    public void TakeDamage(float damage, Vector3 hitPoint, Vector3 hitDirection)
+    public void TakeDamage(float damage)
     {
       var _previousHealth = _currentHealth;
       _currentHealth -= damage;
@@ -42,7 +44,9 @@ namespace VectorVanguard.Actors.Abilities
         OnHealthChanged.Invoke(_currentHealth);
       }
     }
-
-
+    public void Impact(ImpactInfo impactInfo)
+    {
+      OnImpact.Invoke(impactInfo);
+    }
   }
 }

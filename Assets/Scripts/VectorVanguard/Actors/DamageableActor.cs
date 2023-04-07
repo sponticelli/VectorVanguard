@@ -4,14 +4,21 @@ using VectorVanguard.Utils;
 
 namespace VectorVanguard.Actors
 {
-  public class DamageableActor : Actor, IDamageable
+  public class DamageableActor : Actor, IDamageable, IImpactable
   {
 
-    private IDamageable _actorHealth;
+    private IDamageable _actorDamageable;
+    private IImpactable _actorImpactable;
 
-    public void TakeDamage(float damage, Vector3 hitPoint, Vector3 hitDirection)
+    public void TakeDamage(float damage)
     {
-      _actorHealth?.TakeDamage(damage, hitPoint,  hitDirection);
+      _actorDamageable?.TakeDamage(damage);
+    }
+    
+    public void Impact(ImpactInfo impactInfo)
+    {
+      Physics.AddExternalForce(impactInfo.Direction * impactInfo.Force);
+      _actorImpactable?.Impact(impactInfo);
     }
 
     private void Awake()
@@ -22,7 +29,10 @@ namespace VectorVanguard.Actors
     protected override void Initialization()
     {
       base.Initialization();
-      _actorHealth = ActorAbilities.GetAbility<ActorHealth>();
+      _actorDamageable = ActorAbilities.GetAbility<ActorHealth>();
+      _actorImpactable = ActorAbilities.GetAbility<ActorHealth>();
     }
+
+    
   }
 }

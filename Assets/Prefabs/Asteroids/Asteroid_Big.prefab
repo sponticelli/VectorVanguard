@@ -111,6 +111,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnImpact:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: b32848d6fc8b44c9b9de2ffd6d21b856, type: 2}
+        m_TargetAssemblyTypeName: LiteNinja.SOA.Events.ASOEvent`1[[VectorVanguard.Utils.ImpactInfo,
+          Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6701012376267956826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,7 +140,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _onDeathPosition: {fileID: 11400000, guid: e862c3d62a7044499899e52ac75af309, type: 2}
-  _delayedDestroyTime: 0.25
   OnDeath:
     m_PersistentCalls:
       m_Calls:
@@ -215,13 +230,13 @@ MonoBehaviour:
   _materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   _points:
-  - {x: 1.3913758, y: 0.030637711, z: 0}
+  - {x: 1.3913758, y: 0.030637696, z: 0}
   - {x: 1.0857272, y: 1.1432887, z: 0}
-  - {x: -0.07891513, y: 1.5529195, z: 0}
+  - {x: -0.078915104, y: 1.5529195, z: 0}
   - {x: -0.67165565, y: 0.5639596, z: 0}
-  - {x: -1.5789151, y: 0.052919466, z: 0}
+  - {x: -1.5789151, y: 0.05291945, z: 0}
   - {x: -1.184139, y: -1.0448774, z: 0}
-  - {x: 0.15133125, y: -1.28368, z: 0}
+  - {x: 0.15133128, y: -1.28368, z: 0}
   - {x: 0.8851905, y: -1.0151676, z: 0}
   _isClosed: 1
 --- !u!33 &6701012377259143276

@@ -111,11 +111,12 @@ namespace VectorVanguard.Actors.Weapons
     /// <param name="col"></param>
     protected virtual void OnCollide(Collider2D col)
     {
-      var damageable = col.GetComponent<IDamageable>();
+      var damageable = col.GetComponent<DamageableActor>();
+      if (!damageable) return;
       var direction =  col.transform.position - transform.position;
-      damageable?.TakeDamage(_damage, transform.position, direction);
-      var actorPhysics = col.GetComponent<AActorPhysics>();
-      actorPhysics?.AddExternalForce(direction.normalized * _impactForce * _speed);
+      var impactInfo = new ImpactInfo(transform.position, direction, _impactForce*_speed);
+      damageable?.TakeDamage(_damage);
+      damageable?.Impact(impactInfo);
     }
 
     /// <summary>
