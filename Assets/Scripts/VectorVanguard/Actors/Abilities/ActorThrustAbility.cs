@@ -78,7 +78,7 @@ namespace VectorVanguard.Actors.Abilities
 
       if (_isThrusting)
       {
-        _linearForce += _actor.transform.up * _thrustPower; // Apply thrust force based on deltaTime
+        _linearForce += _actor.transform.up * (_thrustPower * Time.deltaTime); // Apply thrust force based on deltaTime
       }
       _linearForce *= _linearDecayRate; // Apply linear decay to the force
       _linearForce = Vector3.ClampMagnitude(_linearForce, _maxSpeed); // Clamp the force to the max speed

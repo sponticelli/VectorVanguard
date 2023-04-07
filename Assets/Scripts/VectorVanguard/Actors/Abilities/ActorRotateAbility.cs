@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace VectorVanguard.Actors.Abilities
@@ -33,7 +34,7 @@ namespace VectorVanguard.Actors.Abilities
     public override void Execute()
     {
       base.Execute();
-      _angularVelocity = _direction * _rotationPower;
+      _angularVelocity = _direction * _rotationPower * Time.deltaTime;
       
       if (_direction == 0)
       {

@@ -7849,8 +7849,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4795c06fbbbd4cd58f617713e2739fa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _thrustPower: 0.1
-  _maxSpeed: 5
+  _thrustPower: 10
+  _maxSpeed: 50
   _linearDecayRate: 0.99
   _useMovementDirection: 1
   _thrustActionID: THRUST
@@ -7923,7 +7923,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b9a5b3a84c84a91a61709f6bf4ba073, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotationPower: 100
+  _rotationPower: 10000
   _angularDecayRate: 0.7
   _invertDirection: 1
 --- !u!114 &1525249081
