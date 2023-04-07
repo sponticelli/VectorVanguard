@@ -1,3 +1,4 @@
+using UnityEngine;
 using VectorVanguard.Actors.Abilities;
 using VectorVanguard.Utils;
 
@@ -8,9 +9,9 @@ namespace VectorVanguard.Actors
 
     private IDamageable _actorHealth;
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, Vector3 hitPoint, Vector3 hitDirection)
     {
-      _actorHealth?.TakeDamage(damage);
+      _actorHealth?.TakeDamage(damage, hitPoint,  hitDirection);
     }
 
     private void Awake()

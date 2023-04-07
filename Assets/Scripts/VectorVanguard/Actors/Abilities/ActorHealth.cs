@@ -31,7 +31,7 @@ namespace VectorVanguard.Actors.Abilities
       _currentHealth = _maxHealth;
     }
     
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, Vector3 hitPoint, Vector3 hitDirection)
     {
       var _previousHealth = _currentHealth;
       _currentHealth -= damage;
@@ -42,5 +42,7 @@ namespace VectorVanguard.Actors.Abilities
         OnHealthChanged.Invoke(_currentHealth);
       }
     }
+
+
   }
 }

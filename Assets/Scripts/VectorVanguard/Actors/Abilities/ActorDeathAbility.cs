@@ -8,14 +8,16 @@ namespace VectorVanguard.Actors.Abilities
   public class ActorDeathAbility : AActorAbility
   {
     [SerializeField] private Vector3Event _onDeathPosition;
-    [SerializeField] private float _delayedDestroyTime = 0.1f;
     protected ActorHealth _actorHealth;
     
     public UnityEvent OnDeath;
     
+    protected bool _isDead;
+    
     public override void Initialization(Actor actor)
     {
       base.Initialization(actor);
+      _isDead = false;
       _actorHealth = _actor.ActorAbilities.GetAbility<ActorHealth>();
         
       if (_actorHealth) _actorHealth.OnHealthChanged.AddListener(OnDamage);
@@ -24,18 +26,10 @@ namespace VectorVanguard.Actors.Abilities
 
     private void OnDamage(float health)
     {
-      if (!(health <= 0)) return;
+      if (health > 0 || _isDead) return;
+      _isDead = true;
       OnDeath.Invoke();
       if (_actorHealth) _actorHealth.OnHealthChanged.RemoveListener(OnDamage);
-      
-      //Disable the actor after 1 second
-      StartCoroutine(DelayedDestroy(_delayedDestroyTime));
-      
-    }
-
-    private IEnumerator DelayedDestroy(float f)
-    {
-      yield return new WaitForSeconds(f);
       _onDeathPosition?.Raise(_actor.transform.position);
       _actor.gameObject.SetActive(false);
     }

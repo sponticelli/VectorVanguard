@@ -54,6 +54,8 @@ MonoBehaviour:
   _speed: 10
   _destroyIfNotVisible: 1
   _disableWhenDestroyed: 1
+  _damage: 1
+  _impactForce: 2
 --- !u!212 &1223861107720204654
 SpriteRenderer:
   m_ObjectHideFlags: 0

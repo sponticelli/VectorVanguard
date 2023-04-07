@@ -13,6 +13,7 @@ namespace VectorVanguard.Actors.Weapons
     [SerializeField] protected bool _destroyIfNotVisible = true;
     [SerializeField] protected bool _disableWhenDestroyed = true;
     [SerializeField] protected float _damage = 1;
+    [SerializeField] protected float _impactForce = 1;
     
     /// <summary>
     /// The speed at which the bullet will travel at
@@ -111,10 +112,10 @@ namespace VectorVanguard.Actors.Weapons
     protected virtual void OnCollide(Collider2D col)
     {
       var damageable = col.GetComponent<IDamageable>();
-      if (damageable != null)
-      {
-        damageable.TakeDamage(_damage);
-      }
+      var direction =  col.transform.position - transform.position;
+      damageable?.TakeDamage(_damage, transform.position, direction);
+      var actorPhysics = col.GetComponent<AActorPhysics>();
+      actorPhysics?.AddExternalForce(direction.normalized * _impactForce * _speed);
     }
 
     /// <summary>
