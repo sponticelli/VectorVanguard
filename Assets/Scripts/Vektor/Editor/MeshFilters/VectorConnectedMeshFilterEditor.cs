@@ -120,6 +120,7 @@ namespace Vektor.Editors
       var worldPoint = _worldPoints[i];
       EditorGUI.BeginChangeCheck();
       worldPoint = Handles.PositionHandle(worldPoint, Quaternion.identity);
+      
       if (EditorGUI.EndChangeCheck())
       {
         // Convert the world point back to local space and update the _points list
