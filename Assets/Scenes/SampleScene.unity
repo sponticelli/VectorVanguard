@@ -567,11 +567,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tag: VFX_IMPACT
-  _prefab: {fileID: 3394267671770020339, guid: fdaddf5568ade49b79a9847c4ed162c6, type: 3}
   _size: 10
   _expandable: 1
   _maxExpandSize: 100
   _expandSize: 10
+  _prefab: {fileID: 3394267671770020339, guid: fdaddf5568ade49b79a9847c4ed162c6, type: 3}
 --- !u!1 &497828801
 GameObject:
   m_ObjectHideFlags: 0
@@ -741,15 +741,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 499269922}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9294eeed254b4cb8bfa773bcb4ab07aa, type: 3}
+  m_Script: {fileID: 11500000, guid: 91fd2802ea3e45feb5d6b0b2032ff3c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _tag: ASTEROID_SMALL
-  _prefab: {fileID: 2666528793599040994, guid: 7b940ccfe0bc349b89c5b585f8a2d4fb, type: 3}
   _size: 10
   _expandable: 1
   _maxExpandSize: 100
   _expandSize: 10
+  _prefabs:
+  - {fileID: 2666528793599040994, guid: 7b940ccfe0bc349b89c5b585f8a2d4fb, type: 3}
+  - {fileID: 2666528793599040994, guid: b05ddfe95d7e74c3e86ad3292b010b62, type: 3}
+  - {fileID: 2666528793599040994, guid: 71eaec3cc7b6e48a5ab815630cbe7229, type: 3}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -931,15 +934,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 533045687}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9294eeed254b4cb8bfa773bcb4ab07aa, type: 3}
+  m_Script: {fileID: 11500000, guid: 91fd2802ea3e45feb5d6b0b2032ff3c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _tag: ASTEROID_MEDIUM
-  _prefab: {fileID: 8955892618887738848, guid: f8f78e6b66ce742a4985858d4caa2857, type: 3}
   _size: 10
   _expandable: 1
   _maxExpandSize: 100
   _expandSize: 10
+  _prefabs:
+  - {fileID: 8955892618887738848, guid: f8f78e6b66ce742a4985858d4caa2857, type: 3}
+  - {fileID: 8955892618887738848, guid: d0db38e22e3b14b11bf7406f182281f5, type: 3}
+  - {fileID: 8955892618887738848, guid: f222caa35082e4e3bbdd2478be3c60e1, type: 3}
 --- !u!1 &573655471
 GameObject:
   m_ObjectHideFlags: 0
@@ -985,11 +991,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tag: BULLET
-  _prefab: {fileID: 1223861107720204655, guid: d2d7a9bcd93c148f388c284838c5e630, type: 3}
   _size: 10
   _expandable: 1
   _maxExpandSize: 100
   _expandSize: 10
+  _prefab: {fileID: 1223861107720204655, guid: d2d7a9bcd93c148f388c284838c5e630, type: 3}
 --- !u!1 &598540691
 GameObject:
   m_ObjectHideFlags: 0
@@ -8436,15 +8442,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1721439004}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9294eeed254b4cb8bfa773bcb4ab07aa, type: 3}
+  m_Script: {fileID: 11500000, guid: 91fd2802ea3e45feb5d6b0b2032ff3c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _tag: ASTEROID_BIG
-  _prefab: {fileID: 6701012377259143275, guid: fc873ac680363404b953e2cf2a9d373e, type: 3}
   _size: 10
   _expandable: 1
   _maxExpandSize: 100
   _expandSize: 10
+  _prefabs:
+  - {fileID: 6701012377259143275, guid: fc873ac680363404b953e2cf2a9d373e, type: 3}
+  - {fileID: 6701012377259143275, guid: b780b3b5b6fde48ed9c2508375755e94, type: 3}
+  - {fileID: 6701012377259143275, guid: 4586e230999ad4229ac22f21f0314aea, type: 3}
 --- !u!1 &1808963031
 GameObject:
   m_ObjectHideFlags: 0
@@ -9289,8 +9298,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tag: VFX_EXPLOSION_ASTEROID
-  _prefab: {fileID: 1393636200135097412, guid: b5b5123be3a234288ba0da9525a4518a, type: 3}
   _size: 5
   _expandable: 1
   _maxExpandSize: 20
   _expandSize: 5
+  _prefab: {fileID: 1393636200135097412, guid: b5b5123be3a234288ba0da9525a4518a, type: 3}

@@ -1,66 +1,24 @@
-using System.Collections.Generic;
+using UnityEditor.iOS;
 using UnityEngine;
 
 namespace VectorVanguard.Pools
 {
-  public class MonoPool : APool
+  public class MonoPool : AExpandablePool
   {
     
     [SerializeField] private GameObject _prefab;
-    [SerializeField] private int _size = 10;
-    [SerializeField] private bool _expandable = true;
-    [SerializeField] private int _maxExpandSize = 100;
-    [SerializeField] private int _expandSize = 10;
     
-    
-    
-    private readonly List<GameObject> _pool = new();
-    private readonly  List<GameObject> _activeObjects = new();
 
-    public override void Initialization()
+    protected override void AddObject(int i)
     {
-      for (var i = 0; i < _size; i++)
-      {
-        var obj = Instantiate(_prefab, transform);
-        obj.SetActive(false);
-        obj.name = $"{_tag} {i}";
-        _pool.Add(obj);
-      }
-    }
-    
-    public override GameObject GetObject(Vector3 position, Quaternion rotation)
-    {
-      Enqueue();
-      if (_pool.Count == 0) return null;
-      var lastIndex = _pool.Count - 1;
-      var obj = _pool[lastIndex];
-      _pool.RemoveAt(lastIndex);
-      obj.transform.position = position;
-      obj.transform.rotation = rotation;
-      obj.SetActive(true);
-      _activeObjects.Add(obj);
-      return obj;
+      var obj = Instantiate(_prefab, transform);
+      obj.SetActive(false);
+      obj.name = $"{_tag} {i}";
+      _pool.Add(obj);
     }
 
-    private void Enqueue()
-    {
-      // if _pool is empty, move all inactive _activeObjects to _pool
-      if (_pool.Count != 0) return;
-      for (var i = 0; i < _activeObjects.Count; i++)
-      {
-        if (_activeObjects[i].activeSelf) continue;
-        _pool.Add(_activeObjects[i]);
-        _activeObjects.RemoveAt(i);
-        i--;
-      }
 
-      if (_pool.Count == 0)
-      {
-        Expand();
-      }
-    }
-
-    private void Expand()
+    protected override void Expand()
     {
       if (!_expandable) return;
       if (_pool.Count >= _maxExpandSize) return;
@@ -71,10 +29,7 @@ namespace VectorVanguard.Pools
       }
       for (var i = 0; i < expandSize; i++)
       {
-        var obj = Instantiate(_prefab, transform);
-        obj.SetActive(false);
-        obj.name = $"{_tag} {i+_size}";
-        _pool.Add(obj);
+        AddObject(i+_size);
       }
       _size += expandSize;
     }

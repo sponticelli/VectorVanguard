@@ -2,16 +2,34 @@ using UnityEngine;
 
 namespace VectorVanguard.Pools
 {
-  public class MultiPool : APool
+  public class MultiPool : AExpandablePool
   {
-    public override void Initialization()
+    [SerializeField] private GameObject[] _prefabs;
+
+
+    protected override void Expand()
     {
-      throw new System.NotImplementedException();
+      if (!_expandable) return;
+      if (_pool.Count >= _maxExpandSize) return;
+      var expandSize = _expandSize;
+      if (_pool.Count + expandSize > _maxExpandSize)
+      {
+        expandSize = _maxExpandSize - _pool.Count;
+      }
+      for (var i = 0; i < expandSize; i++)
+      {
+        AddObject(i+_size);
+      }
+      _size += expandSize;
     }
 
-    public override GameObject GetObject(Vector3 position, Quaternion rotation)
+    protected override void AddObject(int i)
     {
-      throw new System.NotImplementedException();
+      var prefab = _prefabs[i % _prefabs.Length];
+      var obj = Instantiate(prefab, transform);
+      obj.SetActive(false);
+      obj.name = $"{_tag} {i}";
+      _pool.Add(obj);
     }
   }
 }
