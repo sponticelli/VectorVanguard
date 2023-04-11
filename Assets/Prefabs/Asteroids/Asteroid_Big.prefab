@@ -65,7 +65,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b9a5b3a84c84a91a61709f6bf4ba073, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotationPower: 40000
+  _rotationPower: 4000
   _angularDecayRate: 0.7
   _invertDirection: 1
 --- !u!114 &6701012376267956828
@@ -330,8 +330,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc6662c73c534a9d946bd893eb49c73a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _minThrustForce: 0.1
-  _maxThrustForce: 0.75
+  _minThrustForce: 10
+  _maxThrustForce: 100
 --- !u!114 &6701012377259143314
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -29,7 +29,7 @@ namespace VectorVanguard.Actors.Abilities
     public override void Execute()
     {
       base.Execute();
-      _physics.AddForce(_thrustDirection * _thrustForce);
+      _physics.AddForce(_thrustDirection * (_thrustForce * Time.deltaTime));
     }
   }
 }

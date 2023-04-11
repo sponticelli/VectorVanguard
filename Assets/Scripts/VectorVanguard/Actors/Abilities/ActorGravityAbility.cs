@@ -21,7 +21,7 @@ namespace VectorVanguard.Actors.Abilities
     {
       base.Execute();
 
-      _physics.AddForce(_gravityDirection * _gravityPower);
+      _physics.AddForce(_gravityDirection * (_gravityPower * Time.deltaTime));
     }
   }
 }

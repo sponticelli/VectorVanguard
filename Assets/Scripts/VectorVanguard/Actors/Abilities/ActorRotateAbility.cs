@@ -38,7 +38,7 @@ namespace VectorVanguard.Actors.Abilities
       
       if (_direction == 0)
       {
-        _angularVelocity *= _angularDecayRate * 0;
+        _angularVelocity *= _angularDecayRate;
       }
       
       _physics.AddRotationForce(_angularVelocity);

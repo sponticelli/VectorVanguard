@@ -85,9 +85,7 @@ namespace VectorVanguard.Actors.Abilities
       //if _linearForce.magnitude < epsilon, set to zero
       _linearForce = _linearForce.magnitude < 0.0001f ? Vector3.zero : _linearForce;
       _physics.AddForce(_linearForce);
-
-      // Draw a line to show the direction of thrust
-      Debug.DrawLine(_actor.transform.position, _actor.transform.position + (Vector3)_linearForce, Color.green);
+      
     }
   }
 }
