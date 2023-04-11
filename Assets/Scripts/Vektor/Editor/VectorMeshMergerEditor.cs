@@ -10,8 +10,8 @@ namespace Vektor.Editors
 {
   public class VectorMeshMergerEditor
   {
-    [ContextMenu("LiteNinja/Vektor/Bake VectorMeshes to 3D (mesh)")]
-    [MenuItem("LiteNinja/Vektor/Bake VectorMeshes to 3D (mesh)")]
+    [ContextMenu("LiteNinja/Vektor/Vector Meshes Filter/Bake VectorMeshes to 3D (mesh)")]
+    [MenuItem("LiteNinja/Vektor/Vector Meshes Filter/Bake VectorMeshes to 3D (mesh)")]
     private static void MergeSelectedVectorMeshes3D(MenuCommand menuCommand)
     {
       var vectorMeshes = GetVectorMeshes(out var material);
