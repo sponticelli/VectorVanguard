@@ -127,8 +127,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 5692901245414529260}
-        m_TargetAssemblyTypeName: VectorVanguard.VFX.MeshShake, Assembly-CSharp
+      - m_Target: {fileID: 7935492986868004035}
+        m_TargetAssemblyTypeName: VectorVanguard.VFX.ObjectShake, Assembly-CSharp
         m_MethodName: Shake
         m_Mode: 1
         m_Arguments:
@@ -320,7 +320,7 @@ GameObject:
   - component: {fileID: 5998448284525620270}
   - component: {fileID: 5896631988692280583}
   - component: {fileID: 5308501280849212489}
-  - component: {fileID: 5692901245414529260}
+  - component: {fileID: 7935492986868004035}
   m_Layer: 6
   m_Name: Visuals
   m_TagString: Untagged
@@ -407,7 +407,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sortingOrder: 0
   _sortingLayerID: -969110509
---- !u!114 &5692901245414529260
+--- !u!114 &7935492986868004035
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -416,13 +416,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 3249601852491474034}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a277e27a831641d49e3559c4805533ac, type: 3}
+  m_Script: {fileID: 11500000, guid: 77763dda81c245b698f576b2a8c60b95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meshFilter: {fileID: 0}
-  minDuration: 0.1
-  maxDuration: 0.3
-  minMagnitude: 0.01
-  maxMagnitude: 0.07
-  minSpeed: 1
-  maxSpeed: 10
+  minDuration: 0.15
+  maxDuration: 0.25
+  minMagnitude: 0.2
+  maxMagnitude: 0.3
+  minTimeBetweenShakes: 0.01
+  maxTimeBetweenShakes: 0.05
+  _minAngle: 0
+  _maxAngle: 90
+  _smoothShake: 1

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7953723971402029152}
   - component: {fileID: 59443913058019838}
   - component: {fileID: 7857306048694761889}
-  - component: {fileID: 4142273805254125834}
+  - component: {fileID: 7499287594304289961}
   m_Layer: 6
   m_Name: Visuals
   m_TagString: Untagged
@@ -99,7 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sortingOrder: 0
   _sortingLayerID: -969110509
---- !u!114 &4142273805254125834
+--- !u!114 &7499287594304289961
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -108,16 +108,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 3862541816446531261}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a277e27a831641d49e3559c4805533ac, type: 3}
+  m_Script: {fileID: 11500000, guid: 77763dda81c245b698f576b2a8c60b95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meshFilter: {fileID: 0}
   minDuration: 0.1
-  maxDuration: 0.3
+  maxDuration: 0.1
   minMagnitude: 0.01
-  maxMagnitude: 0.07
-  minSpeed: 1
-  maxSpeed: 10
+  maxMagnitude: 0.05
+  minTimeBetweenShakes: 0
+  maxTimeBetweenShakes: 0.01
+  _smoothShake: 0
 --- !u!1 &6701012376267956824
 GameObject:
   m_ObjectHideFlags: 0
@@ -229,18 +229,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 4142273805254125834}
-        m_TargetAssemblyTypeName: VectorVanguard.VFX.MeshShake, Assembly-CSharp
-        m_MethodName: Shake
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   OnImpact:
     m_PersistentCalls:
       m_Calls:
@@ -249,6 +237,18 @@ MonoBehaviour:
           Assembly-CSharp
         m_MethodName: Raise
         m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7499287594304289961}
+        m_TargetAssemblyTypeName: VectorVanguard.VFX.ObjectShake, Assembly-CSharp
+        m_MethodName: Shake
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

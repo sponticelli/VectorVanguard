@@ -395,9 +395,18 @@ PrefabInstance:
       propertyPath: m_Points.m_Paths.Array.data[3].Array.data[9].y
       value: -0.45070976
       objectReference: {fileID: 0}
+    - target: {fileID: 5692901245414529260, guid: 7b940ccfe0bc349b89c5b585f8a2d4fb, type: 3}
+      propertyPath: meshFilter
+      value: 
+      objectReference: {fileID: 3998372351526734785}
     - target: {fileID: 5998448284525620270, guid: 7b940ccfe0bc349b89c5b585f8a2d4fb, type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 4300000, guid: 75704687e6336495b8c027d1f09cdd8f, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b940ccfe0bc349b89c5b585f8a2d4fb, type: 3}
+--- !u!33 &3998372351526734785 stripped
+MeshFilter:
+  m_CorrespondingSourceObject: {fileID: 5998448284525620270, guid: 7b940ccfe0bc349b89c5b585f8a2d4fb, type: 3}
+  m_PrefabInstance: {fileID: 7224854172046059503}
+  m_PrefabAsset: {fileID: 0}

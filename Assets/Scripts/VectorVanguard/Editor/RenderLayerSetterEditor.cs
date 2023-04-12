@@ -55,5 +55,4 @@ namespace VectorVanguard.Editors
       return 0;
     }
   }
-
 }

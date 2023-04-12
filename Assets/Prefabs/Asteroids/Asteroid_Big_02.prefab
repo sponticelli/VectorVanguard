@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6701012376267956829, guid: fc873ac680363404b953e2cf2a9d373e, type: 3}
+      propertyPath: OnHealthChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6701012377259143275, guid: fc873ac680363404b953e2cf2a9d373e, type: 3}
       propertyPath: m_Name
       value: Asteroid_Big_02

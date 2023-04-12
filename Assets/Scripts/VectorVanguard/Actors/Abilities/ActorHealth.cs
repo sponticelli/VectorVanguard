@@ -46,7 +46,7 @@ namespace VectorVanguard.Actors.Abilities
     }
     public void Impact(ImpactInfo impactInfo)
     {
-      OnImpact.Invoke(impactInfo);
+      if (_currentHealth > 0) OnImpact.Invoke(impactInfo);
     }
   }
 }
