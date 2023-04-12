@@ -426,5 +426,5 @@ MonoBehaviour:
   minTimeBetweenShakes: 0.01
   maxTimeBetweenShakes: 0.05
   _minAngle: 0
-  _maxAngle: 90
+  _maxAngle: 60
   _smoothShake: 1
