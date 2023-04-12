@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5581417250467863039}
   - component: {fileID: 3249295439951857656}
   - component: {fileID: 5826235681329469886}
+  - component: {fileID: 7946072373946127111}
   m_Layer: 6
   m_Name: Visuals
   m_TagString: Untagged
@@ -98,6 +99,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sortingOrder: 0
   _sortingLayerID: -969110509
+--- !u!114 &7946072373946127111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6294007594976806876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a277e27a831641d49e3559c4805533ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshFilter: {fileID: 0}
+  minDuration: 0.1
+  maxDuration: 0.3
+  minMagnitude: 0.01
+  maxMagnitude: 0.07
+  minSpeed: 1
+  maxSpeed: 10
 --- !u!1 &8955892617644988056
 GameObject:
   m_ObjectHideFlags: 0
@@ -217,6 +237,18 @@ MonoBehaviour:
           Assembly-CSharp
         m_MethodName: Raise
         m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7946072373946127111}
+        m_TargetAssemblyTypeName: VectorVanguard.VFX.MeshShake, Assembly-CSharp
+        m_MethodName: Shake
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

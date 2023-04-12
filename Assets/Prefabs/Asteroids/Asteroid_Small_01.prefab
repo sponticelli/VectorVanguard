@@ -127,6 +127,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 5692901245414529260}
+        m_TargetAssemblyTypeName: VectorVanguard.VFX.MeshShake, Assembly-CSharp
+        m_MethodName: Shake
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2666528792328219841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,15 +277,16 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.00395, y: 0.5678388}
-      - {x: -0.35543323, y: 0.41334355}
-      - {x: -0.5241617, y: -0.13971424}
-      - {x: -0.18793514, y: -0.11601305}
-      - {x: -0.23061419, y: -0.4359424}
-      - {x: 0.17834675, y: -0.44829458}
-      - {x: 0.43786097, y: -0.11679602}
-      - {x: 0.24902129, y: 0.034012318}
-      - {x: 0.4133006, y: 0.25095028}
+    - - {x: 0.44983107, y: -0.11708023}
+      - {x: 0.250143, y: 0.043061472}
+      - {x: 0.41186154, y: 0.2540606}
+      - {x: 0.0049195737, y: 0.5653225}
+      - {x: -0.36327767, y: 0.40811396}
+      - {x: -0.5189321, y: -0.14494386}
+      - {x: -0.1958472, y: -0.13410288}
+      - {x: -0.22425786, y: -0.43005732}
+      - {x: -0.16229852, y: -0.41588232}
+      - {x: 0.18336903, y: -0.45070976}
 --- !u!50 &2666528793599040918
 Rigidbody2D:
   serializedVersion: 4
@@ -307,6 +320,7 @@ GameObject:
   - component: {fileID: 5998448284525620270}
   - component: {fileID: 5896631988692280583}
   - component: {fileID: 5308501280849212489}
+  - component: {fileID: 5692901245414529260}
   m_Layer: 6
   m_Name: Visuals
   m_TagString: Untagged
@@ -393,3 +407,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sortingOrder: 0
   _sortingLayerID: -969110509
+--- !u!114 &5692901245414529260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3249601852491474034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a277e27a831641d49e3559c4805533ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshFilter: {fileID: 0}
+  minDuration: 0.1
+  maxDuration: 0.3
+  minMagnitude: 0.01
+  maxMagnitude: 0.07
+  minSpeed: 1
+  maxSpeed: 10
