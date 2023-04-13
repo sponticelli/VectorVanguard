@@ -6,9 +6,11 @@ using VectorVanguard.Utils;
 
 namespace VectorVanguard.Actors
 {
+  [Serializable]  
   public class Actor : MonoBehaviour, IFactionable
   {
     [SerializeField] protected EntityFaction _faction;
+    [SerializeField] protected EntityType _entityType;
     
     [SerializeField] private AActorInput _input;
 
@@ -25,6 +27,12 @@ namespace VectorVanguard.Actors
     {
       get => _faction;
       set => _faction = value;
+    }
+    
+    public EntityType EntityType
+    {
+      get => _entityType;
+      set => _entityType = value;
     }
 
 

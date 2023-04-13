@@ -32,6 +32,7 @@ namespace VectorVanguard.Pools
       obj.transform.rotation = rotation;
       obj.SetActive(true);
       _activeObjects.Add(obj);
+      obj.Spawn();
       return obj;
     }
 

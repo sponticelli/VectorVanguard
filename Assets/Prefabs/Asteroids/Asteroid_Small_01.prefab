@@ -178,6 +178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2666528793599041000}
   - component: {fileID: 2666528793599040919}
+  - component: {fileID: 8385526020901163509}
   - component: {fileID: 2666528793599040916}
   - component: {fileID: 2666528793599040917}
   - component: {fileID: 2666528793599041002}
@@ -218,10 +219,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d78515b1f394f1e8378bef87aa8fc55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _faction: 2
+  _faction: 3
+  _entityType: 2
   _input: {fileID: 2666528793599040916}
   _physics: {fileID: 2666528793599040917}
   _actorAbilities: {fileID: 2666528792328219846}
+--- !u!114 &8385526020901163509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2666528793599040994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cb8e230013341cf82f800e1de793029, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _activeActorsSO: {fileID: 11400000, guid: 85aff0e6add27453abfbb0891dbcda86, type: 2}
+  _actor: {fileID: 2666528793599040919}
 --- !u!114 &2666528793599040916
 MonoBehaviour:
   m_ObjectHideFlags: 0

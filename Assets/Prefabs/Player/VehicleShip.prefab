@@ -237,6 +237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23c464bf4f4f4cf4b7616ffc2e3d61e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _faction: 0
   _collisionMask:
     serializedVersion: 2
     m_Bits: 192
@@ -5317,6 +5318,7 @@ GameObject:
   - component: {fileID: 6363551253534607324}
   - component: {fileID: 6363551253534607321}
   - component: {fileID: 6363551253534607320}
+  - component: {fileID: 1585314979306006226}
   m_Layer: 0
   m_Name: VehicleShip
   m_TagString: Untagged
@@ -5355,6 +5357,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55ba6f47c53842889968c580f08241e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _faction: 1
+  _entityType: 1
   _input: {fileID: 6363551253534607325}
   _physics: {fileID: 6363551253534607324}
   _actorAbilities: {fileID: 6363551252641685295}
@@ -5446,6 +5450,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!114 &1585314979306006226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6363551253534607299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cb8e230013341cf82f800e1de793029, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _activeActorsSO: {fileID: 11400000, guid: 85aff0e6add27453abfbb0891dbcda86, type: 2}
+  _actor: {fileID: 6363551253534607326}
 --- !u!1 &6363551253578629379
 GameObject:
   m_ObjectHideFlags: 0
