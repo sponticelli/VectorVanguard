@@ -8,7 +8,8 @@ namespace VectorVanguard.Actors.Weapons
   /// </summary>
   public abstract class APooledWeapon : AWeapon
   {
-    [SerializeField] private string _bulletPoolTag;
+    [SerializeField] private PoolTag _bulletPoolTag;
+    
     
     public override bool Fire(float additionalForce = 0)
     {

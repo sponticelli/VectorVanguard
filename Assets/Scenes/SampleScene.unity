@@ -703,6 +703,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9294eeed254b4cb8bfa773bcb4ab07aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _poolTag: 4
   _tag: VFX_IMPACT
   _size: 10
   _expandable: 1
@@ -881,6 +882,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91fd2802ea3e45feb5d6b0b2032ff3c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _poolTag: 0
   _tag: ASTEROID_SMALL
   _size: 10
   _expandable: 1
@@ -1074,6 +1076,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91fd2802ea3e45feb5d6b0b2032ff3c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _poolTag: 1
   _tag: ASTEROID_MEDIUM
   _size: 10
   _expandable: 1
@@ -1127,6 +1130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9294eeed254b4cb8bfa773bcb4ab07aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _poolTag: 3
   _tag: BULLET
   _size: 10
   _expandable: 1
@@ -1409,8 +1413,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32ea94962472402e83e42ee89e36e9a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _impactTag: VFX_IMPACT
-  _explosionAsteroidTag: VFX_EXPLOSION_ASTEROID
 --- !u!114 &749715918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3995,6 +3997,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91fd2802ea3e45feb5d6b0b2032ff3c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _poolTag: 2
   _tag: ASTEROID_BIG
   _size: 10
   _expandable: 1
@@ -4816,6 +4819,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9294eeed254b4cb8bfa773bcb4ab07aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _poolTag: 5
   _tag: VFX_EXPLOSION_ASTEROID
   _size: 5
   _expandable: 1
@@ -4829,10 +4833,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6363551253141755741, guid: 2adad92906b83483fb96f00b037d727b, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6363551253534607299, guid: 2adad92906b83483fb96f00b037d727b, type: 3}
       propertyPath: m_Name
       value: VehicleShip

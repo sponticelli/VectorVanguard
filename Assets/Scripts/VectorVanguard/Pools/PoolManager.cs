@@ -11,7 +11,7 @@ namespace VectorVanguard.Pools
     public static PoolManager Instance => _instance;
     
     private readonly List<APool> _pools = new();
-    private Dictionary<string, APool> _poolDictionary = new();
+    private Dictionary<PoolTag, APool> _poolDictionary = new();
 
     private void Awake()
     {
@@ -27,11 +27,11 @@ namespace VectorVanguard.Pools
       foreach (var pool in _pools)
       {
         pool.Initialization();
-        _poolDictionary.Add(pool.Tag, pool);
+        _poolDictionary.Add(pool.PoolTag, pool);
       }
     }
     
-    public GameObject GetObject(string tag, Vector3 position, Quaternion rotation)
+    public GameObject GetObject(PoolTag tag, Vector3 position, Quaternion rotation)
     {
       if (_poolDictionary.TryGetValue(tag, out var pool))
       {
@@ -41,12 +41,14 @@ namespace VectorVanguard.Pools
       return null;
     }
     
-    public GameObject GetObject(string tag, Vector3 position)
+    
+    
+    public GameObject GetObject(PoolTag tag, Vector3 position)
     {
       return GetObject(tag, position, Quaternion.identity);
     }
     
-    public GameObject GetObject(string tag)
+    public GameObject GetObject(PoolTag tag)
     {
       return GetObject(tag, Vector3.zero, Quaternion.identity);
     }

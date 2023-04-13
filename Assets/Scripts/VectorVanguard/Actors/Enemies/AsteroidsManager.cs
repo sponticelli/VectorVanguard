@@ -33,7 +33,7 @@ namespace VectorVanguard.Actors.Enemies
         numberOfAsteroids);
       foreach (var p in positions)
       {
-        var asteroid = PoolManager.Instance.GetObject(_bigAsteroidTag, p, Quaternion.Euler(0, 0, Random.Range(0, 360)));
+        var asteroid = PoolManager.Instance.GetObject(PoolTag.ASTEROID_LARGE, p, Quaternion.Euler(0, 0, Random.Range(0, 360)));
       }
     }
 
@@ -48,7 +48,7 @@ namespace VectorVanguard.Actors.Enemies
       foreach (var t in positions)
       {
         var asteroid =
-          PoolManager.Instance.GetObject(_smallAsteroidTag, t, Quaternion.Euler(0, 0, Random.Range(0, 360)));
+          PoolManager.Instance.GetObject(PoolTag.ASTEROID_SMALL, t, Quaternion.Euler(0, 0, Random.Range(0, 360)));
       }
     }
 
@@ -59,7 +59,7 @@ namespace VectorVanguard.Actors.Enemies
       foreach (var t in positions)
       {
         var asteroid =
-          PoolManager.Instance.GetObject(_mediumAsteroidTag, t, Quaternion.Euler(0, 0, Random.Range(0, 360)));
+          PoolManager.Instance.GetObject(PoolTag.ASTEROID_MEDIUM, t, Quaternion.Euler(0, 0, Random.Range(0, 360)));
       }
     }
 

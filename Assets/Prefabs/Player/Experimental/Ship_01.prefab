@@ -5635,7 +5635,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  _bulletPoolTag: BULLET
+  _bulletPoolTag: 3
   _fireRate: 0.12
   _bulletSpeed: 12
   _numberOfBullets: 5

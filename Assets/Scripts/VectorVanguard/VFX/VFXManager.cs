@@ -9,19 +9,16 @@ namespace VectorVanguard.VFX
   /// </summary>
   public class VFXManager : MonoBehaviour
   {
-    [SerializeField] private string _impactTag = "VFX_IMPACT";
-    [SerializeField] private string _explosionAsteroidTag = "VFX_EXPLOSION_ASTEROID";
-
     public void PlayImpactEffect(ImpactInfo impactInfo)
     {
-      var impactEffect = PoolManager.Instance.GetObject(_impactTag, impactInfo.Position, 
+      var impactEffect = PoolManager.Instance.GetObject(PoolTag.VFX_IMPACT, impactInfo.Position, 
         Quaternion.Euler(0, 0, Vector3.SignedAngle(Vector3.up, -impactInfo.Direction, Vector3.forward))); ;
       impactEffect.SetActive(true);
       var particleSystemPlayer = impactEffect.GetComponent<ParticleSystemPlayer>();
       particleSystemPlayer?.Play();
     }
     
-    public void PlayExplosionEffect(Vector3 position, string explosionTag)
+    public void PlayExplosionEffect(Vector3 position, PoolTag explosionTag)
     {
       var explosionEffect = PoolManager.Instance.GetObject(explosionTag, position); ;
       explosionEffect.SetActive(true);
@@ -31,7 +28,7 @@ namespace VectorVanguard.VFX
     
     public void PlayAsteroidExplosionEffect(Vector3 position)
     {
-      PlayExplosionEffect(position, _explosionAsteroidTag);
+      PlayExplosionEffect(position, PoolTag.VFX_ASTEROID_EXPLOSION);
     }
   }
 }
