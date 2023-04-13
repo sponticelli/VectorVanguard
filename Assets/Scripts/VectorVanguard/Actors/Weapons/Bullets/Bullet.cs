@@ -5,9 +5,12 @@ using VectorVanguard.Utils;
 namespace VectorVanguard.Actors.Weapons
 {
   [RequireComponent(typeof(Collider2D))]
-  public class Bullet : MonoBehaviour
+  public class Bullet : MonoBehaviour, IFactionable
   {
     [SerializeField] protected LayerMask _collisionMask;
+    [SerializeField] protected EntityFaction _faction;
+    
+    
     [SerializeField] protected float _maxLifetime = 5;
     [SerializeField] protected float _speed = 10;
     [SerializeField] protected bool _destroyIfNotVisible = true;
@@ -65,8 +68,14 @@ namespace VectorVanguard.Actors.Weapons
       get => _disableWhenDestroyed;
       set => _disableWhenDestroyed = value;
     }
-    
-    
+
+    public EntityFaction Faction
+    {
+      get => _faction; 
+      set => _faction = value;
+    }
+
+
     protected float _xPosition;
     protected float _yPosition;
     private float _timeAlive;
