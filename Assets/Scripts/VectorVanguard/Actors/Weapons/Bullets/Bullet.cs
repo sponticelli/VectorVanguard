@@ -113,8 +113,8 @@ namespace VectorVanguard.Actors.Weapons
       //Check if the bullet is colliding with a layer that is in the collision mask
       if (((1 << collider.gameObject.layer) & CollisionMask) == 0) return;
       //Check the faction of the object that the bullet is colliding with 
-      var factionable = collider.GetComponent<IFactionable>();
-      if (factionable != null && factionable.Faction == Faction) return;
+      var faction = collider.gameObject.GetFaction();
+      if (faction == Faction || faction == EntityFaction.None) return;
       OnCollide(collider);
       OnAfterCollide(collider);
     }

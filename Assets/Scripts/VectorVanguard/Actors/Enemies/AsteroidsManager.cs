@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using VectorVanguard.Pools;
+using VectorVanguard.Utils;
 
 namespace VectorVanguard.Actors.Enemies
 {
@@ -34,6 +35,7 @@ namespace VectorVanguard.Actors.Enemies
       foreach (var p in positions)
       {
         var asteroid = PoolManager.Instance.GetObject(PoolTag.ASTEROID_LARGE, p, Quaternion.Euler(0, 0, Random.Range(0, 360)));
+        asteroid.SetFaction(EntityFaction.Neutral);
       }
     }
 
