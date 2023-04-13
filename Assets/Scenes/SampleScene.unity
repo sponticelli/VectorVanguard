@@ -3397,7 +3397,7 @@ GameObject:
   - component: {fileID: 1527895173}
   - component: {fileID: 1527895172}
   m_Layer: 0
-  m_Name: Polygon_32
+  m_Name: Background_Moon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
