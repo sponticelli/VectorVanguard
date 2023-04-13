@@ -98,21 +98,28 @@ namespace VectorVanguard.Actors.Weapons
       Lifetime();
     }
 
-    private void OnTriggerEnter2D(Collider2D col)
+    private void OnTriggerEnter2D(Collider2D collider)
     {
-      //Check if the bullet is colliding with a layer that is in the collision mask
-      if (((1 << col.gameObject.layer) & CollisionMask) == 0) return;
-      OnCollide(col);
-      OnAfterCollide(col);
+      ApplyCollision(collider);
     }
-
+    
     private void OnCollisionEnter2D(Collision2D col)
     {
-      //Check if the bullet is colliding with a layer that is in the collision mask
-      if (((1 << col.gameObject.layer) & CollisionMask) == 0) return;
-      OnCollide(col.collider);
-      OnAfterCollide(col.collider);
+      ApplyCollision(col.collider);
     }
+
+    private void ApplyCollision(Collider2D collider)
+    {
+      //Check if the bullet is colliding with a layer that is in the collision mask
+      if (((1 << collider.gameObject.layer) & CollisionMask) == 0) return;
+      //Check the faction of the object that the bullet is colliding with 
+      var factionable = collider.GetComponent<IFactionable>();
+      if (factionable != null && factionable.Faction == Faction) return;
+      OnCollide(collider);
+      OnAfterCollide(collider);
+    }
+
+    
 
     /// <summary>
     /// Called when the bullet collides with something

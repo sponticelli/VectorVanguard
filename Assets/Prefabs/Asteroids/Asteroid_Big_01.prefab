@@ -117,6 +117,8 @@ MonoBehaviour:
   maxMagnitude: 0.05
   minTimeBetweenShakes: 0
   maxTimeBetweenShakes: 0.01
+  _minAngle: 0
+  _maxAngle: 45
   _smoothShake: 0
 --- !u!1 &6701012376267956824
 GameObject:
@@ -336,6 +338,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d78515b1f394f1e8378bef87aa8fc55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _faction: 2
   _input: {fileID: 6701012377259143317}
   _physics: {fileID: 6701012377259143314}
   _actorAbilities: {fileID: 6701012376267956827}
