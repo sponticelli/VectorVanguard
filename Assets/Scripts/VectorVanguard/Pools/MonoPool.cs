@@ -5,19 +5,16 @@ namespace VectorVanguard.Pools
 {
   public class MonoPool : AExpandablePool
   {
-    
     [SerializeField] private GameObject _prefab;
-    
 
     protected override void AddObject(int i)
     {
       var obj = Instantiate(_prefab, transform);
       obj.SetActive(false);
-      obj.name = $"{_tag} {i}";
+      obj.name = $"{_poolTag} {i}";
       _pool.Add(obj);
     }
-
-
+    
     protected override void Expand()
     {
       if (!_expandable) return;

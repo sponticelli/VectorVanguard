@@ -431,7 +431,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d78515b1f394f1e8378bef87aa8fc55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _faction: 3
+  _faction: 4
   _entityType: 2
   _input: {fileID: 8955892618887738860}
   _physics: {fileID: 8955892618887738857}

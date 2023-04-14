@@ -8,5 +8,6 @@ namespace VectorVanguard.Pools
     BULLET,
     VFX_IMPACT,
     VFX_ASTEROID_EXPLOSION,
+    UI_ASTEROID_INDICATOR,
   }
 }

@@ -1,26 +1,12 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace VectorVanguard.Utils
 {
   public static class EntityFactionExtensions
   {
-    public static bool IsEnemy(this EntityFaction faction, EntityFaction otherFaction)
-    {
-      return faction == EntityFaction.Player && otherFaction == EntityFaction.Enemy ||
-             faction == EntityFaction.Enemy && otherFaction == EntityFaction.Player;
-    }
-    
-    public static bool IsFriendly(this EntityFaction faction, EntityFaction otherFaction)
-    {
-      return faction == EntityFaction.Player && otherFaction == EntityFaction.Player ||
-             faction == EntityFaction.Enemy && otherFaction == EntityFaction.Enemy;
-    }
-    
-    public static bool IsNeutral(this EntityFaction faction)
-    {
-      return faction == EntityFaction.Neutral;
-    }
-    
+
     public static void SetFaction(this IFactionable factionable, EntityFaction faction)
     {
       factionable.Faction = faction;
@@ -42,5 +28,22 @@ namespace VectorVanguard.Utils
       var factionable = gameObject.GetComponent<IFactionable>();
       return factionable?.GetFaction() ?? EntityFaction.None;
     }
+
+    public static IEnumerable<EntityFaction> GetFlags(this EntityFaction entityFaction)
+    {
+      var factions = EntityFactionUtils.GetFactions();
+      return entityFaction == EntityFaction.None ? 
+        factions.Where(type => type == EntityFaction.None) : 
+        factions.Where(type => entityFaction.HasFlag(type));
+    }
+    
+    public static bool IsComposite(this EntityFaction entityFaction)
+    {
+      var remaining = entityFaction;
+      var factions = EntityFactionUtils.GetFactions();
+      return factions.All(faction => entityFaction != faction);
+    }
+    
+    
   }
 }

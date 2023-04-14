@@ -9,7 +9,7 @@ namespace VectorVanguard.Levels
   /// <summary>
   /// An arrow that it is used to show the position of an actor when it is out of the screen.
   /// </summary>
-  public class OutOfScreenIndicator : MonoBehaviour
+  public class OutOfScreenPointer : MonoBehaviour
   {
     [SerializeField] private Actor _target;
     [SerializeField] private float _distanceFromBorder = 0.1f;
@@ -24,13 +24,13 @@ namespace VectorVanguard.Levels
     }
 
     private Vector3 _screenCenter = Vector3.zero;
-    
+
     private Vector3 _intersectionPoint = Vector3.zero;
     private Vector3 _direction = Vector3.zero;
-    
+
     private bool _draw = false;
-    
-    
+
+
     public void Initialization(Actor actor, Actor player, Camera camera)
     {
       _player = player;
@@ -51,6 +51,13 @@ namespace VectorVanguard.Levels
 
     private void Update()
     {
+      if (_target.isActiveAndEnabled == false)
+      {
+        DisablePointer();
+        gameObject.SetActive(false);
+        return;
+      }
+      
       if (CalcPosition())
       {
         EnablePointer();
@@ -60,7 +67,7 @@ namespace VectorVanguard.Levels
         DisablePointer();
       }
     }
-    
+
     private void DisablePointer()
     {
       _pointer.SetActive(false);
@@ -82,7 +89,7 @@ namespace VectorVanguard.Levels
       {
         return false;
       }
-      
+
       //Camera center in world space with z = 0
       _direction = _target.transform.position - _player.transform.position;
       _direction.z = 0;
@@ -105,7 +112,7 @@ namespace VectorVanguard.Levels
       }
 
       if (_draw) return _draw;
-      
+
       if (targetScreenPosition.y < playerScreenPosition.y)
       {
         _draw =
@@ -126,27 +133,27 @@ namespace VectorVanguard.Levels
       GizmoHelper.Point(_intersectionPoint, 1f, Color.yellow);
     }
 
-  
-    private enum  Side
+
+    private enum Side
     {
       Top,
       Bottom,
       Left,
       Right
     }
-    
-    private bool FindIntersection(Vector3 screenPosition, Vector3 direction, Side side, out Vector3 intersectionPoint)
+
+    private static bool FindIntersection(Vector3 screenPosition, Vector3 direction, Side side, out Vector3 intersectionPoint)
     {
       intersectionPoint = Vector3.zero;
       var screenCenter = new Vector3(Screen.width / 2f, Screen.height / 2f, 0);
-      
+
       //four corners of the screen
       var borderPoint = Vector3.zero;
       var borderDirection = Vector3.zero;
       switch (side)
       {
         case Side.Top:
-          borderPoint = new Vector3(0, Screen.height, 0); 
+          borderPoint = new Vector3(0, Screen.height, 0);
           borderDirection = new Vector3(1, 0, 0);
           break;
         case Side.Bottom:
@@ -164,47 +171,17 @@ namespace VectorVanguard.Levels
         default:
           throw new ArgumentOutOfRangeException(nameof(side), side, null);
       }
-      
-      
-      
+
+
       // Find the intersection with the top border
       var found = false;
-      intersectionPoint = GetIntersectionPointCoordinates(screenPosition, screenPosition+direction, 
+      intersectionPoint = VectorVanguard.Utils.GeometryHelper.GetIntersectionPointCoordinates(screenPosition,
+        screenPosition + direction,
         borderPoint, borderPoint + borderDirection, out found);
-      if (found)
-      {
-        // Check the intersection point is between top left and top right
-        if (intersectionPoint.x >= 0 && intersectionPoint.x <= Screen.width && 
-            intersectionPoint.y >= 0 && intersectionPoint.y <= Screen.height)
-        {
-          return true;
-        }
-      }
-      
-      return false;
+      if (!found) return false;
+      // Check the intersection point is between top left and top right
+      return intersectionPoint.x >= 0 && intersectionPoint.x <= Screen.width &&
+             intersectionPoint.y >= 0 && intersectionPoint.y <= Screen.height;
     }
-
-    public Vector2 GetIntersectionPointCoordinates(Vector2 A1, Vector2 A2, Vector2 B1, Vector2 B2, out bool found)
-    {
-      var tmp = (B2.x - B1.x) * (A2.y - A1.y) - (B2.y - B1.y) * (A2.x - A1.x);
- 
-      if (tmp == 0)
-      {
-        // No solution!
-        found = false;
-        return Vector2.zero;
-      }
- 
-      var mu = ((A1.x - B1.x) * (A2.y - A1.y) - (A1.y - B1.y) * (A2.x - A1.x)) / tmp;
- 
-      found = true;
- 
-      return new Vector2(
-        B1.x + (B2.x - B1.x) * mu,
-        B1.y + (B2.y - B1.y) * mu
-      );
-    }
-    
-    
   }
 }

@@ -28,7 +28,7 @@ namespace VectorVanguard.Pools
       var prefab = _prefabs[i % _prefabs.Length];
       var obj = Instantiate(prefab, transform);
       obj.SetActive(false);
-      obj.name = $"{_tag} {i}";
+      obj.name = $"{_poolTag} {i}";
       _pool.Add(obj);
     }
   }
