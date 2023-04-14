@@ -15,7 +15,7 @@ namespace VectorVanguard.Levels
     [SerializeField] private ActiveActorsSO _activeActors;
     [SerializeField] private EntityFaction _entityFactionMask;
     [SerializeField] private EntityType _entityTypeMask;
-    [SerializeField] private MonoPool _outOfScreenPointerPool;
+    [SerializeField] private APool _outOfScreenPointerPool;
     
     private Dictionary<int, OutOfScreenPointer> _outOfScreenPointers;
 

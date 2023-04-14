@@ -1966,6 +1966,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &852798021 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6363551252641685293, guid: 2adad92906b83483fb96f00b037d727b, type: 3}
+  m_PrefabInstance: {fileID: 6363551253852474444}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &852798026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 852798021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91f0d3da5c9a4ec2ad34a8d1ed2f4513, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _range: 50
 --- !u!1 &867409907
 GameObject:
   m_ObjectHideFlags: 0
@@ -2358,7 +2376,7 @@ MonoBehaviour:
   _activeActors: {fileID: 11400000, guid: 85aff0e6add27453abfbb0891dbcda86, type: 2}
   _entityFactionMask: -1
   _entityTypeMask: 22
-  _outOfScreenPointerPool: {fileID: 0}
+  _outOfScreenPointerPool: {fileID: 1270742684}
 --- !u!1 &1254693579
 GameObject:
   m_ObjectHideFlags: 0
@@ -2536,7 +2554,7 @@ MonoBehaviour:
   _expandable: 1
   _maxExpandSize: 100
   _expandSize: 10
-  _prefab: {fileID: 0}
+  _prefab: {fileID: 1217653376266370924, guid: 89292c0ddbb17433eb48a134213934ba, type: 3}
 --- !u!1 &1287094292
 GameObject:
   m_ObjectHideFlags: 3
@@ -5018,6 +5036,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6363551252641685295, guid: 2adad92906b83483fb96f00b037d727b, type: 3}
+      propertyPath: _abilities.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6363551252641685295, guid: 2adad92906b83483fb96f00b037d727b, type: 3}
+      propertyPath: _abilities.Array.data[2]
+      value: 
+      objectReference: {fileID: 852798026}
     - target: {fileID: 6363551253534607299, guid: 2adad92906b83483fb96f00b037d727b, type: 3}
       propertyPath: m_Name
       value: VehicleShip

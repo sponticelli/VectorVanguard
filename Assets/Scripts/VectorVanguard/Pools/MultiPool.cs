@@ -6,7 +6,6 @@ namespace VectorVanguard.Pools
   {
     [SerializeField] private GameObject[] _prefabs;
 
-
     protected override void Expand()
     {
       if (!_expandable) return;

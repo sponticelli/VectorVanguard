@@ -34,10 +34,10 @@ namespace VectorVanguard.Cameras
 
     [Tooltip("The softness of the effect")] 
     [SerializeField] [Range(0, 1)] 
-    private float _softness = 0.0f;
+    private float _softness;
 
     [Tooltip("The material with the BloomVFX shader")] [SerializeField]
-    private Material material = null;
+    private Material material;
 
     private static readonly int BlurAmountString = Shader.PropertyToID("blur_amount");
     private static readonly int BloomColorString = Shader.PropertyToID("bloom_color");

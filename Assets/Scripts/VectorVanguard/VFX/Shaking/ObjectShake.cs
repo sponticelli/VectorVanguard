@@ -11,7 +11,7 @@ namespace VectorVanguard.VFX
     [SerializeField] private float maxMagnitude = 0.3f;
     [SerializeField] private float minTimeBetweenShakes = 0.01f;
     [SerializeField] private float maxTimeBetweenShakes = 0.05f;
-    [SerializeField] private float _minAngle = 0f;
+    [SerializeField] private float _minAngle;
     [SerializeField] private float _maxAngle = 45f;
     [SerializeField] private bool _smoothShake = true;
     

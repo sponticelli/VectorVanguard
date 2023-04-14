@@ -18,18 +18,18 @@ namespace VectorVanguard.Actors.Vehicles
     [SerializeField] private float _turnFactor = 3.5f;
     [SerializeField] private float _maxSpeed = 10;
     [SerializeField] private float _linearDrag = 3f;
-    [SerializeField] private bool _canGoInReverse = false;
+    [SerializeField] private bool _canGoInReverse;
 
     
-    private float _accelerationInput = 0;
-    private float _steeringInput = 0;
-    private float _rotationAngle = 0;
-    private float _forwardVelocity = 0;
+    private float _accelerationInput;
+    private float _steeringInput;
+    private float _rotationAngle;
+    private float _forwardVelocity;
     
     private Vector2 _thrustForce;
     
     
-    private float _externalRotationForce = 0;
+    private float _externalRotationForce;
     private Vector3 _externalForce = Vector2.zero;
 
     public override void Initialization(Actor actor)

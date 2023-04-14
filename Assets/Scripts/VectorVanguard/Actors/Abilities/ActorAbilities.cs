@@ -1,5 +1,6 @@
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 using VectorVanguard.Actors.Abilities;
 
 namespace VectorVanguard.Actors.Abilities
@@ -8,11 +9,16 @@ namespace VectorVanguard.Actors.Abilities
   {
     [SerializeField] private AActorAbility[] _abilities;
     
+    
+    public UnityEvent<AActorAbility> OnAbilityAdded;
+    public UnityEvent<AActorAbility> OnAbilityRemoved;
+    
     public void Initialization(Actor actor)
     {
       foreach (var ability in _abilities)
       {
         ability.Initialization(actor);
+        OnAbilityAdded?.Invoke(ability);
       }
     }
 
@@ -42,6 +48,31 @@ namespace VectorVanguard.Actors.Abilities
     public T GetAbility<T>() where T : AActorAbility
     {
       return _abilities.OfType<T>().FirstOrDefault();
+    }
+    
+    /// <summary>
+    /// Add an ability to the actor
+    /// </summary>
+    /// <param name="ability"></param>
+    public void AddAbility(AActorAbility ability)
+    {
+      var abilities = _abilities.ToList();
+      abilities.Add(ability);
+      _abilities = abilities.ToArray();
+      OnAbilityAdded?.Invoke(ability);
+    }
+    
+    /// <summary>
+    /// Remove an ability from the actor
+    /// </summary>
+    /// <param name="ability"></param>
+    public void RemoveAbility(AActorAbility ability)
+    {
+      var abilities = _abilities.ToList();
+      if (abilities.Contains(ability) == false) return;
+      abilities.Remove(ability);
+      _abilities = abilities.ToArray();
+      OnAbilityRemoved?.Invoke(ability);
     }
   }
 }

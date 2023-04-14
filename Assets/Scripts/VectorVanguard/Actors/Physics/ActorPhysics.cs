@@ -15,7 +15,7 @@ namespace VectorVanguard.Actors
     private Vector3 _externalLinearForce;
     
     
-    private bool _processed = false;
+    private bool _processed;
     
     private Transform _transform;
     

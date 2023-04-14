@@ -11,11 +11,11 @@ namespace VectorVanguard.Levels
   /// </summary>
   public class OutOfScreenPointer : MonoBehaviour
   {
-    [SerializeField] private Actor _target;
-    [SerializeField] private float _distanceFromBorder = 0.1f;
-    [SerializeField] private Actor _player;
-    [SerializeField] private Camera _camera;
-    [SerializeField] private GameObject _pointer;
+    [SerializeField] protected Actor _target;
+    [SerializeField] protected float _distanceFromBorder = 0.1f;
+    [SerializeField] protected Actor _player;
+    [SerializeField] protected Camera _camera;
+    [SerializeField] protected GameObject _pointer;
 
     public Actor Actor
     {
@@ -28,10 +28,10 @@ namespace VectorVanguard.Levels
     private Vector3 _intersectionPoint = Vector3.zero;
     private Vector3 _direction = Vector3.zero;
 
-    private bool _draw = false;
+    private bool _draw;
 
 
-    public void Initialization(Actor actor, Actor player, Camera camera)
+    public virtual void Initialization(Actor actor, Actor player, Camera camera)
     {
       _player = player;
       _target = actor;
@@ -53,27 +53,32 @@ namespace VectorVanguard.Levels
     {
       if (_target.isActiveAndEnabled == false)
       {
-        DisablePointer();
+        HidePointer();
         gameObject.SetActive(false);
         return;
       }
       
-      if (CalcPosition())
+      if (CalcPosition() && CanDisplay())
       {
-        EnablePointer();
+        DisplayPointer();
       }
       else
       {
-        DisablePointer();
+        HidePointer();
       }
     }
 
-    private void DisablePointer()
+    protected  virtual bool CanDisplay()
+    {
+      return true;
+    }
+
+    protected virtual void HidePointer()
     {
       _pointer.SetActive(false);
     }
 
-    private void EnablePointer()
+    protected virtual void DisplayPointer()
     {
       _pointer.SetActive(true);
       _intersectionPoint = _camera.ScreenToWorldPoint(_intersectionPoint) + _direction * _distanceFromBorder;

@@ -173,6 +173,12 @@ MonoBehaviour:
   - {fileID: 8955892617644988061}
   - {fileID: 8955892617644988063}
   - {fileID: 8955892617644988062}
+  OnAbilityAdded:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAbilityRemoved:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &8955892617644988059
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -309,7 +315,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8955892618887738854
 Transform:
   m_ObjectHideFlags: 0
