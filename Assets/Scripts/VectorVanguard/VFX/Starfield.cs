@@ -1,9 +1,12 @@
 using UnityEngine;
+using VectorVanguard.Levels;
 
 namespace VectorVanguard.VFX
 {
+  [RequireComponent(typeof(ParticleSystem))]
   public class Starfield : MonoBehaviour
   {
+    [SerializeField] private ActiveActorsSO _activeActors;
     [SerializeField] private ParticleSystem _particleSystem;
     [SerializeField] private Transform _cameraTransform;
     
@@ -12,12 +15,13 @@ namespace VectorVanguard.VFX
     [SerializeField] private int _maxStars = 100;
     [SerializeField] private float _minStarSize = 0.1f;
     [SerializeField] private float _maxStarSize = 0.5f;
-    [SerializeField] private float _fieldWidth = 20f;
-    [SerializeField] private float _fieldHeight = 25f;
+    
     [SerializeField] private bool _grayScale = false;
 
     private float _xOffset;
     private float _yOffset;
+    private float _fieldWidth;
+    private float _fieldHeight;
     private ParticleSystem.Particle[] _stars;
 
 
@@ -28,6 +32,16 @@ namespace VectorVanguard.VFX
       {
         _particleSystem = GetComponent<ParticleSystem>();
       }
+      
+      var camera = _activeActors.MainCamera;
+      _cameraTransform = camera.transform;
+      //get screen size
+      var screenSize = new Vector2(camera.pixelWidth, camera.pixelHeight);
+      //get world size
+      var worldSize = camera.ScreenToWorldPoint(screenSize);
+      _fieldWidth = worldSize.x * 2;
+      _fieldHeight = worldSize.y * 2;
+
 
       _xOffset = _fieldWidth * 0.5f; // Offset the coordinates to distribute the spread
       _yOffset = _fieldHeight * 0.5f; // around the object's center
@@ -45,8 +59,8 @@ namespace VectorVanguard.VFX
 
       _particleSystem.SetParticles(_stars, _stars.Length); // Write data to the particle system
     }
-    
-    void Update ()
+
+    private void Update ()
     {
       var newPosition = _cameraTransform.position * _parallaxFactor;
       newPosition.z = transform.position.z;
