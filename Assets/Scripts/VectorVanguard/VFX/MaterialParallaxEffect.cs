@@ -4,7 +4,7 @@ using UnityEngine;
 namespace VectorVanguard.VFX
 {
   [RequireComponent(typeof(MeshRenderer))]
-  public class ParallaxEffect : MonoBehaviour
+  public class MaterialParallaxEffect : MonoBehaviour
   {
     [SerializeField] private MeshRenderer _meshRenderer;
     [SerializeField] private float _speed = 0.1f;
