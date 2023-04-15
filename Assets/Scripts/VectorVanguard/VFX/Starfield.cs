@@ -5,6 +5,10 @@ namespace VectorVanguard.VFX
   public class Starfield : MonoBehaviour
   {
     [SerializeField] private ParticleSystem _particleSystem;
+    [SerializeField] private Transform _cameraTransform;
+    
+    [SerializeField] private float _parallaxFactor = 0.5f;
+    
     [SerializeField] private int _maxStars = 100;
     [SerializeField] private float _minStarSize = 0.1f;
     [SerializeField] private float _maxStarSize = 0.5f;
@@ -41,6 +45,39 @@ namespace VectorVanguard.VFX
 
       _particleSystem.SetParticles(_stars, _stars.Length); // Write data to the particle system
     }
+    
+    void Update ()
+    {
+      var newPosition = _cameraTransform.position * _parallaxFactor;
+      newPosition.z = transform.position.z;
+      transform.position = newPosition;
+      for ( var i=0; i<_maxStars; i++ )
+      {
+        var pos = _stars[ i ].position + transform.position ;
+
+        if ( pos.x < ( _cameraTransform.position.x - _xOffset ) )
+        {
+          pos.x += _fieldWidth;
+        }
+        else if ( pos.x > ( _cameraTransform.position.x + _xOffset ) )
+        {
+          pos.x -= _fieldWidth;
+        }
+
+        if ( pos.y < ( _cameraTransform.position.y - _yOffset ) )
+        {
+          pos.y += _fieldHeight;
+        }
+        else if ( pos.y > ( _cameraTransform.position.y + _yOffset ) )
+        {
+          pos.y -= _fieldHeight;
+        }
+
+        _stars[ i ].position = pos - transform.position;
+      }
+      _particleSystem.SetParticles( _stars, _stars.Length );
+
+    }
 
     private Vector3 GetRandomInRectangle(float width, float height)
     {
@@ -49,4 +86,6 @@ namespace VectorVanguard.VFX
       return new Vector3(x - _xOffset, y - _yOffset, 0);
     }
   }
+  
+  
 }
