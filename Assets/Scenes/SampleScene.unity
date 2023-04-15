@@ -253,14 +253,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13133397870a44f1939b1af03968a39f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _activeActors: {fileID: 11400000, guid: 85aff0e6add27453abfbb0891dbcda86, type: 2}
   _particleSystem: {fileID: 137167392}
-  _cameraTransform: {fileID: 519420032}
+  _cameraTransform: {fileID: 0}
   _parallaxFactor: 0.5
   _maxStars: 60
   _minStarSize: 0.12
   _maxStarSize: 0.4
-  _fieldWidth: 40
-  _fieldHeight: 40
   _grayScale: 1
 --- !u!199 &137167391
 ParticleSystemRenderer:
@@ -5550,7 +5549,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 390092973}
-  m_Mesh: {fileID: 1765577128}
+  m_Mesh: {fileID: 1807103171}
 --- !u!23 &390092977
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5571,7 +5570,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 1044651328}
+  - {fileID: 2038050448}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6565,14 +6564,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13133397870a44f1939b1af03968a39f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _activeActors: {fileID: 11400000, guid: 85aff0e6add27453abfbb0891dbcda86, type: 2}
   _particleSystem: {fileID: 773656832}
-  _cameraTransform: {fileID: 519420032}
+  _cameraTransform: {fileID: 0}
   _parallaxFactor: 0
   _maxStars: 30
   _minStarSize: 0.12
   _maxStarSize: 0.4
-  _fieldWidth: 40
-  _fieldHeight: 40
   _grayScale: 1
 --- !u!199 &773656831
 ParticleSystemRenderer:
@@ -11899,14 +11897,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13133397870a44f1939b1af03968a39f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _activeActors: {fileID: 11400000, guid: 85aff0e6add27453abfbb0891dbcda86, type: 2}
   _particleSystem: {fileID: 888402341}
-  _cameraTransform: {fileID: 519420032}
+  _cameraTransform: {fileID: 0}
   _parallaxFactor: 0.6
   _maxStars: 90
   _minStarSize: 0.12
   _maxStarSize: 0.4
-  _fieldWidth: 40
-  _fieldHeight: 40
   _grayScale: 1
 --- !u!199 &888402340
 ParticleSystemRenderer:
@@ -16687,46 +16684,6 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!21 &1044651328
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: NoiseMaterial (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
-    (Instance)
-  m_Shader: {fileID: 4800000, guid: d7827e0fe4fbc4353bf553b1edd72ef1, type: 3}
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs: []
-    m_Ints: []
-    m_Floats:
-    - _OffsetX: 0
-    - _OffsetY: 0
-    - _Opacity: 0.332
-    - _Reach: 0.8
-    - _WarpX: 0
-    - _WarpY: 0
-    m_Colors:
-    - _Color: {r: 0.0057320506, g: 0, b: 0.1509434, a: 1}
-    - _Color2: {r: 0.14901961, g: 0, b: 0.011764706, a: 1}
-    - _OffsetSeed: {r: 832.7737, g: 513.75555, b: -300.99356, a: 703.9149}
-  m_BuildTextureStacks: []
 --- !u!1 &1130943818
 GameObject:
   m_ObjectHideFlags: 0
@@ -18117,14 +18074,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13133397870a44f1939b1af03968a39f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _activeActors: {fileID: 11400000, guid: 85aff0e6add27453abfbb0891dbcda86, type: 2}
   _particleSystem: {fileID: 1434231354}
-  _cameraTransform: {fileID: 519420032}
+  _cameraTransform: {fileID: 0}
   _parallaxFactor: 0.7
   _maxStars: 100
   _minStarSize: 0.12
   _maxStarSize: 0.4
-  _fieldWidth: 40
-  _fieldHeight: 40
   _grayScale: 1
 --- !u!199 &1434231353
 ParticleSystemRenderer:
@@ -23692,7 +23648,7 @@ MonoBehaviour:
   - {fileID: 6701012377259143275, guid: fc873ac680363404b953e2cf2a9d373e, type: 3}
   - {fileID: 2147657668331949773, guid: a2a9bf0171adf4f1582cfc682128c84a, type: 3}
   - {fileID: 5475939022031692448, guid: 4586e230999ad4229ac22f21f0314aea, type: 3}
---- !u!43 &1765577128
+--- !u!43 &1807103171
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -24286,14 +24242,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13133397870a44f1939b1af03968a39f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _activeActors: {fileID: 11400000, guid: 85aff0e6add27453abfbb0891dbcda86, type: 2}
   _particleSystem: {fileID: 1930583971}
-  _cameraTransform: {fileID: 519420032}
+  _cameraTransform: {fileID: 0}
   _parallaxFactor: 0.8
   _maxStars: 100
   _minStarSize: 0.12
   _maxStarSize: 0.4
-  _fieldWidth: 40
-  _fieldHeight: 40
   _grayScale: 1
 --- !u!199 &1930583970
 ParticleSystemRenderer:
@@ -29202,6 +29157,46 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!21 &2038050448
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: NoiseMaterial (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance) (Instance) (Instance) (Instance)
+  m_Shader: {fileID: 4800000, guid: d7827e0fe4fbc4353bf553b1edd72ef1, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs: []
+    m_Ints: []
+    m_Floats:
+    - _OffsetX: 0
+    - _OffsetY: 0
+    - _Opacity: 0.332
+    - _Reach: 0.8
+    - _WarpX: 0
+    - _WarpY: 0
+    m_Colors:
+    - _Color: {r: 0.0057320506, g: 0, b: 0.1509434, a: 1}
+    - _Color2: {r: 0.14901961, g: 0, b: 0.011764706, a: 1}
+    - _OffsetSeed: {r: 832.7737, g: 513.75555, b: -300.99356, a: 703.9149}
+  m_BuildTextureStacks: []
 --- !u!1 &2048989496
 GameObject:
   m_ObjectHideFlags: 0
