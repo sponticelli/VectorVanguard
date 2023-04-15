@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace VectorVanguard.Utils
 {
+  [ExecuteInEditMode]
   [RequireComponent(typeof(Renderer))]
   public class RenderLayerSetter : MonoBehaviour
   {
@@ -45,8 +46,13 @@ namespace VectorVanguard.Utils
 
     private void SetSortingInfo()
     {
+      if (_renderer == null)
+      {
+        _renderer = GetComponent<Renderer>();
+      };
       _renderer.sortingLayerID = _sortingLayerID;
       _renderer.sortingOrder = _sortingOrder;
     }
+    
   }
 }

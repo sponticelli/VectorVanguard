@@ -30,7 +30,7 @@ namespace VectorVanguard.Actors.Enemies
     
     public void SpawnAsteroids(int numberOfAsteroids)
     {
-      var positions = GetPositionsInARing(Vector3.zero, _bigAsteroidRadius, _bigAsteroidRadius * 4, _bigAsteroidRadius,
+      var positions = GetPositionsInARing(Vector3.zero, _bigAsteroidRadius * 3, _bigAsteroidRadius * 8, _bigAsteroidRadius,
         numberOfAsteroids);
       foreach (var p in positions)
       {
