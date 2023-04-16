@@ -1,4 +1,3 @@
-using System.Collections;
 using LiteNinja.SOA.Events;
 using UnityEngine;
 using UnityEngine.Events;

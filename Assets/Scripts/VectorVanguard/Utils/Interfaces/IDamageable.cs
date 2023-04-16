@@ -1,4 +1,3 @@
-using UnityEngine;
 namespace VectorVanguard.Utils
 {
   public interface IDamageable

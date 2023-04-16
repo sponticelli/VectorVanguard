@@ -1,7 +1,6 @@
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
-using VectorVanguard.Actors.Abilities;
 
 namespace VectorVanguard.Actors.Abilities
 {

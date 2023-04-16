@@ -1,7 +1,6 @@
 using UnityEngine;
 using VectorVanguard.Actors;
 using VectorVanguard.Attributes;
-using VectorVanguard.Utils;
 
 namespace VectorVanguard.Levels
 {

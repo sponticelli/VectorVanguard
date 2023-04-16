@@ -1,5 +1,3 @@
-using System;
-using System.Numerics;
 using UnityEngine;
 using UnityEngine.Events;
 using Vector2 = UnityEngine.Vector2;

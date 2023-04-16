@@ -1,7 +1,4 @@
-using System;
 using UnityEngine;
-using VectorVanguard.Utils;
-using Random = UnityEngine.Random;
 
 namespace VectorVanguard.Utils.Meshes
 {
@@ -15,23 +12,44 @@ namespace VectorVanguard.Utils.Meshes
     [SerializeField][Range(2,255)] private int _numVerticesY = 32;
     [SerializeField] private float _edgeSize = 1f;
 
+    public MeshFilter MeshFilter
+    {
+      get => _meshFilter;
+      set => _meshFilter = value;
+    }
+    
+    
     private void Awake()
     {
       Init();
+    }
+
+    private void Start()
+    {
       if (_meshFilter.mesh == null)
+      {
+        Generate();
+      }
+    }
+
+    public void Generate()
+    {
+#if UNITY_EDITOR
+      if (!Application.isPlaying)
+      {
+        _meshFilter.sharedMesh = MeshHelper.GenerateStaggeredGridMesh(_numVerticesX, _numVerticesY, _edgeSize);
+      }
+      else
       {
         _meshFilter.mesh = MeshHelper.GenerateStaggeredGridMesh(_numVerticesX, _numVerticesY, _edgeSize);
       }
-    }
-    
-    
-    private void OnValidate()
-    {
-      Init();
-      _meshFilter.sharedMesh = MeshHelper.GenerateStaggeredGridMesh(_numVerticesX, _numVerticesY, _edgeSize);
+#else
+      _meshFilter.mesh = MeshHelper.GenerateStaggeredGridMesh(_numVerticesX, _numVerticesY, _edgeSize);
+#endif
     }
 
-    private void Init()
+
+    public void Init()
     {
       if (_meshFilter == null)
       {
