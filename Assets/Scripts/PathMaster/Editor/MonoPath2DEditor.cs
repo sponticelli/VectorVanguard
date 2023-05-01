@@ -33,7 +33,7 @@ namespace LiteNinja.PathMaster.Editors
     private const float _addDiameter = 0.05f;
     private const float _anchorSelectOffset = 0.3f;
     private const float _controlSelectOffset = _controlDiameter + 0.02f;
-    private const float _segmentSelectDistanceThreshold = 0.2f;
+    private const float _segmentSelectDistanceThreshold = 0.02f;
 
 #endregion
 
@@ -411,6 +411,7 @@ namespace LiteNinja.PathMaster.Editors
       }
       else
       {
+        
         if (!_selectedNodes.Contains(closest))
         {
           _selectedNodes.Add(closest);
@@ -693,9 +694,10 @@ namespace LiteNinja.PathMaster.Editors
     private void DrawAnchors(List<int> anchorIndexes)
     {
       Handles.color = _nodeColor;
-      var anchorType = AnchorStatus.Normal;
+      
       foreach (var i in anchorIndexes)
       {
+        var anchorType = AnchorStatus.Normal;
         if (_selectedNodes.Contains(i) || _selectedNodesAux.Contains(i))
         {
           anchorType = AnchorStatus.Selected;
