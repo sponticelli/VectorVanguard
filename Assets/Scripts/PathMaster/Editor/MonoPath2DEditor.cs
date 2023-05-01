@@ -558,7 +558,7 @@ namespace LiteNinja.PathMaster.Editors
     {
       for (var i = 0; i < Path2D.NodeCount; i++)
       {
-        var minDist = (i % 3 == 0) ? _anchorSelectOffset * 0.5f : _controlSelectOffset * 0.5f;
+        var minDist = i % 3 == 0 ? _anchorSelectOffset * 0.5f : _controlSelectOffset * 0.5f;
 
         var dist = Vector2.Distance(mousePosition, _monoPath2D.GetNodePosition(i));
         if (dist < minDist)
@@ -576,14 +576,14 @@ namespace LiteNinja.PathMaster.Editors
 
       for (var i = 0; i < Path2D.NodeCount; i += 3)
       {
-        if ((Mathf.Abs(_dragStartPosition.x - _monoPath2D.GetNodePosition(i).x) <=
-             Mathf.Abs(_dragStartPosition.x - _dragCurrentPosition.x) &&
-             Mathf.Abs(_dragCurrentPosition.x - _monoPath2D.GetNodePosition(i).x) <=
-             Mathf.Abs(_dragStartPosition.x - _dragCurrentPosition.x)) &&
-            (Mathf.Abs(_dragStartPosition.y - _monoPath2D.GetNodePosition(i).y) <=
-             Mathf.Abs(_dragStartPosition.y - _dragCurrentPosition.y) &&
-             Mathf.Abs(_dragCurrentPosition.y - _monoPath2D.GetNodePosition(i).y) <=
-             Mathf.Abs(_dragStartPosition.y - _dragCurrentPosition.y)))
+        if (Mathf.Abs(_dragStartPosition.x - _monoPath2D.GetNodePosition(i).x) <=
+            Mathf.Abs(_dragStartPosition.x - _dragCurrentPosition.x) &&
+            Mathf.Abs(_dragCurrentPosition.x - _monoPath2D.GetNodePosition(i).x) <=
+            Mathf.Abs(_dragStartPosition.x - _dragCurrentPosition.x) &&
+            Mathf.Abs(_dragStartPosition.y - _monoPath2D.GetNodePosition(i).y) <=
+            Mathf.Abs(_dragStartPosition.y - _dragCurrentPosition.y) &&
+            Mathf.Abs(_dragCurrentPosition.y - _monoPath2D.GetNodePosition(i).y) <=
+            Mathf.Abs(_dragStartPosition.y - _dragCurrentPosition.y))
         {
           if (!_selectedNodes.Contains(i) || !_nodesSelectedInCurrentDrag.Contains(i)) selectedIndexes.Add(i);
         }
