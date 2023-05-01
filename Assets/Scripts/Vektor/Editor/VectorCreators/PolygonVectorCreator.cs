@@ -1,8 +1,6 @@
 using UnityEditor;
 using UnityEngine;
 using Vektor.Meshes;
-using Vektor.MeshFilters;
-using Vektor.MeshRenderers;
 
 namespace Vektor.Editors
 {
@@ -38,7 +36,7 @@ namespace Vektor.Editors
 
     private Vector3[] GeneratePoints()
     {
-      // Calculate the points of the inscribed polygon
+      // Calculate the nodes of the inscribed polygon
       var points = new Vector3[_numSides];
       var angleIncrement = 2f * Mathf.PI / _numSides;
       var angleOffset = _angle * Mathf.Deg2Rad;

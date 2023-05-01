@@ -24,12 +24,12 @@ Material:
     m_Floats:
     - _OffsetX: 0
     - _OffsetY: 0
-    - _Opacity: 0.398
+    - _Opacity: 0.586
     - _Reach: 1.58
     - _WarpX: 0
     - _WarpY: 0
     m_Colors:
-    - _Color: {r: 0.0057320506, g: 0, b: 0.1509434, a: 1}
-    - _Color2: {r: 0.14901961, g: 0, b: 0.011764706, a: 1}
-    - _OffsetSeed: {r: 832.37, g: 520.8, b: -300.99356, a: 701.1}
+    - _Color: {r: 0.14901961, g: 0.14901961, b: 0.14901961, a: 1}
+    - _Color2: {r: 0, g: 0, b: 0, a: 1}
+    - _OffsetSeed: {r: 832.7737, g: 513.75555, b: -300.99356, a: 703.9149}
   m_BuildTextureStacks: []

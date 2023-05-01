@@ -39,10 +39,10 @@ namespace Vektor.Editors
     {
       if (_numPoints < 2)
       {
-        Debug.LogError("Number of points must be at least 2");
+        Debug.LogError("Number of nodes must be at least 2");
         return;
       }
-      // Calculate the points of the star
+      // Calculate the nodes of the star
       var points = new Vector3[_numPoints * 2];
       var angleIncrement = Mathf.PI / _numPoints;
       var angleOffset = _angle * Mathf.Deg2Rad;
@@ -53,7 +53,7 @@ namespace Vektor.Editors
         points[i] = new Vector3(radius * Mathf.Cos(angle), radius * Mathf.Sin(angle), 0);
       }
 
-      // Call the CreateConnectedVector method with the points and object name
+      // Call the CreateConnectedVector method with the nodes and object name
       CreateConnectedVector(points, GetStarName());
     }
 

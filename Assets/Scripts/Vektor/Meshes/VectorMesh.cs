@@ -273,7 +273,7 @@ namespace Vektor.Meshes
 
     private void RemoveDuplicateSegments()
     {
-      // Remove duplicate segments by removing the segment that has the same start and end points,or the end point is the same as the start point and the start point is the same as the end point
+      // Remove duplicate segments by removing the segment that has the same start and end nodes,or the end point is the same as the start point and the start point is the same as the end point
       var segments = new List<Segment>();
       foreach (var segment in _segments)
       {

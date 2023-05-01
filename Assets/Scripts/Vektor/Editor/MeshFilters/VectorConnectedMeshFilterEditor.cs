@@ -133,7 +133,7 @@ namespace Vektor.Editors
 
     private void DrawLineBetweenPoints(int i, out int j)
     {
-      // Draw lines between adjacent points
+      // Draw lines between adjacent nodes
       Handles.color = Color.blue;
       j = (i + 1) % _worldPoints.Count;
       Handles.DrawLine(_worldPoints[i], _worldPoints[j], 1);

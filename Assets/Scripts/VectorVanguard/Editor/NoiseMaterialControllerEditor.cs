@@ -2,7 +2,7 @@ using UnityEditor;
 using UnityEngine;
 using VectorVanguard.VFX;
 
-namespace VectorVanguard.Attributes
+namespace VectorVanguard.Editors
 {
   [CustomEditor(typeof(NoiseMaterialController))]
   public class NoiseMaterialControllerEditor : Editor

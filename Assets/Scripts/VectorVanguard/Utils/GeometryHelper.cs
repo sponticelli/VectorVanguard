@@ -5,7 +5,7 @@ namespace VectorVanguard.Utils
   public static class GeometryHelper
   {
     /// <summary>
-    /// Calc the intersection point of two lines. The lines are defined by two points each.
+    /// Calc the intersection point of two lines. The lines are defined by two nodes each.
     /// </summary>
     /// <param name="A1">first point of line A</param>
     /// <param name="A2">second point of line A</param>

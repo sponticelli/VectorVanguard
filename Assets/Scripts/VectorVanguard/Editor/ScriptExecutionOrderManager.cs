@@ -1,7 +1,8 @@
 using System;
 using UnityEditor;
+using VectorVanguard.Attributes;
 
-namespace VectorVanguard.Attributes
+namespace VectorVanguard.Editors
 {
   [InitializeOnLoad]
   public class ScriptExecutionOrderManager

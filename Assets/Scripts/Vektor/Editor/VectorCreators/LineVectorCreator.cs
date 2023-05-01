@@ -1,8 +1,6 @@
 using UnityEditor;
 using UnityEngine;
 using Vektor.Meshes;
-using Vektor.MeshFilters;
-using Vektor.MeshRenderers;
 
 namespace Vektor.Editors
 {

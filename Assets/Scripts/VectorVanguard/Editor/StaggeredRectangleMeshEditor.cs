@@ -1,9 +1,8 @@
-using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using VectorVanguard.Utils.Meshes;
 
-namespace VectorVanguard.Attributes
+namespace VectorVanguard.Editors
 {
   [CustomEditor(typeof(StaggeredRectangleMesh))]
   public class StaggeredRectangleMeshEditor : Editor
