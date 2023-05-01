@@ -45,10 +45,10 @@ namespace LiteNinja.PathMaster.Editors
 
 
     private readonly List<int> _selectedNodes = new();
-    private readonly List<int> _selectedNodesAux = new();
+    private readonly List<int> _nodesSelectedInCurrentDrag = new();
 
-    private bool _dragSelect;
-    private bool _dragCurve;
+    private bool _dragSelection;
+    private bool _dragSegment;
     private bool _isCurveDraggable;
     private Vector2 _dragStartPosition;
     private Vector2 _dragCurrentPosition;
@@ -271,7 +271,7 @@ namespace LiteNinja.PathMaster.Editors
     {
       if (currentEvent.type != EventType.MouseUp || currentEvent.button != 0) return;
       _isDragging = false;
-      _dragSelect = false;
+      _dragSelection = false;
 
       if (_deselect)
       {
@@ -279,15 +279,15 @@ namespace LiteNinja.PathMaster.Editors
       }
       else
       {
-        foreach (var i in _selectedNodesAux.Where(i => !_selectedNodes.Contains(i)))
+        foreach (var i in _nodesSelectedInCurrentDrag.Where(i => !_selectedNodes.Contains(i)))
         {
           _selectedNodes.Add(i);
         }
 
-        _selectedNodesAux.Clear();
+        _nodesSelectedInCurrentDrag.Clear();
       }
 
-      _dragCurve = false;
+      _dragSegment = false;
       _movingSegmentIndex = -1;
       Repaint();
     }
@@ -356,7 +356,7 @@ namespace LiteNinja.PathMaster.Editors
         {
           if (_selectedSegmentIndex != -1 && _isCurveDraggable)
           {
-            _dragCurve = true;
+            _dragSegment = true;
             _dragStartPosition = mousePosition;
             _dragCurrentPosition = mousePosition;
             _movingSegmentIndex = _selectedSegmentIndex;
@@ -370,7 +370,7 @@ namespace LiteNinja.PathMaster.Editors
       else if (nearestNodeIndex != _clickedNode)
       {
         _clickedNode = nearestNodeIndex;
-        _dragSelect = false;
+        _dragSelection = false;
       }
     }
 
@@ -378,7 +378,7 @@ namespace LiteNinja.PathMaster.Editors
     {
       if (currentEvent.type != EventType.MouseDrag) return;
       _isDragging = true;
-      if (_dragSelect)
+      if (_dragSelection)
       {
         _selectedSegmentIndex = -1;
         _dragCurrentPosition = mousePosition;
@@ -386,7 +386,7 @@ namespace LiteNinja.PathMaster.Editors
         HandleUtility.Repaint();
       }
 
-      if (_dragCurve)
+      if (_dragSegment)
       {
         Undo.RecordObject(_monoPath2D, "Move Curve");
         _monoPath2D.MoveSegment(_movingSegmentIndex, mousePosition - _dragCurrentPosition, _dragStartPosition);
@@ -405,7 +405,7 @@ namespace LiteNinja.PathMaster.Editors
       var closest = ClosestNodeIndex(mousePosition);
       if (closest == -1)
       {
-        _dragSelect = true;
+        _dragSelection = true;
         _dragStartPosition = mousePosition;
         _dragCurrentPosition = mousePosition;
       }
@@ -467,7 +467,7 @@ namespace LiteNinja.PathMaster.Editors
       if (currentEvent.type != EventType.KeyDown || currentEvent.keyCode != KeyCode.Delete) return;
       GUIUtility.hotControl = 0;
       Event.current.Use();
-      if (_isDragging || _dragSelect) return;
+      if (_isDragging || _dragSelection) return;
       _selectedNodes.Sort();
       for (var i = _selectedNodes.Count - 1; i >= 0; i--)
       {
@@ -585,18 +585,18 @@ namespace LiteNinja.PathMaster.Editors
              Mathf.Abs(_dragCurrentPosition.y - _monoPath2D.GetNodePosition(i).y) <=
              Mathf.Abs(_dragStartPosition.y - _dragCurrentPosition.y)))
         {
-          if (!_selectedNodes.Contains(i) || !_selectedNodesAux.Contains(i)) selectedIndexes.Add(i);
+          if (!_selectedNodes.Contains(i) || !_nodesSelectedInCurrentDrag.Contains(i)) selectedIndexes.Add(i);
         }
         else
         {
-          if (_selectedNodesAux.Contains(i)) _selectedNodesAux.Remove(i);
+          if (_nodesSelectedInCurrentDrag.Contains(i)) _nodesSelectedInCurrentDrag.Remove(i);
           if (selectedIndexes.Contains(i)) selectedIndexes.Remove(i);
         }
       }
 
-      foreach (var i in selectedIndexes.Where(i => !_selectedNodesAux.Contains(i)))
+      foreach (var i in selectedIndexes.Where(i => !_nodesSelectedInCurrentDrag.Contains(i)))
       {
-        _selectedNodesAux.Add(i);
+        _nodesSelectedInCurrentDrag.Add(i);
       }
     }
 
@@ -630,7 +630,7 @@ namespace LiteNinja.PathMaster.Editors
 
     private void DrawSelectionArea()
     {
-      if (!_dragSelect) return;
+      if (!_dragSelection) return;
       Handles.color = _selectionColor;
       Handles.DrawSolidRectangleWithOutline(new Rect(_dragStartPosition, _dragCurrentPosition - _dragStartPosition),
         _selectionColor,
@@ -698,7 +698,7 @@ namespace LiteNinja.PathMaster.Editors
       foreach (var i in anchorIndexes)
       {
         var anchorType = AnchorStatus.Normal;
-        if (_selectedNodes.Contains(i) || _selectedNodesAux.Contains(i))
+        if (_selectedNodes.Contains(i) || _nodesSelectedInCurrentDrag.Contains(i))
         {
           anchorType = AnchorStatus.Selected;
         }
