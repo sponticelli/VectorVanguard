@@ -11,7 +11,7 @@ namespace LiteNinja.MeshCraft
     /// <param name="originalMesh">The original mesh to be duplicated and modified for wireframe rendering.</param>
     /// <returns>The duplicated and modified mesh suitable for wireframe rendering.
     /// If the vertex count of the original mesh is too high, returns null.</returns>
-    public static Mesh CreateTriangleWireframeWithShader(Mesh mesh)
+    public static Mesh CreateTriangleWireframeForShader(Mesh mesh)
     {
       // Set the maximum number of vertices that Unity can handle.
       const int maxVertices = 65535;
@@ -79,16 +79,124 @@ namespace LiteNinja.MeshCraft
       return wireframeMesh;
     }
 
-    public static Mesh CreateTriangleWireframeWithShader(GameObject targetObject)
+    public static Mesh CreateTriangleWireframeForShader(GameObject targetObject)
     {
       var mesh = MeshHelper.GetMesh(targetObject);
 
-      if (mesh != null) return CreateTriangleWireframeWithShader(mesh);
+      if (mesh != null) return CreateTriangleWireframeForShader(mesh);
 
       Debug.LogError("No mesh found on target object!");
       return null;
     }
 
-  
+    public static Mesh CreateTriangleWireframeMesh(Mesh originalMesh)
+    {
+      var wireframeMesh = new Mesh();
+
+      // Create a list of edge vertices and a corresponding list of triangle indices
+      var edgeVertices = new Vector3[originalMesh.triangles.Length * 2];
+      var edgeIndices = new int[originalMesh.triangles.Length * 2];
+
+      for (var i = 0; i < originalMesh.triangles.Length; i += 3)
+      {
+        // Get the indices of the three vertices of the triangle
+        var i1 = originalMesh.triangles[i];
+        var i2 = originalMesh.triangles[i + 1];
+        var i3 = originalMesh.triangles[i + 2];
+
+        // Create a new vertex for each edge of the triangle
+        var v1 = originalMesh.vertices[i1];
+        var v2 = originalMesh.vertices[i2];
+        var v3 = originalMesh.vertices[i3];
+
+        edgeVertices[i * 2] = v1;
+        edgeVertices[i * 2 + 1] = v2;
+        edgeVertices[i * 2 + 2] = v2;
+        edgeVertices[i * 2 + 3] = v3;
+        edgeVertices[i * 2 + 4] = v3;
+        edgeVertices[i * 2 + 5] = v1;
+
+        // Create new triangle indices for the edge vertices
+        edgeIndices[i * 2] = i * 2;
+        edgeIndices[i * 2 + 1] = i * 2 + 1;
+        edgeIndices[i * 2 + 2] = i * 2 + 2;
+        edgeIndices[i * 2 + 3] = i * 2 + 3;
+        edgeIndices[i * 2 + 4] = i * 2 + 4;
+        edgeIndices[i * 2 + 5] = i * 2 + 5;
+      }
+
+      // Assign the edge vertices and indices to the wireframe mesh
+      wireframeMesh.vertices = edgeVertices;
+      wireframeMesh.SetIndices(edgeIndices, MeshTopology.Lines, 0);
+
+      // Recalculate the bounds and normals of the wireframe mesh
+      wireframeMesh.RecalculateBounds();
+      wireframeMesh.RecalculateNormals();
+
+      return wireframeMesh;
+    }
+
+    public static Mesh CreateTriangleWireframeMesh(GameObject targetObject)
+    {
+      var mesh = MeshHelper.GetMesh(targetObject);
+
+      if (mesh != null) return CreateTriangleWireframeMesh(mesh);
+
+      Debug.LogError("No mesh found on target object!");
+      return null;
+    }
+
+
+    public static Mesh CreateQuadWireframeMesh(Mesh originalMesh)
+    {
+      var wireframeMesh = new Mesh();
+
+      var edgeVertices = new List<Vector3>();
+      var edgeIndices = new List<int>();
+
+      for (var i = 0; i < originalMesh.triangles.Length; i += 3)
+      {
+        var i1 = originalMesh.triangles[i];
+        var i2 = originalMesh.triangles[i + 1];
+        var i3 = originalMesh.triangles[i + 2];
+
+        var v1 = originalMesh.vertices[i1];
+        var v2 = originalMesh.vertices[i2];
+        var v3 = originalMesh.vertices[i3];
+
+        edgeVertices.Add(v1);
+        edgeVertices.Add(v2);
+        edgeVertices.Add(v2);
+        edgeVertices.Add(v3);
+        edgeVertices.Add(v3);
+        edgeVertices.Add(v1);
+
+        var baseIndex = edgeIndices.Count;
+        edgeIndices.Add(baseIndex);
+        edgeIndices.Add(baseIndex + 1);
+        edgeIndices.Add(baseIndex + 2);
+        edgeIndices.Add(baseIndex + 3);
+        edgeIndices.Add(baseIndex + 4);
+        edgeIndices.Add(baseIndex + 5);
+      }
+
+      wireframeMesh.SetVertices(edgeVertices);
+      wireframeMesh.SetIndices(edgeIndices.ToArray(), MeshTopology.Lines, 0);
+
+      wireframeMesh.RecalculateBounds();
+
+      return wireframeMesh;
+    }
+
+
+    public static Mesh CreateQuadWireframeMesh(GameObject targetObject)
+    {
+      var mesh = MeshHelper.GetMesh(targetObject);
+
+      if (mesh != null) return CreateQuadWireframeMesh(mesh);
+
+      Debug.LogError("No mesh found on target object!");
+      return null;
+    }
   }
 }

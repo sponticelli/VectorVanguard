@@ -3,14 +3,15 @@ using UnityEngine;
 
 namespace LiteNinja.MeshCraft.Editors
 {
-  public class MeshShaderWireframerWindow : EditorWindow
+  public class FlatConvexHullWindow : EditorWindow
   {
     private GameObject selectedObject;
+    private MeshSilhouette.Axis axis = MeshSilhouette.Axis.NegativeY;
 
-    [MenuItem("Window/LiteNinja/MeshCraft/Convert Mesh for Shader Wireframe")]
+    [MenuItem("Window/LiteNinja/MeshCraft/Convert Mesh for Flat Convex Hull")]
     public static void ShowWindow()
     {
-      GetWindow<MeshShaderWireframerWindow>("Convert Mesh for Shader Wireframe");
+      GetWindow<FlatConvexHullWindow>("Convert Mesh for Flat Convex Hull");
     }
 
     private void OnGUI()
@@ -18,9 +19,10 @@ namespace LiteNinja.MeshCraft.Editors
       GUILayout.Label("Select a GameObject with MeshFilter and MeshRenderer (or SkinnedMeshRenderer)",
         EditorStyles.boldLabel);
 
-      EditorGUILayout.BeginHorizontal();
+      EditorGUILayout.BeginVertical();
       selectedObject = (GameObject)EditorGUILayout.ObjectField(selectedObject, typeof(GameObject), true);
-      EditorGUILayout.EndHorizontal();
+      axis = (MeshSilhouette.Axis)EditorGUILayout.EnumPopup(axis);
+      EditorGUILayout.EndVertical();
 
       GUILayout.Space(10);
 
@@ -30,8 +32,10 @@ namespace LiteNinja.MeshCraft.Editors
 
         if (GUILayout.Button("Convert Mesh"))
         {
-          var mesh =  MeshWireframer.CreateTriangleWireframeForShader(selectedObject);
-          MeshEditorHelper.SaveMeshAsAsset(mesh, "Wireframe");
+          var name = selectedObject.name + "_FlatConvexHull_" + axis.ToString();
+          
+          var mesh =  MeshSilhouette.CreateSilhouetteMesh(selectedObject, axis);
+          MeshEditorHelper.SaveMeshAsAsset(mesh, name);
         }
       }
       else
