@@ -14,11 +14,14 @@ namespace VectorVanguard.Audio
     public void Play(AudioClip clip)
     {
       _audioSource.clip = clip;
+      _audioSource.loop = false;
       _audioSource.Play();
     }
     
     public void PlayLoop(AudioClip clip)
     {
+      if (_audioSource.isPlaying && _audioSource.clip == clip)
+        return;
       _audioSource.clip = clip;
       _audioSource.loop = true;
       _audioSource.Play();
