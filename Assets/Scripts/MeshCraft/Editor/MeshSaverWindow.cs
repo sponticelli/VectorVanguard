@@ -11,7 +11,7 @@ namespace LiteNinja.MeshCraft.Editors
         private string assetName = "NewMesh";
         private string objName = "NewMesh";
         private bool saveAsAsset = true;
-        private bool mergeSubMeshes = false;
+        private bool mergeSubMeshes;
 
         [MenuItem("Window/LiteNinja/MeshCraft/Mesh Saver")]
         public static void ShowWindow()

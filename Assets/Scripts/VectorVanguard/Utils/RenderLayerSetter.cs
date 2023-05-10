@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using UnityEngine;
 
@@ -44,7 +45,7 @@ namespace VectorVanguard.Utils
       SetSortingInfo();
     }
 
-    private void SetSortingInfo()
+    public void SetSortingInfo()
     {
       if (_renderer == null)
       {
@@ -53,6 +54,7 @@ namespace VectorVanguard.Utils
       _renderer.sortingLayerID = _sortingLayerID;
       _renderer.sortingOrder = _sortingOrder;
     }
+    
     
   }
 }
