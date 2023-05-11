@@ -53,6 +53,9 @@ namespace VectorVanguard.Utils
       };
       _renderer.sortingLayerID = _sortingLayerID;
       _renderer.sortingOrder = _sortingOrder;
+      
+      var sortingLayer = SortingLayer.layers.FirstOrDefault(layer => layer.id == _sortingLayerID);
+      Debug.Log($"Sorting layer set to {sortingLayer.name} and order to {_renderer.sortingOrder}");
     }
     
     

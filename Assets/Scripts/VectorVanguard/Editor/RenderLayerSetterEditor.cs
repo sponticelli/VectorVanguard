@@ -8,35 +8,43 @@ namespace VectorVanguard.Editors
   [CustomEditor(typeof(RenderLayerSetter))]
   public class RenderLayerSetterEditor : Editor
   {
-    SerializedProperty sortingOrder;
-    SerializedProperty sortingLayerID;
+    private SerializedProperty _sortingOrder;
+    private SerializedProperty _sortingLayerID;
+    private RenderLayerSetter _renderLayerSetter;
 
     private void OnEnable()
     {
-      sortingOrder = serializedObject.FindProperty("_sortingOrder");
-      sortingLayerID = serializedObject.FindProperty("_sortingLayerID");
+      _sortingOrder = serializedObject.FindProperty("_sortingOrder");
+      _sortingLayerID = serializedObject.FindProperty("_sortingLayerID");
+      _renderLayerSetter = (RenderLayerSetter) target;
     }
 
     public override void OnInspectorGUI()
     {
-      // Draw the default inspector
-      //DrawDefaultInspector();
+      serializedObject.Update();
 
-      // Draw the sorting layer dropdown menu
       EditorGUI.BeginChangeCheck();
-      EditorGUI.BeginProperty(new Rect(), GUIContent.none, sortingLayerID);
-      var newSortingLayerIndex = EditorGUILayout.Popup("Sorting Layer", GetSortingLayerIndex(sortingLayerID.intValue), GetSortingLayerNames());
-      EditorGUI.EndProperty();
+      var newSortingLayerIndex = EditorGUILayout.Popup("Sorting Layer", GetSortingLayerIndex(_renderLayerSetter.SortingLayer.id), GetSortingLayerNames());
       if (EditorGUI.EndChangeCheck())
       {
-        Undo.RecordObject(target, "Changed Sorting Layer");
-        sortingLayerID.intValue = SortingLayer.layers[newSortingLayerIndex].id;
-        serializedObject.ApplyModifiedProperties();
+        _sortingLayerID.intValue = SortingLayer.layers[newSortingLayerIndex].id;
       }
 
-      // Draw the sorting order field
-      EditorGUILayout.PropertyField(sortingOrder);
+      EditorGUI.BeginChangeCheck();
+      EditorGUILayout.PropertyField(_sortingOrder, new GUIContent("Sorting Order"));
+      if (EditorGUI.EndChangeCheck())
+      {
+        _sortingOrder.intValue = Mathf.Clamp(_sortingOrder.intValue, -32768, 32767);
+      }
+      
+      serializedObject.ApplyModifiedProperties();
+
+      if (GUI.changed)
+      {
+        _renderLayerSetter.SetSortingInfo();
+      }
     }
+
 
     private string[] GetSortingLayerNames()
     {
