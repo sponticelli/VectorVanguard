@@ -38,20 +38,20 @@ namespace LiteNinja.PathMaster
       {
         nodes = new List<Vector2>
         {
-          centre + new Vector2(-1, 0),
-          centre + new Vector2(-1, 0),
-          centre + new Vector2(1, 0),
-          centre + new Vector2(1, 0)
+          centre + Vector2.left,
+          centre + Vector2.left,
+          centre + Vector2.right,
+          centre + Vector2.right
         };
       }
       else
       {
         nodes = new List<Vector2>
         {
-          centre + new Vector2(-1, 0),
+          centre + Vector2.left,
           centre + new Vector2(-1, 1) * 0.5f,
           centre + new Vector2(-1, -1) * 0.5f,
-          centre + new Vector2(1, 0)
+          centre + Vector2.right
         };
       }
 

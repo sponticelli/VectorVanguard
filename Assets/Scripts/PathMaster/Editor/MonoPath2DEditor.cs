@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
@@ -43,6 +44,7 @@ namespace LiteNinja.PathMaster.Editors
     private int _clickedNode = -1;
     private bool _isDragging;
 
+    private bool _anchorsFoldout = true;
 
     private readonly List<int> _selectedNodes = new();
     private readonly List<int> _nodesSelectedInCurrentDrag = new();
@@ -80,6 +82,13 @@ namespace LiteNinja.PathMaster.Editors
       DrawCloseGUI();
       DrawSpacingGUI();
       DrawNodeTypeGUI();
+      
+      DrawAnchorList();
+      
+      DrawCenterButton();
+      DrawSetOriginAsFirstButton();
+      DrawSetOriginAsLastButton();
+      
       DrawResetButton();
 
       if (EditorGUI.EndChangeCheck())
@@ -155,6 +164,119 @@ namespace LiteNinja.PathMaster.Editors
 
       Undo.RecordObject(_monoPath2D, "Set Nodes Type");
       SetAnchorStatus(_selectedNode, (NodeType)nodeType, true);
+    }
+
+    private void DrawAnchorList()
+    {
+      var anchorIndexes = new List<int>();
+      var controlPointIndexes = new List<int>();
+      
+      for (var i = 0; i < Path2D.NodeCount; i++)
+      {
+        if (i % 3 == 0)
+        {
+          anchorIndexes.Add(i);
+        }
+        else
+        {
+          controlPointIndexes.Add(i);
+        }
+      }
+
+      _anchorsFoldout = EditorGUILayout.Foldout(_anchorsFoldout, "Anchors:");
+      if (_anchorsFoldout)
+      {
+        var deleteIndexes = anchorIndexes.Where(DrawAnchorDrawer).ToList();
+        if (deleteIndexes.Count > 0)
+        {
+          Undo.RecordObject(_monoPath2D, "Delete Anchors");
+          foreach (var index in deleteIndexes)
+          {
+            Path2D.RemoveSegment(index);
+          }
+        }
+        
+      }
+    }
+
+    private bool DrawAnchorDrawer(int anchorIndex)
+    {
+      var position = Path2D[anchorIndex];
+      var nodeType = Path2D.GetAnchorType(anchorIndex);
+      EditorGUILayout.BeginHorizontal();
+      var newPosition = EditorGUILayout.Vector2Field("", position);
+
+      if (newPosition != position)
+      {
+        Undo.RecordObject(_monoPath2D, "Move Anchor");
+        Path2D.MoveNode(anchorIndex, newPosition);
+        SetAnchorStatus(anchorIndex, nodeType, true);
+      }
+
+      var newType = EditorGUILayout.Popup("", (int)nodeType,
+        new[] { "Smooth", "Tangent", "Free", "Angular" }, GUILayout.Width(80));
+      if (newType != (int)nodeType)
+      {
+        Undo.RecordObject(_monoPath2D, "Set Anchor Type");
+        SetAnchorStatus(anchorIndex, (NodeType)newType, true);
+      }
+
+      bool remove = GUILayout.Button("X", GUILayout.Width(20));
+
+      EditorGUILayout.EndHorizontal();
+      return remove;
+    }
+
+    private void DrawCenterButton()
+    {
+      GUILayout.Space(20);
+      if (!GUILayout.Button("Center")) return;
+      if (Path2D.NodeCount <= 0) return;
+      Undo.RecordObject(_monoPath2D, "Center");
+      
+      Vector2 center = _monoPath2D.gameObject.transform.position;
+      //Calc the average position of all the anchors
+      var currentCenter = Vector2.zero;
+      var numAnchors = 0;
+      for (var i = 0; i < Path2D.NodeCount; i++)
+      {
+        if (i % 3 != 0) continue;
+        currentCenter += Path2D[i] + center;
+        numAnchors++;
+      }
+
+      currentCenter /= numAnchors;
+      // Calc the offset
+      var offset = center - currentCenter;
+      Path2D.Translate(offset);
+    }
+
+    private void DrawSetOriginAsFirstButton()
+    {
+      if (!GUILayout.Button("Set First Node in the Origin")) return;
+      if (Path2D.NodeCount <= 0) return;
+      Undo.RecordObject(_monoPath2D, "Set First Node in the Origin");
+      
+      Vector2 center = _monoPath2D.gameObject.transform.position;
+      var firstNode = Path2D[0] + center;
+      Path2D.Translate(-firstNode);
+    }
+
+    private void DrawSetOriginAsLastButton()
+    {
+      if (!GUILayout.Button("Set Last Node in the Origin")) return;
+      if (Path2D.NodeCount <= 0) return;
+      Undo.RecordObject(_monoPath2D, "Set Last Node in the Origin");
+      
+      Vector2 center = _monoPath2D.gameObject.transform.position;
+      var lastNodeIndex = Path2D.NodeCount - 1;
+      if (Path2D.IsClosed && Path2D.NodeCount > 2)
+      {
+        lastNodeIndex = Path2D.NodeCount - 2;
+      }
+      
+      var lastNode = Path2D[lastNodeIndex] + center;
+      Path2D.Translate(-lastNode);
     }
 
     private void DrawResetButton()

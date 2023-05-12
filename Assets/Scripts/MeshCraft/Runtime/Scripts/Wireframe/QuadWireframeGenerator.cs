@@ -13,7 +13,7 @@ namespace LiteNinja.MeshCraft.Wireframe
     {
       return Generate(originalMesh, normalCoefficient, angleCoefficient, areaCoefficient, new MeshAttributes());
     }
-    
+
     public static Mesh Generate(Mesh originalMesh, float normalCoefficient, float angleCoefficient,
       float areaCoefficient, bool uv2,
       bool uv3, bool uv4, bool normal, bool tangent, bool color, bool skin)
@@ -207,7 +207,7 @@ namespace LiteNinja.MeshCraft.Wireframe
 
     private static Mesh InitializeQuads(Mesh originalMesh, MeshAttributes meshAttributes)
     {
-      var quads = CloneMeshAsFlat(originalMesh, meshAttributes);
+      var quads = CloneWithFlattenedTriangles(originalMesh, meshAttributes);
       quads.name = originalMesh.name;
       return quads;
     }
@@ -218,7 +218,7 @@ namespace LiteNinja.MeshCraft.Wireframe
     /// <param name="originalMesh">The original mesh to clone and flatten.</param>
     /// <param name="meshAttributes">An object specifying which mesh attributes (normals, tangents, UVs, etc.) to preserve in the cloned and flattened mesh.</param>
     /// <returns>A new mesh that is a clone of the original mesh with flattened triangles and selected mesh attributes preserved.</returns>
-    private static Mesh CloneMeshAsFlat(Mesh originalMesh, MeshAttributes meshAttributes)
+    private static Mesh CloneWithFlattenedTriangles(Mesh originalMesh, MeshAttributes meshAttributes)
     {
       var vertices = originalMesh.vertices;
       var normals = originalMesh.normals;
@@ -243,13 +243,20 @@ namespace LiteNinja.MeshCraft.Wireframe
       var tangentsList = new List<Vector4>();
       var colorList = new List<Color>();
       var boneWeightList = new List<BoneWeight>();
-      var useUV2 = true;
-      var useUV3 = true;
-      var useUV4 = true;
-      var useNormals = true;
-      var useTangents = true;
-      var useColors = true;
-      var useSkin = true;
+      var useUV2 = originalMesh.uv2 != null && originalMesh.uv2.Length == originalMesh.vertexCount &&
+                   meshAttributes.UseUV2;
+      var useUV3 = !(originalMesh.uv3 == null || originalMesh.uv3.Length != originalMesh.vertexCount ||
+                     !meshAttributes.UseUV3);
+      var useUV4 = !(originalMesh.uv4 == null || originalMesh.uv4.Length != originalMesh.vertexCount ||
+                     !meshAttributes.UseUV4);
+      var useNormals = !(originalMesh.normals == null || originalMesh.normals.Length != originalMesh.vertexCount ||
+                         !meshAttributes.UseNormals);
+      var useTangents = !(originalMesh.tangents == null || originalMesh.tangents.Length != originalMesh.vertexCount ||
+                          !meshAttributes.UseTangents);
+      var useColors = !(originalMesh.colors == null || originalMesh.colors.Length != originalMesh.vertexCount ||
+                        !meshAttributes.UseColors);
+      var useSkin = !(originalMesh.boneWeights == null || originalMesh.boneWeights.Length != originalMesh.vertexCount ||
+                      !meshAttributes.UseSkin);
       if (originalMesh.uv == null || originalMesh.uv.Length != originalMesh.vertexCount)
       {
         uvs1 = new List<Vector4>();
@@ -259,20 +266,6 @@ namespace LiteNinja.MeshCraft.Wireframe
         }
       }
 
-      if (originalMesh.uv2 == null || originalMesh.uv2.Length != originalMesh.vertexCount ||
-          !meshAttributes.UseUV2) useUV2 = false;
-      if (originalMesh.uv3 == null || originalMesh.uv3.Length != originalMesh.vertexCount ||
-          !meshAttributes.UseUV3) useUV3 = false;
-      if (originalMesh.uv4 == null || originalMesh.uv4.Length != originalMesh.vertexCount ||
-          !meshAttributes.UseUV4) useUV4 = false;
-      if (originalMesh.normals == null || originalMesh.normals.Length != originalMesh.vertexCount ||
-          !meshAttributes.UseNormals) useNormals = false;
-      if (originalMesh.tangents == null || originalMesh.tangents.Length != originalMesh.vertexCount ||
-          !meshAttributes.UseTangents) useTangents = false;
-      if (originalMesh.colors == null || originalMesh.colors.Length != originalMesh.vertexCount ||
-          !meshAttributes.UseColors) useColors = false;
-      if (originalMesh.boneWeights == null || originalMesh.boneWeights.Length != originalMesh.vertexCount ||
-          !meshAttributes.UseSkin) useSkin = false;
       var vertexIndex = 0;
       for (var subMesh = 0; subMesh < originalMesh.subMeshCount; ++subMesh)
       {
