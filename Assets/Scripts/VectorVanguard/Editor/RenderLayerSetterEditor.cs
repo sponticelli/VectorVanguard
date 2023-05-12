@@ -11,11 +11,15 @@ namespace VectorVanguard.Editors
     private SerializedProperty _sortingOrder;
     private SerializedProperty _sortingLayerID;
     private RenderLayerSetter _renderLayerSetter;
+    private SerializedProperty _useZOrder;
+    private SerializedProperty _zOrderFactor;
 
     private void OnEnable()
     {
       _sortingOrder = serializedObject.FindProperty("_sortingOrder");
       _sortingLayerID = serializedObject.FindProperty("_sortingLayerID");
+      _useZOrder = serializedObject.FindProperty("_useZOrder");
+      _zOrderFactor = serializedObject.FindProperty("_zOrderFactor");
       _renderLayerSetter = (RenderLayerSetter) target;
     }
 
@@ -37,6 +41,12 @@ namespace VectorVanguard.Editors
         _sortingOrder.intValue = Mathf.Clamp(_sortingOrder.intValue, -32768, 32767);
       }
       
+      EditorGUILayout.PropertyField(_useZOrder, new GUIContent("Use Z Order"));
+      if (_useZOrder.boolValue)
+      {
+        EditorGUILayout.PropertyField(_zOrderFactor, new GUIContent("Z Order Factor"));
+      }
+
       serializedObject.ApplyModifiedProperties();
 
       if (GUI.changed)

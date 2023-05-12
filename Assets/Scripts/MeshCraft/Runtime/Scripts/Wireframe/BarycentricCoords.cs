@@ -1,4 +1,4 @@
-namespace LiteNinja.MeshCraft
+namespace LiteNinja.MeshCraft.Wireframe
 {
   /// <summary>
   /// Represents a set of three integer values that describe the barycentric coordinates of a point in a triangle.

@@ -1,6 +1,5 @@
 using LiteNinja.SOA.Events;
 using UnityEngine;
-using VectorVanguard.Utils;
 
 namespace VectorVanguard.VFX.SOEvents
 {

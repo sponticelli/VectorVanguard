@@ -7,7 +7,8 @@ namespace VectorVanguard.Actors.Enemies
 {
   public class AsteroidsManager : MonoBehaviour
   {
-    [Header("Pool")] [SerializeField] private string _smallAsteroidTag;
+    [Header("Pool")] 
+    [SerializeField] private string _smallAsteroidTag;
     [SerializeField] private string _mediumAsteroidTag;
     [SerializeField] private string _bigAsteroidTag;
 
@@ -17,24 +18,32 @@ namespace VectorVanguard.Actors.Enemies
     [SerializeField] private float _mediumAsteroidRadius;
     [SerializeField] private float _bigAsteroidRadius;
 
-    [Header("Asteroids creation")] [SerializeField]
-    private int _mediumAsteroidsFromBigAsteroid = 2;
-
+    [Header("Asteroids creation")] 
+    [SerializeField] private int _mediumAsteroidsFromBigAsteroid = 2;
     [SerializeField] private int _smallAsteroidsFromMediumAsteroid = 2;
 
-
+    [Header("Spawn")]
+    [SerializeField] private float _spawnInnerRadius = 3;
+    [SerializeField] private float _spawnOuterRadius = 20;
+    [SerializeField] private int _spanwBigAsteroids = 8;
+    [SerializeField] private int _spanwMediumAsteroids = 16;
+    [SerializeField] private int _spanwSmallAsteroids = 32;
+    
     private void Start()
     {
-      SpawnAsteroids(8);
+      SpawnAsteroids(_spanwBigAsteroids, _spawnInnerRadius, _spawnOuterRadius, PoolTag.ASTEROID_LARGE);
+      SpawnAsteroids(_spanwMediumAsteroids, _spawnInnerRadius, _spawnOuterRadius, PoolTag.ASTEROID_MEDIUM);
+      SpawnAsteroids(_spanwSmallAsteroids, _spawnInnerRadius, _spawnOuterRadius, PoolTag.ASTEROID_SMALL);
     }
     
-    public void SpawnAsteroids(int numberOfAsteroids)
+    public void SpawnAsteroids(int numberOfAsteroids, float innerRadius, float outerRadius, PoolTag poolTag)
     {
-      var positions = GetPositionsInARing(Vector3.zero, _bigAsteroidRadius * 3, _bigAsteroidRadius * 8, _bigAsteroidRadius,
+      var positions = GetPositionsInARing(Vector3.zero, _bigAsteroidRadius * innerRadius, 
+        _bigAsteroidRadius * outerRadius, _bigAsteroidRadius,
         numberOfAsteroids);
       foreach (var p in positions)
       {
-        var asteroid = PoolManager.Instance.GetObject(PoolTag.ASTEROID_LARGE, p, Quaternion.Euler(0, 0, Random.Range(0, 360)));
+        var asteroid = PoolManager.Instance.GetObject(poolTag, p, Quaternion.Euler(0, 0, Random.Range(0, 360)));
         asteroid.SetFaction(EntityFaction.Neutral);
       }
     }

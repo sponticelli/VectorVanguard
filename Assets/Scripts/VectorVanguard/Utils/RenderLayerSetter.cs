@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using UnityEngine;
 
@@ -11,7 +10,8 @@ namespace VectorVanguard.Utils
         
     [SerializeField] private int _sortingOrder;
     [SerializeField] private int _sortingLayerID;
-    
+    [SerializeField] private bool _useZOrder = true;
+    [SerializeField] private float _zOrderFactor = 0.01f;
     
     private Renderer _renderer;
     
@@ -34,6 +34,27 @@ namespace VectorVanguard.Utils
         SetSortingInfo();
       }
     }
+    
+    
+    public bool UseZOrder
+    {
+      get => _useZOrder;
+      set
+      {
+        _useZOrder = value;
+        SetSortingInfo();
+      }
+    }
+    
+    public float ZOrderFactor
+    {
+      get => _zOrderFactor;
+      set
+      {
+        _zOrderFactor = value;
+        SetSortingInfo();
+      }
+    }
 
     private void Awake()
     {
@@ -53,9 +74,18 @@ namespace VectorVanguard.Utils
       };
       _renderer.sortingLayerID = _sortingLayerID;
       _renderer.sortingOrder = _sortingOrder;
-      
+
+      if (_useZOrder)
+      {
+        // Calculate Z position based on sorting layer and sorting order within the layer
+        var layerZ = SortingLayer.layers.Length - SortingLayer.layers.ToList().IndexOf(SortingLayer);
+        var zPosition = layerZ + _sortingOrder * _zOrderFactor;
+        transform.position = new Vector3(transform.position.x, transform.position.y, zPosition);
+      }
+
       var sortingLayer = SortingLayer.layers.FirstOrDefault(layer => layer.id == _sortingLayerID);
-      Debug.Log($"Sorting layer set to {sortingLayer.name} and order to {_renderer.sortingOrder}");
+      Debug.Log(
+        $"{gameObject.name} Sorting layer set to {sortingLayer.name} and order to {_renderer.sortingOrder}.");
     }
     
     

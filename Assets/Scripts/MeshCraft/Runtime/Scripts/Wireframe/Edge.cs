@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace LiteNinja.MeshCraft
+namespace LiteNinja.MeshCraft.Wireframe
 {
   /// <summary>
   /// Represents an edge connecting two vertices.
@@ -12,14 +12,17 @@ namespace LiteNinja.MeshCraft
     /// The first vertex of the edge.
     /// </summary>
     public Vertex v1;
+
     /// <summary>
     /// The second vertex of the edge.
     /// </summary>
     public Vertex v2;
+
     /// <summary>
     /// The normalized direction vector of the edge.
     /// </summary>
     public Vector3 normalizedDirection;
+
     /// <summary>
     /// The length of the edge.
     /// </summary>
@@ -28,21 +31,21 @@ namespace LiteNinja.MeshCraft
     /// <summary>
     /// Creates an edge using two vectors.
     /// </summary>
-    /// <param name="vert1">The first vector.</param>
-    /// <param name="vert2">The second vector.</param>
-    public Edge(Vector3 vert1, Vector3 vert2)
+    /// <param name="point1">The first point.</param>
+    /// <param name="point2">The second point.</param>
+    public Edge(Vector3 point1, Vector3 point2)
     {
-      v1 = new Vertex(vert1);
-      v2 = new Vertex(vert2);
-      normalizedDirection = (vert2 - vert1).normalized;
-      length = Vector3.Distance(vert1, vert2);
+      v1 = new Vertex(point1);
+      v2 = new Vertex(point2);
+      normalizedDirection = (point2 - point1).normalized;
+      length = Vector3.Distance(point1, point2);
     }
 
     /// <summary>
     /// Creates an edge using two vertices.
     /// </summary>
-    /// <param name="_v1">The first vertex.</param>
-    /// <param name="_v2">The second vertex.</param>
+    /// <param name="vertex1">The first vertex.</param>
+    /// <param name="vertex2">The second vertex.</param>
     public Edge(Vertex vertex1, Vertex vertex2)
     {
       v1 = vertex1;
@@ -54,9 +57,10 @@ namespace LiteNinja.MeshCraft
     /// <summary>
     /// Checks whether two edges share a vertex.
     /// </summary>
-    /// <param name="_other">The other edge to compare with.</param>
+    /// <param name="other">The other edge to compare with.</param>
     /// <returns>True if the edges share a vertex, otherwise false.</returns>
-    public bool DoShareVertex(Edge _other) => v1.Equals(_other.v1) || v1.Equals(_other.v2) || v2.Equals(_other.v1) || v2.Equals(_other.v2);
+    public bool DoShareVertex(Edge other) =>
+      v1.Equals(other.v1) || v1.Equals(other.v2) || v2.Equals(other.v1) || v2.Equals(other.v2);
 
     /// <summary>
     /// Checks whether this edge is equal to another edge.
@@ -68,13 +72,13 @@ namespace LiteNinja.MeshCraft
     /// <summary>
     /// Determines the sign of the equality between this edge and another edge.
     /// </summary>
-    /// <param name="p">The other edge to compare with.</param>
+    /// <param name="other">The other edge to compare with.</param>
     /// <returns>1 if the edges are equal, -1 if they are equal but in reverse order, 0 otherwise.</returns>
-    public int EqualSign(Edge p)
+    public int EqualSign(Edge other)
     {
-      if (v1.Equals(p.v1) && v2.Equals(p.v2))
+      if (v1.Equals(other.v1) && v2.Equals(other.v2))
         return 1;
-      return v1.Equals(p.v2) && v2.Equals(p.v1) ? -1 : 0;
+      return v1.Equals(other.v2) && v2.Equals(other.v1) ? -1 : 0;
     }
 
     /// <summary>
@@ -86,6 +90,6 @@ namespace LiteNinja.MeshCraft
     /// <summary>
     /// Returns a string representation of this edge.
     /// </summary>
-    public override string ToString() => "(" + (object) v1 + ", " + (object) v2 + ")";
+    public override string ToString() => "(" + (object)v1 + ", " + (object)v2 + ")";
   }
 }

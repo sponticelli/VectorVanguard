@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using LiteNinja.MeshCraft.Wireframe;
 using UnityEditor;
 using UnityEngine;
 
@@ -214,8 +215,8 @@ namespace LiteNinja.MeshCraft.Editors
         try
         {
           _saveMesh = _generateQuads
-            ? WireframeGenerator.GenerateQuads(_skinnedMeshRenderers[index].sharedMesh)
-            : WireframeGenerator.Generate(_skinnedMeshRenderers[index].sharedMesh);
+            ? QuadWireframeGenerator.Generate(_skinnedMeshRenderers[index].sharedMesh)
+            : TriangleWireframeGenerator.Generate(_skinnedMeshRenderers[index].sharedMesh);
         }
         catch
         {
@@ -274,8 +275,8 @@ namespace LiteNinja.MeshCraft.Editors
           Debug.Log(
             $"Generating mesh for {_meshFilters[index].sharedMesh.name} {_meshFilters[index].sharedMesh.GetInstanceID()}");
           _saveMesh = _generateQuads
-            ? WireframeGenerator.GenerateQuads(_meshFilters[index].sharedMesh)
-            : WireframeGenerator.Generate(_meshFilters[index].sharedMesh);
+            ? QuadWireframeGenerator.Generate(_meshFilters[index].sharedMesh)
+            : TriangleWireframeGenerator.Generate(_meshFilters[index].sharedMesh);
         }
         catch(Exception ex)
         {

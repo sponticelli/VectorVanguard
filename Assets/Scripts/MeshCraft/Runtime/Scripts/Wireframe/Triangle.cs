@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace LiteNinja.MeshCraft
+namespace LiteNinja.MeshCraft.Wireframe
 {
   /// <summary>
   /// Represents a triangle in 3D space with vertices as edges.
@@ -30,7 +30,7 @@ namespace LiteNinja.MeshCraft
     public BarycentricCoords barycentricCoords0;
     public BarycentricCoords barycentricCoords1;
     public BarycentricCoords barycentricCoords2;
-    public readonly Dictionary<Triangle, NeighborInfo> neighbors;
+    public readonly Dictionary<Triangle, TriangleNeighborRelationship> neighbors;
 
     private readonly Vector3 _normal;
     private readonly float _area;
@@ -52,7 +52,7 @@ namespace LiteNinja.MeshCraft
       this.edge1 = edge1;
       this.edge2 = edge2;
       _area = CalcArea(this);
-      neighbors = new Dictionary<Triangle, NeighborInfo>();
+      neighbors = new Dictionary<Triangle, TriangleNeighborRelationship>();
       _match = null;
       barycentricCoords0 = new BarycentricCoords(1, 0, 0);
       barycentricCoords1 = new BarycentricCoords(0, 1, 0);
@@ -67,114 +67,150 @@ namespace LiteNinja.MeshCraft
     {
       foreach (var neighbor in neighbors)
       {
+        // Get the shared edge index between the current object and the neighbor. 
         var shareEdgeIndexForMe = neighbor.Key.GetSharedEdgeIndexForMe(this);
         if (shareEdgeIndexForMe == -1) continue;
-        neighbor.Value.Dot = Vector3.Dot(_normal, neighbor.Key._normal);
-        neighbor.Value.Dot = neighbor.Value.Dot * neighbor.Value.Dot * Mathf.Sign(neighbor.Value.Dot);
-        neighbor.Value.Dot *= NormalCoefficient;
-        var num1 = CalcAngle(this, neighbor.Value.edgeIndex);
-        var num2 = num1 <= 90.0 ? num1 / 90f : 90f / num1;
-        var num3 = CalcAngle(neighbor.Key, shareEdgeIndexForMe);
-        var num4 = num3 <= 90.0 ? num3 / 90f : 90f / num3;
-        neighbor.Value.Angle = (float)((num2 + (double)num4) / 2.0);
-        neighbor.Value.Angle = Mathf.Lerp(0.0f, neighbor.Value.Angle, AngleCoefficient);
-        Vector3 v1;
-        Vector3 v2;
-        GetEdgeVertices(neighbor.Value.edgeIndex, out v1, out v2);
-        var topVertex1 = GetTopVertex(neighbor.Value.edgeIndex);
-        var topVertex2 = neighbor.Key.GetTopVertex(shareEdgeIndexForMe);
-        var vector3 = topVertex1 - v1;
-        var normalized1 = vector3.normalized;
-        vector3 = topVertex2 - v1;
-        var normalized2 = vector3.normalized;
-        var num5 = (float)((Vector3.Dot(normalized1, normalized2) + 1.0) * 90.0);
-        var num6 = num5 <= 90.0 ? num5 / 90f : 90f / num5;
-        vector3 = topVertex1 - v2;
-        var normalized3 = vector3.normalized;
-        vector3 = topVertex2 - v2;
-        var normalized4 = vector3.normalized;
-        var num7 = (float)((Vector3.Dot(normalized3, normalized4) + 1.0) * 90.0);
-        var num8 = num7 <= 90.0 ? num7 / 90f : 90f / num7;
-        neighbor.Value.Angle += (float)((num6 + (double)num8) / 2.0);
-        neighbor.Value.Angle /= 2f;
-        if (AreaCoefficient > 0.5)
-        {
-          var num9 = Vector3.Distance(GetTopVertex(neighbor.Value.edgeIndex),
-            neighbor.Key.GetTopVertex(shareEdgeIndexForMe));
-          var edgeLength = GetEdgeLength(neighbor.Value.edgeIndex);
-          if (edgeLength == 0.0)
-            neighbor.Value.Parallel = 0.0f;
-          else if (num9 > (double)edgeLength)
-            neighbor.Value.Parallel += edgeLength / num9;
-          else
-            neighbor.Value.Parallel += num9 / edgeLength;
-        }
+        
+        CalcNeighborDotProduct(neighbor);
+        CalcNeighborAngle(neighbor, shareEdgeIndexForMe);
+        CalcNeighborRefinedAnglesAndParallelCoefficient(neighbor, shareEdgeIndexForMe);
+        CalcNeighborArea(neighbor);
+      }
+    }
 
-        neighbor.Value.Area = neighbor.Key._area <= (double)_area
-          ? neighbor.Key._area / _area
-          : _area / neighbor.Key._area;
-        neighbor.Value.Area *= AreaCoefficient;
+    private void CalcNeighborArea(KeyValuePair<Triangle, TriangleNeighborRelationship> neighbor)
+    {
+      neighbor.Value.Area = neighbor.Key._area <= (double)_area
+        ? neighbor.Key._area / _area
+        : _area / neighbor.Key._area;
+      neighbor.Value.Area *= AreaCoefficient;
+    }
+
+    private void CalcNeighborDotProduct(KeyValuePair<Triangle, TriangleNeighborRelationship> neighbor)
+    {
+      // Calculate the dot product between the normals of the current object and the neighbor.
+      neighbor.Value.Dot = Vector3.Dot(_normal, neighbor.Key._normal);
+      neighbor.Value.Dot = neighbor.Value.Dot * neighbor.Value.Dot * Mathf.Sign(neighbor.Value.Dot);
+      neighbor.Value.Dot *= NormalCoefficient;
+    }
+
+    private void CalcNeighborRefinedAnglesAndParallelCoefficient(KeyValuePair<Triangle, TriangleNeighborRelationship> neighbor, int shareEdgeIndexForMe)
+    {
+      GetEdgeVertices(neighbor.Value.edgeIndex, out var v1, out var v2);
+      var topVertex1 = GetTopVertex(neighbor.Value.edgeIndex);
+      var topVertex2 = neighbor.Key.GetTopVertex(shareEdgeIndexForMe);
+      
+      var topVertex1_v1 = topVertex1 - v1;
+      var normalized1 = topVertex1_v1.normalized;
+      
+      var topVertex2_v1 = topVertex2 - v1;
+      var normalized2 = topVertex2_v1.normalized;
+      
+      var angle1_v1 = (float)((Vector3.Dot(normalized1, normalized2) + 1.0) * 90.0);
+      var normalizedAngle1_v1 = angle1_v1 <= 90.0 ? angle1_v1 / 90f : 90f / angle1_v1;
+      var topVertex1_v2 = topVertex1 - v2;
+      var normalized3 = topVertex1_v2.normalized;
+      
+      var topVertex2_v2 = topVertex2 - v2;
+      var normalized4 = topVertex2_v2.normalized;
+      var angle1_v2 = (float)((Vector3.Dot(normalized3, normalized4) + 1.0) * 90.0);
+      var normalizedAngle1_v2 = angle1_v2 <= 90.0 ? angle1_v2 / 90f : 90f / angle1_v2;
+      
+      neighbor.Value.Angle += (float)((normalizedAngle1_v1 + (double)normalizedAngle1_v2) / 2.0);
+      neighbor.Value.Angle /= 2f;
+  
+      if (!(AreaCoefficient > 0.5)) return;
+  
+      var topVerticesDistance = Vector3.Distance(
+        GetTopVertex(neighbor.Value.edgeIndex),
+        neighbor.Key.GetTopVertex(shareEdgeIndexForMe));
+      
+      var edgeLength = GetEdgeLength(neighbor.Value.edgeIndex);
+      if (edgeLength == 0.0)
+      {
+        neighbor.Value.Parallel = 0.0f;
+      }
+      else
+      {
+        neighbor.Value.Parallel += topVerticesDistance > (double)edgeLength
+          ? edgeLength / topVerticesDistance
+          : topVerticesDistance / edgeLength;
+        
       }
     }
 
 
+    private void CalcNeighborAngle(KeyValuePair<Triangle, TriangleNeighborRelationship> neighbor, int shareEdgeIndexForMe)
+    {
+      // Calculate the angles between the current object and its neighbor, as well as between the neighbor and
+      // the shared edge. Use these angles to compute the final angle and store it in 
+      var angle1 = CalcAngle(this, neighbor.Value.edgeIndex);
+      var normalizedAngle1 = angle1 <= 90.0 ? angle1 / 90f : 90f / angle1;
+      var angle2 = CalcAngle(neighbor.Key, shareEdgeIndexForMe);
+      var normalizedAngle2 = angle2 <= 90.0 ? angle2 / 90f : 90f / angle2;
+      // Average the two angles and lerp the result by the angle coefficient.
+      neighbor.Value.Angle = (float)((normalizedAngle1 + (double)normalizedAngle2) / 2.0);
+      neighbor.Value.Angle = Mathf.Lerp(0.0f, neighbor.Value.Angle, AngleCoefficient);
+    }
+
+
     /// <summary>
-    /// Finds the best matching neighbor triangle based on their neighbor information, sets the match connection, and updates their colors.
+    /// Finds the best matching neighbor triangle based on their neighbor information and  sets the match connection
     /// </summary>
     public void FindBestMatch()
     {
       if (neighbors.Count == 0)
         return;
-      var match = (Triangle)null;
-      var neighborInfo = (NeighborInfo)null;
-      var num1 = -1f;
+      var matchTriangle = (Triangle)null;
+      var neighborInfo = (TriangleNeighborRelationship)null;
+      var matchWeight = -1f;
       foreach (var neighbor in neighbors)
       {
-        var num2 = neighbor.Key.GiveMeYourBestNeighbor(out var target);
+        var bestNeighborWeight = neighbor.Key.GiveMeYourBestNeighbor(out var target);
         if (target == null) continue;
         if (neighbor.Value.Dot > 0.5 && GetFreeNeighbourCount() == 1)
         {
           Debug.Log(Index + " - " + neighbor.Key);
         }
         else if (Index != target.Index) continue;
-        if (!(num2 >= (double)num1)) continue;
-        num1 = num2;
-        match = neighbor.Key;
+        if (!(bestNeighborWeight >= (double)matchWeight)) continue;
+        matchWeight = bestNeighborWeight;
+        matchTriangle = neighbor.Key;
         neighborInfo = neighbor.Value;
       }
 
-      if (match == null)
+      if (matchTriangle == null)
         return;
-      SetMatchConnection(neighborInfo, match);
+      SetMatchConnection(neighborInfo, matchTriangle);
     }
 
     /// <summary>
     /// Sets the match connection between two triangles based on their neighbor info.
     /// Determines the barycentric coords of each triangle and its corresponding vertex based on the connection with its neighbor.
     /// </summary>
-    /// <param name="neighborInfo">The neighbor info object containing connection information.</param>
+    /// <param name="triangleNeighborRelationship">The neighbor info object containing connection information.</param>
     /// <param name="match">The triangle to connect to.</param>
-    private void SetMatchConnection(NeighborInfo neighborInfo, Triangle match)
+    private void SetMatchConnection(TriangleNeighborRelationship triangleNeighborRelationship, Triangle match)
     {
       barycentricCoords0 = barycentricCoords1 = barycentricCoords2 = match.barycentricCoords0 = match.barycentricCoords1 = match.barycentricCoords2 = Zero;
-      switch (neighborInfo.connect0To)
+      switch (triangleNeighborRelationship.connect0To)
       {
-        case 0 when neighborInfo.connect1To == 1:
+        case 0 when triangleNeighborRelationship.connect1To == 1:
           barycentricCoords0 = match.barycentricCoords0 = One;
           barycentricCoords1 = match.barycentricCoords1 = One;
           barycentricCoords2 = match.barycentricCoords2 = One;
           break;
-        case 0 when neighborInfo.connect1To == 2:
+        case 0 when triangleNeighborRelationship.connect1To == 2:
           barycentricCoords2 = match.barycentricCoords1 = Z;
           barycentricCoords1 = match.barycentricCoords0 = XZ;
           barycentricCoords0 = match.barycentricCoords2 = YZ;
           break;
-        case 0 when neighborInfo.connect2To == 1:
+        case 0 when triangleNeighborRelationship.connect2To == 1:
           barycentricCoords1 = match.barycentricCoords2 = Z;
           barycentricCoords2 = match.barycentricCoords0 = XZ;
           barycentricCoords0 = match.barycentricCoords1 = YZ;
           break;
-        case 0 when neighborInfo.connect2To == 2:
+        case 0 when triangleNeighborRelationship.connect2To == 2:
           barycentricCoords0 = match.barycentricCoords0 = One;
           barycentricCoords1 = match.barycentricCoords1 = One;
           barycentricCoords2 = match.barycentricCoords2 = One;
@@ -184,22 +220,22 @@ namespace LiteNinja.MeshCraft
           barycentricCoords1 = match.barycentricCoords1 = One;
           barycentricCoords2 = match.barycentricCoords2 = One;
           break;
-        case 1 when neighborInfo.connect1To == 0:
+        case 1 when triangleNeighborRelationship.connect1To == 0:
           barycentricCoords2 = match.barycentricCoords2 = Z;
           barycentricCoords1 = match.barycentricCoords1 = XZ;
           barycentricCoords0 = match.barycentricCoords0 = YZ;
           break;
-        case 1 when neighborInfo.connect1To == 2:
+        case 1 when triangleNeighborRelationship.connect1To == 2:
           barycentricCoords0 = match.barycentricCoords0 = One;
           barycentricCoords1 = match.barycentricCoords1 = One;
           barycentricCoords2 = match.barycentricCoords2 = One;
           break;
-        case 1 when neighborInfo.connect2To == 0:
+        case 1 when triangleNeighborRelationship.connect2To == 0:
           barycentricCoords0 = match.barycentricCoords0 = One;
           barycentricCoords1 = match.barycentricCoords1 = One;
           barycentricCoords2 = match.barycentricCoords2 = One;
           break;
-        case 1 when neighborInfo.connect2To == 2:
+        case 1 when triangleNeighborRelationship.connect2To == 2:
           barycentricCoords1 = match.barycentricCoords0 = Z;
           barycentricCoords2 = match.barycentricCoords1 = XZ;
           barycentricCoords0 = match.barycentricCoords2 = YZ;
@@ -211,7 +247,7 @@ namespace LiteNinja.MeshCraft
           break;
         default:
         {
-          switch (neighborInfo.connect1To)
+          switch (triangleNeighborRelationship.connect1To)
           {
             case 0:
               barycentricCoords0 = match.barycentricCoords1 = Z;
@@ -225,7 +261,7 @@ namespace LiteNinja.MeshCraft
               break;
             default:
             {
-              switch (neighborInfo.connect2To)
+              switch (triangleNeighborRelationship.connect2To)
               {
                 case 0:
                   barycentricCoords1 = match.barycentricCoords1 = Z;
