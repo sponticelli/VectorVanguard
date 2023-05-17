@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace LiteNinja.PathMaster
+namespace LiteNinja.PathMaster._2D
 {
   [Serializable]
   public class Path2D
@@ -598,4 +598,5 @@ namespace LiteNinja.PathMaster
       return (i + nodes.Count) % nodes.Count;
     }
   }
+
 }

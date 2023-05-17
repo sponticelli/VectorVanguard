@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace LiteNinja.PathMaster
+namespace LiteNinja.PathMaster._2D
 {
   public static class BezierHelper
   {

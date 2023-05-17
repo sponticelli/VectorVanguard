@@ -1,4 +1,4 @@
-namespace LiteNinja.PathMaster
+namespace LiteNinja.PathMaster._2D
 {
   public enum NodeType
   {

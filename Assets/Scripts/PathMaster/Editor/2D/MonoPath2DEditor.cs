@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
+using LiteNinja.PathMaster._2D;
 using UnityEditor;
 using UnityEngine;
 
@@ -221,7 +221,7 @@ namespace LiteNinja.PathMaster.Editors
         SetAnchorStatus(anchorIndex, (NodeType)newType, true);
       }
 
-      bool remove = GUILayout.Button("X", GUILayout.Width(20));
+      var remove = GUILayout.Button("X", GUILayout.Width(20));
 
       EditorGUILayout.EndHorizontal();
       return remove;

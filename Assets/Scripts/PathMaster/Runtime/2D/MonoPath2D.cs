@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace LiteNinja.PathMaster
+namespace LiteNinja.PathMaster._2D
 {
   /// <summary>
   /// The MonoPath2D class is used to generate and manipulate a 2D path within the Unity game engine.

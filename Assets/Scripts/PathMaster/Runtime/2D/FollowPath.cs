@@ -1,7 +1,6 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 
-namespace LiteNinja.PathMaster
+namespace LiteNinja.PathMaster._2D
 {
   /// <summary>
   /// A simple component that makes an object follow a path.
