@@ -7,10 +7,9 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: WIRE_Carrier_Body
-  m_Shader: {fileID: 4800000, guid: 655c7c9cd39597648b0973c1aa721acd, type: 3}
-  m_ValidKeywords:
-  - MC_TRANSPARENCY_OFF
+  m_Name: TrackMaterial
+  m_Shader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
+  m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -21,11 +20,11 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _BumpMap:
+    - _AlphaTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _Cube:
+    - _BumpMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -45,20 +44,8 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _MC_NormalMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MC_Specular_Lookup:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MC_WireTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 35ff0937876540d3bd4b6a941df62a92, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -75,48 +62,27 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - PixelSnap: 0
     - _BumpScale: 1
-    - _Cull: 2
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
+    - _EnableExternalAlpha: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _MC_BumpEnumID: 0
-    - _MC_EmissionStrength: 0
-    - _MC_ImprovedBlendEnumID: 0
-    - _MC_IncludeLightEnumID: 0
-    - _MC_Label_V_Options: 0
-    - _MC_Label_W_Options: 0
-    - _MC_LineWidth: 1
-    - _MC_ReflectionEnumID: 0
-    - _MC_Reflection_Fresnel_Bias: -1
-    - _MC_Reflection_Roughness: 0.3
-    - _MC_Reflection_Strength: 0.5
-    - _MC_SpecularEnumID: 0
-    - _MC_TransparencyEnumID: 0
-    - _MC_Transparency_M_Options: 0
-    - _MC_TransparentTex_Alpha_Offset: 1
-    - _MC_TransparentTex_Invert: 0
-    - _MC_VertexColor: 0
-    - _MC_WireTex_UVSet: 0
-    - _MC_WireVertexColor: 1
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _Shininess: 0.078125
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0, g: 0, b: 0, a: 0.03529412}
+    - _Color: {r: 0, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _MC_Color: {r: 0.8113208, g: 0.8113208, b: 0.8113208, a: 0.95686275}
-    - _MC_MainTex_Scroll: {r: 0, g: 0, b: 0, a: 0}
-    - _MC_WireTex_Scroll: {r: 0, g: 0, b: 0, a: 0}
-    - _ReflectColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _Flip: {r: 1, g: 1, b: 1, a: 1}
+    - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

@@ -120,6 +120,7 @@ Material:
     - _MC_Label_UAR_Options: 0
     - _MC_Label_V_Options: 0
     - _MC_Label_W_Options: 0
+    - _MC_LineWidth: 1.69
     - _MC_ReflectionEnumID: 0
     - _MC_Reflection_Fresnel_Bias: -1
     - _MC_Reflection_Roughness: 0.3

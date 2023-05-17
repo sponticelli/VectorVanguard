@@ -1,0 +1,126 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5895446711900833209
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5895446711900833208}
+  - component: {fileID: 5895446711900833207}
+  - component: {fileID: 5895446711900833206}
+  m_Layer: 0
+  m_Name: AsteroidsManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5895446711900833208
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5895446711900833209}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5895446711900833207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5895446711900833209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9414db983aed450a8fb24f938367a6dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _smallAsteroidTag: ASTEROID_SMALL
+  _mediumAsteroidTag: ASTEROID_MEDIUM
+  _bigAsteroidTag: ASTEROID_BIG
+  _smallAsteroidRadius: 0.5
+  _mediumAsteroidRadius: 1
+  _bigAsteroidRadius: 2
+  _mediumAsteroidsFromBigAsteroid: 2
+  _smallAsteroidsFromMediumAsteroid: 2
+  _spawnInnerRadius: 3
+  _spawnOuterRadius: 40
+  _spanwBigAsteroids: 8
+  _spanwMediumAsteroids: 16
+  _spanwSmallAsteroids: 32
+--- !u!114 &5895446711900833206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5895446711900833209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6a528e3bf0d54188a7c13cbe222735f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _binding: 0
+  _disableAfterSubscribing: 0
+  _eventResponses:
+  - _soEvent: {fileID: 11400000, guid: e862c3d62a7044499899e52ac75af309, type: 2}
+    _response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5895446711900833207}
+          m_TargetAssemblyTypeName: VectorVanguard.Actors.Enemies.AsteroidsManager,
+            Assembly-CSharp
+          m_MethodName: OnBigAsteroidDestroyed
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - _soEvent: {fileID: 11400000, guid: 8987581d4a57149e487c7fad82dd3318, type: 2}
+    _response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5895446711900833207}
+          m_TargetAssemblyTypeName: VectorVanguard.Actors.Enemies.AsteroidsManager,
+            Assembly-CSharp
+          m_MethodName: OnMediumAsteroidDestroyed
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - _soEvent: {fileID: 11400000, guid: 5ff07723d60164361bebe8dbb8660fe8, type: 2}
+    _response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5895446711900833207}
+          m_TargetAssemblyTypeName: VectorVanguard.Actors.Enemies.AsteroidsManager,
+            Assembly-CSharp
+          m_MethodName: OnSmallAsteroidDestroyed
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2

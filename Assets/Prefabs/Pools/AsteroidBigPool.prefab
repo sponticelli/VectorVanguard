@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5143487797793296887
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5143487797793296886}
+  - component: {fileID: 5143487797793296885}
+  m_Layer: 0
+  m_Name: AsteroidBigPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5143487797793296886
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5143487797793296887}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5143487797793296885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5143487797793296887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91fd2802ea3e45feb5d6b0b2032ff3c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _poolTag: 2
+  _size: 10
+  _expandable: 1
+  _maxExpandSize: 100
+  _expandSize: 10
+  _prefabs:
+  - {fileID: 6701012377259143275, guid: fc873ac680363404b953e2cf2a9d373e, type: 3}
+  - {fileID: 2147657668331949773, guid: a2a9bf0171adf4f1582cfc682128c84a, type: 3}
+  - {fileID: 5475939022031692448, guid: 4586e230999ad4229ac22f21f0314aea, type: 3}

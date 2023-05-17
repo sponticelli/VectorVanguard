@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6363551252641685295}
   - component: {fileID: 6363551252641685288}
   - component: {fileID: 6363551252641685289}
+  - component: {fileID: 852798026}
   m_Layer: 0
   m_Name: Abilities
   m_TagString: Untagged
@@ -49,6 +50,7 @@ MonoBehaviour:
   _abilities:
   - {fileID: 6363551252641685289}
   - {fileID: 6363551252641685288}
+  - {fileID: 852798026}
   OnAbilityAdded:
     m_PersistentCalls:
       m_Calls: []
@@ -69,7 +71,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _actionID: FIRE
   _weapon: {fileID: 6363551252803755691}
-  _actorSpeedMultiplier: 0.25
+  _actorSpeedMultiplier: 1.1
 --- !u!114 &6363551252641685289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121,7 +123,20 @@ MonoBehaviour:
         m_MethodName: PlayLoop
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 8300000, guid: 74206d779c4984e8da08f96912c604e4, type: 3}
+          m_ObjectArgument: {fileID: 8300000, guid: cd7a2275e63a64339b2dbbf6f5d68d9d, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: 1d4b10acb8b024fe5a85f57db9160e08, type: 2}
+        m_TargetAssemblyTypeName: LiteNinja.SOA.Events.ASOEvent`1[[UnityEngine.AudioClip,
+          UnityEngine
+        m_MethodName: Raise
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 63168cef77fe04b7dbeccbe9e8ca098c, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -155,6 +170,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: VectorVanguard.Audio.PlayAudio, Assembly-CSharp
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnPositiveYAxis:
     m_PersistentCalls:
       m_Calls: []
@@ -167,6 +194,19 @@ MonoBehaviour:
   OnNegativeYAxis:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &852798026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6363551252641685293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91f0d3da5c9a4ec2ad34a8d1ed2f4513, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _range: 50
 --- !u!1 &6363551252784303080
 GameObject:
   m_ObjectHideFlags: 0
@@ -369,6 +409,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sortingOrder: 2
   _sortingLayerID: 599360959
+  _useZOrder: 1
+  _zOrderFactor: 0.01
 --- !u!199 &6363551252822780005
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -5207,7 +5249,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6363551253141755741}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 1.02}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5278,6 +5320,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sortingOrder: 2
   _sortingLayerID: 599360959
+  _useZOrder: 1
+  _zOrderFactor: 0.01
 --- !u!1 &6363551253500922128
 GameObject:
   m_ObjectHideFlags: 0
