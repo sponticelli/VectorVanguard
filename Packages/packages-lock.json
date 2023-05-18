@@ -7,12 +7,33 @@
       "dependencies": {},
       "hash": "cd69adc6d8ba796eb17f377bb3caa1e6a559bb5e"
     },
+    "com.liteninja.meshcraft": {
+      "version": "https://github.com/sponticelli/LiteNinja-MeshCraft.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "f4949f9d2627c0eb3d574c2642a8ca2bc5f6bb38"
+    },
+    "com.liteninja.pathmaster": {
+      "version": "https://github.com/sponticelli/LiteNinja-PathMaster.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "09eb62625348c6dfc1f70388028e79a9a864a934"
+    },
     "com.liteninja.soa": {
       "version": "https://github.com/sponticelli/LiteNinja-SOA.git",
       "depth": 0,
       "source": "git",
       "dependencies": {},
       "hash": "95ad904fac8502026598be2e7974fab2aa351211"
+    },
+    "com.liteninja.vektor": {
+      "version": "https://github.com/sponticelli/LiteNinja-Vektor.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "a335e4172ec6245496efd3e5154c86479a0ce68e"
     },
     "com.unity.2d.animation": {
       "version": "7.0.9",

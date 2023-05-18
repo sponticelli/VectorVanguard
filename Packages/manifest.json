@@ -1,7 +1,10 @@
 {
   "dependencies": {
     "com.liteninja.common": "https://github.com/sponticelli/LiteNinja-Common.git",
+    "com.liteninja.meshcraft": "https://github.com/sponticelli/LiteNinja-MeshCraft.git",
+    "com.liteninja.pathmaster": "https://github.com/sponticelli/LiteNinja-PathMaster.git",
     "com.liteninja.soa": "https://github.com/sponticelli/LiteNinja-SOA.git",
+    "com.liteninja.vektor": "https://github.com/sponticelli/LiteNinja-Vektor.git",
     "com.unity.cinemachine": "2.8.9",
     "com.unity.collab-proxy": "1.17.7",
     "com.unity.feature.2d": "1.0.0",
